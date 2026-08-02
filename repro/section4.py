@@ -399,20 +399,23 @@ def _official_warcraft_inputs():
     members_used = {}
     with tarfile.open(archive, "r:gz") as bundle:
         members = bundle.getmembers()
+        suffix = "/12x12/train_vertex_weights.npy"
+        matches = [
+            member
+            for member in members
+            if member.name == suffix[1:] or member.name.endswith(suffix)
+        ]
+        if len(matches) != 1:
+            raise RuntimeError(f"expected one archive member ending {suffix}, found {len(matches)}")
+        handle = bundle.extractfile(matches[0])
+        if handle is None:
+            raise RuntimeError(f"could not read {matches[0].name}")
+        official_weights = np.asarray(
+            np.load(io.BytesIO(handle.read()), allow_pickle=False), dtype=np.float64
+        )
+        official_weights = official_weights.reshape(len(official_weights), 12, 12)
         for size in (8, 12):
-            suffix = f"/{size}x{size}/train_vertex_weights.npy"
-            matches = [
-                member
-                for member in members
-                if member.name == suffix[1:] or member.name.endswith(suffix)
-            ]
-            if len(matches) != 1:
-                raise RuntimeError(f"expected one archive member ending {suffix}, found {len(matches)}")
-            handle = bundle.extractfile(matches[0])
-            if handle is None:
-                raise RuntimeError(f"could not read {matches[0].name}")
-            weights = np.load(io.BytesIO(handle.read()), allow_pickle=False)
-            weights = np.asarray(weights, dtype=np.float64).reshape(len(weights), -1)
+            weights = official_weights[:, :size, :size].reshape(len(official_weights), -1)
             if weights.shape[1] != size * size or np.any(~np.isfinite(weights)):
                 raise RuntimeError(f"invalid official Warcraft array shape {weights.shape}")
             sample = weights[: min(256, len(weights))]
@@ -423,6 +426,8 @@ def _official_warcraft_inputs():
             arrays[size] = np.log(positive)
             members_used[size] = {
                 "member": matches[0].name,
+                "derivation": "native 12x12" if size == 12 else "top-left 8x8 crop of official 12x12 weights",
+                "source_array_shape": list(official_weights.shape),
                 "array_shape": list(weights.shape),
                 "selected_index": index,
                 "selection": "closest coefficient of variation to median among first 256 training maps",

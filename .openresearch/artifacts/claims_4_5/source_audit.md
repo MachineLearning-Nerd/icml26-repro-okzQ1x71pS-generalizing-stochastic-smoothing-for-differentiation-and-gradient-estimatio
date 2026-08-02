@@ -9,4 +9,4 @@
 - Section 3 defines Cartesian RQMC by subdividing the unit hypercube into cells and independently sampling a point from each cell, rather than jittering a tensor product of one point per axis.
 - The prose conclusion selects Cartesian RQMC + LOO + no antithetic whenever Cartesian sampling is feasible. The immediately preceding paragraph explicitly identifies triangular noise as an exception, selecting Latin QMC because boundary scores dominate.
 
-The paper does not disclose the exact cost maps, sorting input vectors, repeat count, or implementation code. This reconstruction therefore cannot use absolute table values as an acceptance criterion; it tests the complete disclosed domain and the disclosed ranking pattern.
+The paper does not disclose the exact cost maps, sorting input vectors, repeat count, or implementation code. The cited official Warcraft archive has native 12x12 and larger splits but no 8x8 split, so the 8x8 input is a recorded crop of official 12x12 costs. This reconstruction therefore cannot use absolute table values as an acceptance criterion; it tests the complete disclosed domain and the disclosed ranking pattern.

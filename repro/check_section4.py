@@ -64,6 +64,12 @@ def check(result_path, csv_path):
             result["warcraft_dataset_audit"]["members_used"]
         )
         == {"8", "12"},
+        "map_derivations_recorded": result["warcraft_dataset_audit"]["members_used"]["8"][
+            "derivation"
+        ]
+        == "top-left 8x8 crop of official 12x12 weights"
+        and result["warcraft_dataset_audit"]["members_used"]["12"]["derivation"]
+        == "native 12x12",
         "held_out_path_perturbations_non_vacuous": all(
             0.1 <= audit["held_out_path_change_rate"] <= 0.9
             for audit in result["path_scale_calibration"]

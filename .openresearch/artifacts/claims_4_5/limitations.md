@@ -6,3 +6,4 @@
 - The benchmark is full scale in disclosed dimensions, distributions, sample counts, and method combinations; it is an independent reconstruction rather than an execution of unavailable author code.
 - Four independently scrambled path-oracle blocks quantify uncertainty. This is stricter than the paper, which reports no repeat count or oracle uncertainty; failure of the calibrated threshold leaves the claim BLOCKED.
 - One deterministic representative training map per grid size is used across all path estimators. This tests every disclosed method cell without claiming coverage of every Warcraft map.
+- The official archive has native 12x12, 18x18, 24x24, and 30x30 splits but no 8x8 split. The disclosed 8x8 benchmark is therefore evaluated on a prespecified top-left 8x8 crop of official 12x12 costs; this is a documented input deviation.
