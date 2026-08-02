@@ -1,0 +1,3044 @@
+{
+  "paper": "arXiv:2410.08125",
+  "git_sha": "f2a974d677660fa7168072c3c710ccf15bdc9efa",
+  "fixed_command": "uv sync --frozen --no-dev && .venv/bin/python -m repro.run",
+  "environment": {
+    "estimated_required_cores": 32,
+    "selected_flavor": "hf/cpu-upgrade",
+    "selected_flavor_declared_vcpus": 8,
+    "visible_logical_cpus": 64,
+    "affinity_logical_cpus": 64,
+    "cgroup_quota_vcpus": 8.0,
+    "worker_limit": 8,
+    "declared_cost_usd_per_hour": 0.03,
+    "hardware_source_url": "https://huggingface.co/docs/huggingface_hub/guides/jobs",
+    "hardware_source_retrieved": "2026-08-02",
+    "gpu_requested": false,
+    "python": "3.12.12",
+    "platform": "Linux-6.12.90-120.164.amzn2023.x86_64-x86_64-with-glibc2.36",
+    "runtime_seconds": 2611.389107635943,
+    "estimated_cost_usd": 0.021761575896966194
+  },
+  "claims": {
+    "1": {
+      "verdict": "VERIFIED",
+      "metrics": {
+        "laplace_error": 0.0,
+        "triangular_error": 0.0,
+        "wrong_score_error": 0.05369396702682416
+      }
+    },
+    "2": {
+      "verdict": "VERIFIED",
+      "metrics": {
+        "grad_x_error": 9.952129398360654e-12,
+        "grad_scale_error": 1.5252021867695476e-11
+      }
+    },
+    "3": {
+      "verdict": "VERIFIED",
+      "metrics": {
+        "grad_cov_x_error": 2.3664403769885212e-11,
+        "grad_cov_scale_error": 5.203468766978858e-10
+      }
+    },
+    "4": {
+      "verdict": "VERIFIED",
+      "metrics": {
+        "resources": {
+          "estimated_required_cores": 32,
+          "selected_flavor": "hf/cpu-upgrade",
+          "selected_flavor_declared_vcpus": 8,
+          "visible_logical_cpus": 64,
+          "affinity_logical_cpus": 64,
+          "cgroup_quota_vcpus": 8.0,
+          "worker_limit": 8,
+          "declared_cost_usd_per_hour": 0.03,
+          "hardware_source_url": "https://huggingface.co/docs/huggingface_hub/guides/jobs",
+          "hardware_source_retrieved": "2026-08-02",
+          "gpu_requested": false
+        },
+        "workers": 8,
+        "sorting_repeats": 64,
+        "path_repeats": 24,
+        "path_oracle_blocks": {
+          "default": 4,
+          "Triangular": 32
+        },
+        "path_oracle_samples_per_block": 65536,
+        "path_oracle_samples_per_distribution_and_size": {
+          "Gaussian": 262144,
+          "Logistic": 262144,
+          "Gumbel": 262144,
+          "Cauchy": 262144,
+          "Laplace": 262144,
+          "Triangular": 2097152
+        },
+        "cell_count": 447,
+        "expected_cell_count": 447,
+        "coverage_pass": true,
+        "sorting_oracle_checks_pass": true,
+        "path_oracle_checks_pass": true,
+        "path_checks_pass": true,
+        "official_dataset_integrity_pass": true,
+        "non_vacuity_pass": true,
+        "negative_control_pass": true,
+        "claim4_verified": true,
+        "claim5_verified": true
+      },
+      "historical_rejected_baseline": {
+        "seed": 2024,
+        "samples": 64,
+        "repeats": 150,
+        "combination_count": 108,
+        "all_finite": true,
+        "variances": {
+          "Gaussian/MC/none": 0.04341706716143551,
+          "Gaussian/MC/f(x)": 0.028039688081967447,
+          "Gaussian/MC/LOO": 0.01448952071094095,
+          "Gaussian/MC-antithetic/none": 0.001747635942974533,
+          "Gaussian/MC-antithetic/f(x)": 0.001747635942974533,
+          "Gaussian/MC-antithetic/LOO": 0.001803556770577901,
+          "Gaussian/QMC-cart/none": 3.102169037939172e-33,
+          "Gaussian/QMC-cart/f(x)": 3.102169037939172e-33,
+          "Gaussian/QMC-cart/LOO": 0.0,
+          "Gaussian/RQMC-cart/none": 0.0020523738074564642,
+          "Gaussian/RQMC-cart/f(x)": 0.0017801793148551415,
+          "Gaussian/RQMC-cart/LOO": 0.0014976331897409234,
+          "Gaussian/QMC-latin/none": 3.102169037939172e-33,
+          "Gaussian/QMC-latin/f(x)": 3.102169037939172e-33,
+          "Gaussian/QMC-latin/LOO": 0.0,
+          "Gaussian/RQMC-latin/none": 0.0016246242317908483,
+          "Gaussian/RQMC-latin/f(x)": 0.0014078559223847334,
+          "Gaussian/RQMC-latin/LOO": 0.0011834923367972827,
+          "Logistic/MC/none": 0.04242687830045065,
+          "Logistic/MC/f(x)": 0.032097300701475644,
+          "Logistic/MC/LOO": 0.012874359240561146,
+          "Logistic/MC-antithetic/none": 0.00034735020331046364,
+          "Logistic/MC-antithetic/f(x)": 0.00034735020331046364,
+          "Logistic/MC-antithetic/LOO": 0.0003584647096900124,
+          "Logistic/QMC-cart/none": 7.75542259484793e-34,
+          "Logistic/QMC-cart/f(x)": 7.75542259484793e-34,
+          "Logistic/QMC-cart/LOO": 7.75542259484793e-34,
+          "Logistic/RQMC-cart/none": 0.0004892473342805854,
+          "Logistic/RQMC-cart/f(x)": 0.0004831852770314547,
+          "Logistic/RQMC-cart/LOO": 0.000482792227224834,
+          "Logistic/QMC-latin/none": 7.75542259484793e-34,
+          "Logistic/QMC-latin/f(x)": 7.75542259484793e-34,
+          "Logistic/QMC-latin/LOO": 7.75542259484793e-34,
+          "Logistic/RQMC-latin/none": 0.0006013243379843834,
+          "Logistic/RQMC-latin/f(x)": 0.0005942184636682571,
+          "Logistic/RQMC-latin/LOO": 0.0005944933398897513,
+          "Gumbel/MC/none": 0.03965832697673658,
+          "Gumbel/MC/f(x)": 0.02554240366379699,
+          "Gumbel/MC/LOO": 0.010745642386220638,
+          "Gumbel/MC-antithetic/none": 0.0026907513079484787,
+          "Gumbel/MC-antithetic/f(x)": 0.003777926689677608,
+          "Gumbel/MC-antithetic/LOO": 0.013635412771520913,
+          "Gumbel/QMC-cart/none": 1.2408676151756689e-32,
+          "Gumbel/QMC-cart/f(x)": 1.2408676151756689e-32,
+          "Gumbel/QMC-cart/LOO": 1.2408676151756689e-32,
+          "Gumbel/RQMC-cart/none": 0.0013280542153093983,
+          "Gumbel/RQMC-cart/f(x)": 0.0009998914123938525,
+          "Gumbel/RQMC-cart/LOO": 0.0005169094454518286,
+          "Gumbel/QMC-latin/none": 1.2408676151756689e-32,
+          "Gumbel/QMC-latin/f(x)": 1.2408676151756689e-32,
+          "Gumbel/QMC-latin/LOO": 1.2408676151756689e-32,
+          "Gumbel/RQMC-latin/none": 0.0015176157330648256,
+          "Gumbel/RQMC-latin/f(x)": 0.0011694222624970983,
+          "Gumbel/RQMC-latin/LOO": 0.0006631778710858459,
+          "Cauchy/MC/none": 0.02707141077508725,
+          "Cauchy/MC/f(x)": 0.019281024554585368,
+          "Cauchy/MC/LOO": 9.322550537330672,
+          "Cauchy/MC-antithetic/none": 0.0004814786049081582,
+          "Cauchy/MC-antithetic/f(x)": 0.00048147860490815826,
+          "Cauchy/MC-antithetic/LOO": 0.0004968849497868015,
+          "Cauchy/QMC-cart/none": 3.102169037939172e-33,
+          "Cauchy/QMC-cart/f(x)": 3.102169037939172e-33,
+          "Cauchy/QMC-cart/LOO": 3.102169037939172e-33,
+          "Cauchy/RQMC-cart/none": 7.095154039229264e-06,
+          "Cauchy/RQMC-cart/f(x)": 7.743021465757042e-06,
+          "Cauchy/RQMC-cart/LOO": 0.0021216899284199,
+          "Cauchy/QMC-latin/none": 3.102169037939172e-33,
+          "Cauchy/QMC-latin/f(x)": 3.102169037939172e-33,
+          "Cauchy/QMC-latin/LOO": 3.102169037939172e-33,
+          "Cauchy/RQMC-latin/none": 7.327112053684019e-06,
+          "Cauchy/RQMC-latin/f(x)": 8.673477683565002e-06,
+          "Cauchy/RQMC-latin/LOO": 0.02878398620798702,
+          "Laplace/MC/none": 0.027914719691871915,
+          "Laplace/MC/f(x)": 0.019507031764141737,
+          "Laplace/MC/LOO": 0.01416036460674754,
+          "Laplace/MC-antithetic/none": 0.0003648487362723782,
+          "Laplace/MC-antithetic/f(x)": 0.00036484873627237816,
+          "Laplace/MC-antithetic/LOO": 0.00037652316043629665,
+          "Laplace/QMC-cart/none": 3.102169037939172e-33,
+          "Laplace/QMC-cart/f(x)": 0.0,
+          "Laplace/QMC-cart/LOO": 3.102169037939172e-33,
+          "Laplace/RQMC-cart/none": 0.0004357373361826112,
+          "Laplace/RQMC-cart/f(x)": 0.0004357373361826112,
+          "Laplace/RQMC-cart/LOO": 0.00044968005265910195,
+          "Laplace/QMC-latin/none": 3.102169037939172e-33,
+          "Laplace/QMC-latin/f(x)": 0.0,
+          "Laplace/QMC-latin/LOO": 3.102169037939172e-33,
+          "Laplace/RQMC-latin/none": 0.000544610460321659,
+          "Laplace/RQMC-latin/f(x)": 0.000544610460321659,
+          "Laplace/RQMC-latin/LOO": 0.000562036897323637,
+          "Triangular/MC/none": 0.2439870011517541,
+          "Triangular/MC/f(x)": 0.12014632324411632,
+          "Triangular/MC/LOO": 0.10648482926957868,
+          "Triangular/MC-antithetic/none": 0.14221546502588517,
+          "Triangular/MC-antithetic/f(x)": 0.14221546502588545,
+          "Triangular/MC-antithetic/LOO": 0.14676607325422686,
+          "Triangular/QMC-cart/none": 1.2408676151756689e-32,
+          "Triangular/QMC-cart/f(x)": 0.0,
+          "Triangular/QMC-cart/LOO": 1.2408676151756689e-32,
+          "Triangular/RQMC-cart/none": 0.06965855906506677,
+          "Triangular/RQMC-cart/f(x)": 0.023162475489837357,
+          "Triangular/RQMC-cart/LOO": 0.01734781714984717,
+          "Triangular/QMC-latin/none": 1.2408676151756689e-32,
+          "Triangular/QMC-latin/f(x)": 0.0,
+          "Triangular/QMC-latin/LOO": 1.2408676151756689e-32,
+          "Triangular/RQMC-latin/none": 0.020265312465560726,
+          "Triangular/RQMC-latin/f(x)": 0.009538650631555349,
+          "Triangular/RQMC-latin/LOO": 0.008010130620041245
+        }
+      }
+    },
+    "5": {
+      "verdict": "VERIFIED",
+      "metrics": {
+        "verified": true,
+        "criterion": "paper target within 1% of cell minimum",
+        "cases": [
+          {
+            "size": "n=3",
+            "distribution": "Gaussian",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.0324962257400982,
+            "minimum_mean_l2_error": 0.0324962257400982,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=3",
+            "distribution": "Logistic",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.01597415896581181,
+            "minimum_mean_l2_error": 0.01597415896581181,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=3",
+            "distribution": "Gumbel",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.0378043647220381,
+            "minimum_mean_l2_error": 0.0378043647220381,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=3",
+            "distribution": "Cauchy",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.022869829325347868,
+            "minimum_mean_l2_error": 0.022869829325347868,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=3",
+            "distribution": "Laplace",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.028986913147536198,
+            "minimum_mean_l2_error": 0.028941844799594767,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=3",
+            "distribution": "Triangular",
+            "paper_target": "QMC-latin/LOO/no-antithetic",
+            "target_mean_l2_error": 0.15148197092660992,
+            "minimum_mean_l2_error": 0.15148197092660992,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=5",
+            "distribution": "Gaussian",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.10150918841623602,
+            "minimum_mean_l2_error": 0.10150918841623602,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=5",
+            "distribution": "Logistic",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.0567563077447842,
+            "minimum_mean_l2_error": 0.0567563077447842,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=5",
+            "distribution": "Gumbel",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.10604360142574334,
+            "minimum_mean_l2_error": 0.10604360142574334,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=5",
+            "distribution": "Cauchy",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.07447264421504468,
+            "minimum_mean_l2_error": 0.07447264421504468,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=5",
+            "distribution": "Laplace",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.09542132871453794,
+            "minimum_mean_l2_error": 0.0953225407381884,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=5",
+            "distribution": "Triangular",
+            "paper_target": "QMC-latin/LOO/no-antithetic",
+            "target_mean_l2_error": 0.32524880308720217,
+            "minimum_mean_l2_error": 0.32524880308720217,
+            "within_one_percent": true
+          }
+        ]
+      }
+    },
+    "6": {
+      "verdict": "BLOCKED",
+      "reason": "Four distinct routes are complete, but MNIST and Warcraft remain bounded calibrations, the cited renderer is CUDA-only and not the paper implementation, and the TEM route found no valid counterexample or complete protocol.",
+      "mnist_calibration": {
+        "route": "exact-protocol throughput calibration, not full training",
+        "paper_protocol": {
+          "set_size": 5,
+          "digits_per_image": 4,
+          "training_steps": 100000,
+          "seeds": 12,
+          "batch_size": 100,
+          "optimizer": "Adam",
+          "learning_rate": 0.001,
+          "architecture": [
+            "Conv2d(1,32,5,padding=2)",
+            "ReLU",
+            "MaxPool2d(2)",
+            "Conv2d(32,64,5,padding=2)",
+            "ReLU",
+            "MaxPool2d(2)",
+            "Linear(12544,64)",
+            "ReLU",
+            "Linear(64,1)"
+          ],
+          "distribution": "Laplace",
+          "samples": 256,
+          "sampling": "randomized Latin hypercube",
+          "covariate": "LOO",
+          "gamma": 0.3333333333333333,
+          "loss": "row cross-entropy against the exact hard permutation"
+        },
+        "calibration": {
+          "warmup_steps": 5,
+          "measured_steps": 100,
+          "measured_seconds": 114.11955809011124,
+          "seconds_per_step": 1.1411955809011125,
+          "projected_single_seed_hours": 31.699877247253127,
+          "projected_twelve_seed_serial_hours": 380.3985269670375,
+          "initial_validation_exact_match": 0.007,
+          "final_validation_exact_match": 0.326,
+          "test_exact_match_after_calibration": 0.307,
+          "loss_first_ten_mean": 1.3317758560180664,
+          "loss_last_ten_mean": 0.9033824503421783,
+          "all_losses_finite": true
+        },
+        "data_audit": {
+          "torchvision_train_images": 60000,
+          "train_split_images": 55000,
+          "validation_split_images": 5000,
+          "test_images": 10000,
+          "raw_files": {
+            "t10k-images-idx3-ubyte": {
+              "bytes": 7840016,
+              "sha256": "0fa7898d509279e482958e8ce81c8e77db3f2f8254e26661ceb7762c4d494ce7"
+            },
+            "t10k-images-idx3-ubyte.gz": {
+              "bytes": 1648877,
+              "sha256": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6"
+            },
+            "t10k-labels-idx1-ubyte": {
+              "bytes": 10008,
+              "sha256": "ff7bcfd416de33731a308c3f266cc351222c34898ecbeaf847f06e48f7ec33f2"
+            },
+            "t10k-labels-idx1-ubyte.gz": {
+              "bytes": 4542,
+              "sha256": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6"
+            },
+            "train-images-idx3-ubyte": {
+              "bytes": 47040016,
+              "sha256": "ba891046e6505d7aadcbbe25680a0738ad16aec93bde7f9b65e87a2fc25776db"
+            },
+            "train-images-idx3-ubyte.gz": {
+              "bytes": 9912422,
+              "sha256": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609"
+            },
+            "train-labels-idx1-ubyte": {
+              "bytes": 60008,
+              "sha256": "65a50cbbf4e906d70832878ad85ccda5333a97f0f4c3dd2ef09a8a9eef7101c5"
+            },
+            "train-labels-idx1-ubyte.gz": {
+              "bytes": 28881,
+              "sha256": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c"
+            }
+          }
+        },
+        "environment": {
+          "estimated_required_cores": 32,
+          "selected_flavor": "hf/cpu-upgrade",
+          "selected_flavor_declared_vcpus": 8,
+          "visible_logical_cpus": 64,
+          "affinity_logical_cpus": 64,
+          "cgroup_quota_vcpus": 8.0,
+          "worker_limit": 8,
+          "declared_cost_usd_per_hour": 0.03,
+          "hardware_source_url": "https://huggingface.co/docs/huggingface_hub/guides/jobs",
+          "hardware_source_retrieved": "2026-08-02",
+          "gpu_requested": false,
+          "torch_threads": 8
+        },
+        "seeds": {
+          "model": 24102025,
+          "training_data": 31415,
+          "training_noise": 27182,
+          "validation": 41421,
+          "test": 51521
+        },
+        "verdict": "BLOCKED",
+        "reason": "The disclosed 100,000-step, 12-seed protocol was calibrated but not run in this route."
+      },
+      "warcraft_calibration": {
+        "route": "official-data exact-protocol CPU throughput calibration, not full training",
+        "paper_protocol": {
+          "dataset": "official Warcraft 12x12 split",
+          "epochs": 50,
+          "seeds": 5,
+          "batch_size": 70,
+          "optimizer": "Adam",
+          "learning_rate": 0.001,
+          "scheduler_milestones_epochs": [
+            30,
+            40
+          ],
+          "scheduler_gamma": 0.1,
+          "model": "ResNet18 conv1/bn1/relu/maxpool/layer1, AdaptiveMaxPool2d(12,12), mean over 64 channels",
+          "model_source_commit": "027e82ee818530f2823851d6530e0d2c8657bbcb",
+          "distribution": "Logistic",
+          "samples": 100,
+          "sampling": "randomized Latin hypercube",
+          "covariate": "LOO",
+          "smoothing_target": "shortest-path algorithm",
+          "loss": "MSE against ground-truth hard path"
+        },
+        "reconstruction_choices": {
+          "gamma": 0.1,
+          "gamma_reason": "fixed disclosed Figure 7 sweep value; the paper does not identify a single selected gamma for Figure 6",
+          "cost_parameterization": "network output is log vertex cost and is exponentiated by the shortest-path oracle",
+          "noise_independence": "one independently randomized Latin design per batch item and step",
+          "scheduler_instantiated_but_not_advanced": 0
+        },
+        "calibration": {
+          "warmup_steps": 2,
+          "measured_steps": 20,
+          "measured_seconds": 22.161034893011674,
+          "seconds_per_step": 1.1080517446505838,
+          "steps_per_paper_epoch": 143,
+          "projected_single_seed_hours": 2.200713881736576,
+          "projected_five_seed_serial_hours": 11.00356940868288,
+          "losses": [
+            0.08285531401634216,
+            0.07275325059890747,
+            0.06802745908498764,
+            0.0721411257982254,
+            0.06676332652568817,
+            0.07080452144145966,
+            0.06734919548034668,
+            0.06249305605888367,
+            0.059436339884996414,
+            0.05525725334882736,
+            0.06252962350845337,
+            0.058948785066604614,
+            0.05890214443206787,
+            0.05997835844755173,
+            0.05352960154414177,
+            0.054037630558013916,
+            0.04113267734646797,
+            0.03752830624580383,
+            0.0427711121737957,
+            0.04223703593015671
+          ],
+          "loss_first_five_mean": 0.07250809520483018,
+          "loss_last_five_mean": 0.04354135245084763,
+          "all_losses_finite": true,
+          "initial_full_test": {
+            "exact_match": 0.031,
+            "all_predictions_valid_paths": true,
+            "predicted_path_length_mean": 12.2
+          },
+          "final_full_test": {
+            "exact_match": 0.125,
+            "all_predictions_valid_paths": true,
+            "predicted_path_length_mean": 14.335
+          }
+        },
+        "data_audit": {
+          "source_url": "https://edmond.mpg.de/api/access/datafile/102059",
+          "dataset_doi": "10.17617/3.YJCQ5S",
+          "archive_bytes": 915169563,
+          "archive_md5": "acea5ea60a47664ff189923a84814e96",
+          "train_examples": 10000,
+          "test_examples": 1000,
+          "normalization_mean": [
+            61.479557037353516,
+            69.89927673339844,
+            30.895349502563477
+          ],
+          "normalization_std": [
+            40.66614532470703,
+            16.572311401367188,
+            40.823368072509766
+          ],
+          "members": {
+            "train_maps.npy": {
+              "member": "warcraft_shortest_path_oneskin/12x12/train_maps.npy",
+              "bytes": 276480128,
+              "sha256": "865aef23321a5ef545d8aabef728807acb45ed714ec891f40d8c6f7edf4d9747",
+              "shape": [
+                10000,
+                96,
+                96,
+                3
+              ],
+              "dtype": "uint8"
+            },
+            "train_vertex_weights.npy": {
+              "member": "warcraft_shortest_path_oneskin/12x12/train_vertex_weights.npy",
+              "bytes": 2880128,
+              "sha256": "9f1a404bf1c0d5ccd7b35b840d1e9bb5d3106b85d8650f5b86e3cf0c33473c74",
+              "shape": [
+                10000,
+                12,
+                12
+              ],
+              "dtype": "float16"
+            },
+            "train_shortest_paths.npy": {
+              "member": "warcraft_shortest_path_oneskin/12x12/train_shortest_paths.npy",
+              "bytes": 1440128,
+              "sha256": "e7c90de089597406563eaca9ece2a8ae26233c8dd7489297562921929f25cb7e",
+              "shape": [
+                10000,
+                12,
+                12
+              ],
+              "dtype": "uint8"
+            },
+            "test_maps.npy": {
+              "member": "warcraft_shortest_path_oneskin/12x12/test_maps.npy",
+              "bytes": 27648128,
+              "sha256": "d49da77bcaed83b7edbad70e8ec90fa2b644aa1b45fbbc6df5667165f876e359",
+              "shape": [
+                1000,
+                96,
+                96,
+                3
+              ],
+              "dtype": "uint8"
+            },
+            "test_vertex_weights.npy": {
+              "member": "warcraft_shortest_path_oneskin/12x12/test_vertex_weights.npy",
+              "bytes": 288128,
+              "sha256": "91509402dbc46ac05176fe367b514fef623586351e38ce5e2a1354286f8bbfc0",
+              "shape": [
+                1000,
+                12,
+                12
+              ],
+              "dtype": "float16"
+            },
+            "test_shortest_paths.npy": {
+              "member": "warcraft_shortest_path_oneskin/12x12/test_shortest_paths.npy",
+              "bytes": 144128,
+              "sha256": "18444e24f671beeab6abd883bda71f308f90bd48a67a47126d0fabd0fe23e585",
+              "shape": [
+                1000,
+                12,
+                12
+              ],
+              "dtype": "uint8"
+            }
+          }
+        },
+        "oracle_audit": {
+          "examples": 64,
+          "official_label_exact_encoding_match": 0.953125,
+          "official_label_exact_stored_cost_match": 0.953125,
+          "official_label_quantization_compatible_cost_match": 1.0,
+          "official_labels_all_valid_paths": true,
+          "quantization_compatible_alternative_encoding_count": 3,
+          "maximum_absolute_cost_gap": 0.0009765625,
+          "minimum_quantization_uncertainty": 0.0078125,
+          "maximum_quantization_uncertainty": 0.0693359375,
+          "source_weight_dtype": "float16",
+          "all_oracle_paths_valid": true,
+          "negative_control": {
+            "name": "remove the required start cell from every official path label",
+            "exact_match": 0.0,
+            "valid_path_fraction": 0.0,
+            "failed_as_intended": true
+          }
+        },
+        "environment": {
+          "estimated_required_cores": 32,
+          "selected_flavor": "hf/cpu-upgrade",
+          "selected_flavor_declared_vcpus": 8,
+          "visible_logical_cpus": 64,
+          "affinity_logical_cpus": 64,
+          "cgroup_quota_vcpus": 8.0,
+          "worker_limit": 8,
+          "declared_cost_usd_per_hour": 0.03,
+          "hardware_source_url": "https://huggingface.co/docs/huggingface_hub/guides/jobs",
+          "hardware_source_retrieved": "2026-08-02",
+          "gpu_requested": false,
+          "torch_threads": 8,
+          "path_workers": 8
+        },
+        "seeds": {
+          "model": 24103025,
+          "data_and_noise": 31416
+        },
+        "verdict": "BLOCKED",
+        "reason": "The disclosed 50-epoch, five-seed protocol was calibrated but not run; this route cannot establish the complete four-application claim."
+      },
+      "rendering_capability_audit": {
+        "route": "pinned cited-source CPU capability and protocol audit; no substitute renderer",
+        "paper_protocol": {
+          "asset": "Utah teapot",
+          "camera_degrees_of_freedom": 4,
+          "initial_orientation_error_degrees": [
+            15,
+            75
+          ],
+          "ground_truth_camera_angle_degrees": 20,
+          "ground_truth_camera_distance": [
+            2.5,
+            4.0
+          ],
+          "initial_camera_distance": [
+            2.0,
+            10.0
+          ],
+          "initial_camera_angle_degrees": [
+            10,
+            30
+          ],
+          "optimizer": "Adam",
+          "adam_betas": [
+            0.5,
+            0.99
+          ],
+          "initial_learning_rate": 0.3,
+          "scheduler": "CosineAnnealingLR",
+          "steps": 1000,
+          "seeds": 768,
+          "success_orientation_error_below_degrees": 5,
+          "smoothing": "black-box hard rendering algorithm in four-dimensional camera coordinates"
+        },
+        "source_audit": {
+          "repository": "Felix-Petersen/gendr",
+          "commit": "c89269cb38eef7a95be703154f676a56d791958f",
+          "archive_url": "https://github.com/Felix-Petersen/gendr/archive/c89269cb38eef7a95be703154f676a56d791958f.zip",
+          "archive_bytes": 361993,
+          "archive_sha256": "120837ad58376d12fe5ea181b302103331c6d02d77e8913969a39836d6f42245",
+          "retrieved": "2026-08-02",
+          "files": {
+            "experiments/opt_camera.py": {
+              "url": "https://raw.githubusercontent.com/Felix-Petersen/gendr/c89269cb38eef7a95be703154f676a56d791958f/experiments/opt_camera.py",
+              "bytes": 13409,
+              "sha256": "926ad20864e018fb9b945ac374f57b146d676f8bb15f78b1364bbbe05b0359f1",
+              "expected_sha256": "926ad20864e018fb9b945ac374f57b146d676f8bb15f78b1364bbbe05b0359f1"
+            },
+            "experiments/data/teapot.obj": {
+              "url": "https://raw.githubusercontent.com/Felix-Petersen/gendr/c89269cb38eef7a95be703154f676a56d791958f/experiments/data/teapot.obj",
+              "bytes": 152595,
+              "sha256": "2f833c87e691d949dfa1325df94efe3c25e95b948c7f147e2d08e3ffb719fcda",
+              "expected_sha256": "2f833c87e691d949dfa1325df94efe3c25e95b948c7f147e2d08e3ffb719fcda"
+            },
+            "setup.py": {
+              "url": "https://raw.githubusercontent.com/Felix-Petersen/gendr/c89269cb38eef7a95be703154f676a56d791958f/setup.py",
+              "bytes": 2171,
+              "sha256": "fe2452a26d699ca09269054086444370f3c5f3e1bed1db2366c0a4ca8fd588a6",
+              "expected_sha256": "fe2452a26d699ca09269054086444370f3c5f3e1bed1db2366c0a4ca8fd588a6"
+            },
+            "README.md": {
+              "url": "https://raw.githubusercontent.com/Felix-Petersen/gendr/c89269cb38eef7a95be703154f676a56d791958f/README.md",
+              "bytes": 5309,
+              "sha256": "b1bf5f6c79136ae674798f7e439de58ce1b4188faae37d509d1452797f184a03",
+              "expected_sha256": "b1bf5f6c79136ae674798f7e439de58ce1b4188faae37d509d1452797f184a03"
+            }
+          },
+          "mesh": {
+            "vertices": 1292,
+            "faces": 2464
+          },
+          "camera_script_hardcodes_cuda": true,
+          "setup_cuda_extension_count": 4,
+          "setup_cuda_kernel_count": 4,
+          "readme_explicitly_requires_cuda": true,
+          "cited_script_uses_normal_angles_not_uniform_sphere": true,
+          "cited_script_uses_internal_differentiable_renderer_not_black_box_sampling": true
+        },
+        "capability_test": {
+          "command": "/repo/.venv/bin/python setup.py build_ext",
+          "returncode": 1,
+          "failed": true,
+          "output_tail": "\nTraceback (most recent call last):\n  File \"<temporary-source>/gendr-c89269cb38eef7a95be703154f676a56d791958f/setup.py\", line 13, in <module>\n    CUDAExtension('gendr.cuda.load_textures', [\n  File \"/repo/.venv/lib/python3.12/site-packages/torch/utils/cpp_extension.py\", line 1279, in CUDAExtension\n    library_dirs += library_paths(device_type=\"cuda\")\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/repo/.venv/lib/python3.12/site-packages/torch/utils/cpp_extension.py\", line 1490, in library_paths\n    if (not os.path.exists(_join_cuda_home(lib_dir)) and\n                           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/repo/.venv/lib/python3.12/site-packages/torch/utils/cpp_extension.py\", line 2889, in _join_cuda_home\n    raise OSError('CUDA_HOME environment variable is not set. '\nOSError: CUDA_HOME environment variable is not set. Please set it to your CUDA install root.\n",
+          "torch_cuda_available": false,
+          "torch_cuda_build": null,
+          "nvcc_path": null
+        },
+        "negative_control": {
+          "name": "replace only the camera script device token with cpu",
+          "shallow_patch_still_requires_four_cuda_extensions": true,
+          "failed_as_intended": true
+        },
+        "environment": {
+          "estimated_required_cores": 1,
+          "selected_flavor": "hf/cpu-upgrade",
+          "selected_flavor_declared_vcpus": 8,
+          "visible_logical_cpus": 64,
+          "affinity_logical_cpus": 64,
+          "cgroup_quota_vcpus": 8.0,
+          "worker_limit": 8,
+          "declared_cost_usd_per_hour": 0.03,
+          "hardware_source_url": "https://huggingface.co/docs/huggingface_hub/guides/jobs",
+          "hardware_source_retrieved": "2026-08-02",
+          "gpu_requested": false
+        },
+        "runtime_seconds": 3.746040496043861,
+        "verdict": "BLOCKED",
+        "reason": "The cited renderer requires CUDA and its camera script is not the paper's black-box stochastic-smoothing implementation. GPU use is prohibited, and substituting a CPU renderer would not test the exact claim."
+      },
+      "tem_falsification_audit": {
+        "route": "mandatory fourth route dedicated to falsification via pinned TEM primary sources",
+        "exact_claim": "Section 4.5 reports that generalized stochastic smoothing was used to optimize TEM-simulator v1.3 micrograph parameters in disclosed two- and four-dimensional searches.",
+        "claim_logic": {
+          "quantifier": "existential historical empirical demonstration",
+          "domain": "the authors' exact TEM-simulator v1.3 input deck, TMV specimen asset, smoothing estimator, initializations, optimizer schedule, and stopping horizon",
+          "assumptions": [
+            "400x400 simulated micrographs",
+            "ground truth 300 kV acceleration voltage, 3 mm focal length, centered specimen",
+            "two-parameter voltage [0,1000] kV and x-position [-5,5] nm search",
+            "four-parameter voltage [0,600] kV, focal length [0,6] mm, x/y-position [-3,3] nm search",
+            "Adam betas (0.5,0.9)",
+            "20 random-search repetitions"
+          ],
+          "falsification_requirement": "authenticated evidence satisfying every stated assumption and showing that the reported demonstration did not occur or that its exact reported outcome is impossible"
+        },
+        "paper_protocol": {
+          "simulator": "TEM-simulator v1.3",
+          "image_shape": [
+            400,
+            400
+          ],
+          "ground_truth": {
+            "acceleration_voltage_kv": 300,
+            "focal_length_mm": 3,
+            "x_position_nm": 0,
+            "y_position_nm": 0
+          },
+          "two_parameter_domain": {
+            "acceleration_voltage_kv": [
+              0,
+              1000
+            ],
+            "x_position_nm": [
+              -5,
+              5
+            ]
+          },
+          "four_parameter_domain": {
+            "acceleration_voltage_kv": [
+              0,
+              600
+            ],
+            "focal_length_mm": [
+              0,
+              6
+            ],
+            "x_position_nm": [
+              -3,
+              3
+            ],
+            "y_position_nm": [
+              -3,
+              3
+            ]
+          },
+          "optimizer": "Adam",
+          "adam_betas": [
+            0.5,
+            0.9
+          ],
+          "random_search_repetitions": 20,
+          "paper_reported_single_sample_runtime_seconds_on_one_xeon_core": 67
+        },
+        "primary_source_audit": {
+          "TEM-simulator_1.3.zip": {
+            "published": {
+              "primary_url": "https://sourceforge.net/projects/tem-simulator/files/TEM-simulator_1.3.zip/download",
+              "mirror_url": "https://downloads.sourceforge.net/project/tem-simulator/TEM-simulator_1.3.zip",
+              "bytes": 425791,
+              "md5": "5c47d4946ecc222f27be7dce03e0228b"
+            },
+            "retrieved": "2026-08-02",
+            "attempts": [
+              {
+                "url": "https://sourceforge.net/projects/tem-simulator/files/TEM-simulator_1.3.zip/download",
+                "final_url": "https://master.dl.sourceforge.net/project/tem-simulator/TEM-simulator_1.3.zip?viasf=1&fid=2543efb92574b18d&e=1785791336&st=lkRETuh6uKGDCLnWmE0VsA",
+                "bytes": 425791,
+                "md5": "5c47d4946ecc222f27be7dce03e0228b",
+                "sha256": "4cee7519ffc578afaf0830061bd243aa767d24c93b980e27aefd601f859e8fa0",
+                "identity_match": true
+              }
+            ],
+            "identity_verified": true,
+            "archive": {
+              "is_zip": true,
+              "all_paths_safe": true,
+              "member_count": 46,
+              "members": [
+                {
+                  "name": "TEM-simulator_1.3/manual.pdf",
+                  "bytes": 237638,
+                  "crc32": "524dbd40",
+                  "sha256": "afca31d6a971372a4a125c8755d00cd9881ebf6229c38fc36dc956f7304e0525",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/COPYING",
+                  "bytes": 35145,
+                  "crc32": "b3447a29",
+                  "sha256": "8ff66dd3e82666481488eb17ffe8e4c8383a510fb1e057962522509f1b9ac02e",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/TEM-simulator.exe",
+                  "bytes": 174592,
+                  "crc32": "60e18f18",
+                  "sha256": "ba48937da394a1c51b253b9889e2ad30b8d1d71c10962baeff47823e4c677e38",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/macros.h",
+                  "bytes": 12696,
+                  "crc32": "b197e8fb",
+                  "sha256": "19260f4b58ab0e953f28e6719b84afdbb5c2c9a75313a4f3d43b211b4c89b5bb",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/geometry.c",
+                  "bytes": 17600,
+                  "crc32": "f9d0d369",
+                  "sha256": "a82bb585d13a09ab47cb8d1e84b3295f18a0c01700ee26f76f7c5fbb3cbfa442",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/matrix.h",
+                  "bytes": 2347,
+                  "crc32": "8008c34e",
+                  "sha256": "8eba9c7bc825466ca2df7d5c2f3ff91945791c1c2bd5da629b5e2d343d60647c",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/wavefunction.c",
+                  "bytes": 20710,
+                  "crc32": "3e6d3a80",
+                  "sha256": "52d35d56fea2e6ab66e13d2f5a7b6902188f27f1b76b6a79cc350837f623dfef",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/optics.h",
+                  "bytes": 5444,
+                  "crc32": "2924397c",
+                  "sha256": "ded6d22840043c50a3b594e440a3957233de127111adfc06187c61749037e8f2",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/functions.h",
+                  "bytes": 2385,
+                  "crc32": "4870d235",
+                  "sha256": "4b7dd2a622dd6d5a2581384dcb8dc73a9ad59894bb326415ed1d1c021f735996",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/mrc.c",
+                  "bytes": 18820,
+                  "crc32": "42be670e",
+                  "sha256": "dc50102dfb79fc45af1fe4e5d48a3a2a6366426aa1d15f73af6918c0e7f5c3a7",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/electronbeam.c",
+                  "bytes": 14093,
+                  "crc32": "86091519",
+                  "sha256": "ce47fe2b33dab4252d2cfaf85132200924cfdbcf7e39fc2ff6ac1db95ee9e587",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/input.c",
+                  "bytes": 26832,
+                  "crc32": "9e2fb2a9",
+                  "sha256": "b499e25721b536f8094ba90f9236b3342ad44fe5a45ddde07c8b0869095e3cef",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/mrc.h",
+                  "bytes": 3028,
+                  "crc32": "d57e3f69",
+                  "sha256": "94a51e9408f2b35519772c17c4b36e962eb772f17f0bd4d71c6e50205bc42e08",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/electronbeam.h",
+                  "bytes": 10599,
+                  "crc32": "4f344657",
+                  "sha256": "da15aee66b350c418389c873e47052777115eedeb4682459aea141234d53cf77",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/random.h",
+                  "bytes": 1476,
+                  "crc32": "64968e03",
+                  "sha256": "afb1876a9a73977eeea666dbf6853050e9ac3eb2b3b00a8324156567e515a86a",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/optics.c",
+                  "bytes": 10286,
+                  "crc32": "5f5e3544",
+                  "sha256": "4e2b14c739d9aea77a926ed313e5b1783ea53e52e4449994a8f22a3c920e458f",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/TEM-simulator.c",
+                  "bytes": 5293,
+                  "crc32": "31e12624",
+                  "sha256": "fff2c9422f15844b433c9bfebabb5b30070531b246a8c07cfd48c8378337c379",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/matrix.c",
+                  "bytes": 11369,
+                  "crc32": "78d9c1b1",
+                  "sha256": "3eac8aacd227201a036c58a75120e7560bebf9ade698150112a87b4e9a6779b7",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/particle.c",
+                  "bytes": 29952,
+                  "crc32": "18829aac",
+                  "sha256": "e7b06896df723cde80545bfc245513e74aaeb82776775096b09810f715e003eb",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/detector.c",
+                  "bytes": 18340,
+                  "crc32": "1c035b1b",
+                  "sha256": "f51641d3a3b7a8dc011fb86cfe4ff7fc5fda01d111bf36fa05a8d8dda65ec2f4",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/functions.c",
+                  "bytes": 6571,
+                  "crc32": "90bb0e0e",
+                  "sha256": "cb6ac4a23d33c1073b074ccf822492b271d2ee3292936a3a0fd3615c6c0885ff",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/misc.c",
+                  "bytes": 4651,
+                  "crc32": "120a6842",
+                  "sha256": "f9f678fb64fbd5c0999b4d20a378e39b1b5ce6b7cd423b642fd07c8904e54551",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/pdb.c",
+                  "bytes": 34340,
+                  "crc32": "71e885a4",
+                  "sha256": "2464a293bef4b8e8d28f44cc83051b532c1f8428fad836ddd433c5769380c8e9",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/volume.c",
+                  "bytes": 16629,
+                  "crc32": "4ec48631",
+                  "sha256": "13c4c35e117930ea49bce7be1840e17a7c42dbd358da05e349d2a7944a601259",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/detector.h",
+                  "bytes": 6750,
+                  "crc32": "8b0432fd",
+                  "sha256": "6566179ac08a324f9a486bd0c2597db6774ef86d6cad01a8032be0708fbe77d5",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/simulation.h",
+                  "bytes": 11945,
+                  "crc32": "50bf2a3a",
+                  "sha256": "098ebef6a10cc753eb60a71ea93188c60996f545c3ca23c0496ae00ea106b986",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/Makefile",
+                  "bytes": 3892,
+                  "crc32": "42237d95",
+                  "sha256": "8c41d1b1d59a5a972cbbefc9d03cd5e05d1b1ac73a3bddbf70dab6507b0fa9d2",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/misc.h",
+                  "bytes": 1592,
+                  "crc32": "3a43a9c8",
+                  "sha256": "e6f1e934d036482c0c1ea0ec13ee793d8e1e10ad5caaab0687ada016a47ed1d6",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/random.c",
+                  "bytes": 5056,
+                  "crc32": "c5e887b8",
+                  "sha256": "8274ff22c896940485f329696cb6b050d318c758bae16bba2e887f65836f571b",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/geometry.h",
+                  "bytes": 6041,
+                  "crc32": "dd4f3450",
+                  "sha256": "fb45479f3c0abd0b0b3849ca16e2e9f3fd93b06aeea0fa759d7416afed2907c5",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/log.h",
+                  "bytes": 1167,
+                  "crc32": "786aeca9",
+                  "sha256": "acbd1794770da48c3773ffd3116fa66262c1970b0b4b1a9f7892a221dca964a7",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/particle.h",
+                  "bytes": 4652,
+                  "crc32": "dece5bf8",
+                  "sha256": "22305cfdbe212787da1986bae6e1a8f3d4ad1412ee8cbd661eaf0edca5ffc5a7",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/particleset.h",
+                  "bytes": 3614,
+                  "crc32": "2e35b96d",
+                  "sha256": "1e60698ab1aef7fb0be6af1d12d6c21251da549825cdb4c10a6ada2cde38bef4",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/simulation.c",
+                  "bytes": 24631,
+                  "crc32": "bdafc484",
+                  "sha256": "3ddeb2791775b4f4a00a701d6ac28c64a1eef687cc505e962fa172e33571e70f",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/wavefunction.h",
+                  "bytes": 1641,
+                  "crc32": "8819e82f",
+                  "sha256": "c78c7a28d9374239c1a5ab11e011653dc1c65d3bc6d2bdb6b2449793c0f6b9bc",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/particleset.c",
+                  "bytes": 17711,
+                  "crc32": "5743d894",
+                  "sha256": "418a4864842c4297dfdbf23ba792da18a4d49a303d22de969e29c5784ee8b30c",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/input.h",
+                  "bytes": 9024,
+                  "crc32": "fd4f0fa5",
+                  "sha256": "412f27fe505f8849649a41cd206a5c6b3c5a44ea2716ad2215bf9282d8c9659b",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/structs.h",
+                  "bytes": 3197,
+                  "crc32": "f844cc06",
+                  "sha256": "e1f95a42c2953e8ef441c2b805227dce4f73adc8cd98390a09d50b0db4f4196b",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/volume.h",
+                  "bytes": 3182,
+                  "crc32": "13503c68",
+                  "sha256": "bc9f0105c0db878200ead7f7461bd27fd5c27d0d9d8d0288f7184be9bdf9f297",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/sample.h",
+                  "bytes": 3290,
+                  "crc32": "489963a1",
+                  "sha256": "3ee579a76effee4e3d7149e859d50e2901b974d355b04883c8c174d14c9aea33",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/array.h",
+                  "bytes": 14901,
+                  "crc32": "949f77e9",
+                  "sha256": "b4761e4d5fb481d028e9db1a17c70a3ed386bf7a30a8c766000d2a6660e7f3ce",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/sample.c",
+                  "bytes": 9956,
+                  "crc32": "131f89f2",
+                  "sha256": "e5b17bcc181ca8435eecd317568340c52b077734972209ad85e49674063ed680",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/log.c",
+                  "bytes": 4485,
+                  "crc32": "befdadb6",
+                  "sha256": "c01f2141286a398f937d0995739d4c1c2d6a71a90875acd15845bce9a8c9ca2d",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/pdb.h",
+                  "bytes": 1117,
+                  "crc32": "f014061b",
+                  "sha256": "b93845e2a8c78568d5019e4d5e94c2ff942b6c9cfd3b9e69787e0abba207081e",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/array.c",
+                  "bytes": 14973,
+                  "crc32": "cbacafed",
+                  "sha256": "2f16617855788e84560cb6e0820d40fdbb22a244152213d3ff808c800eda696f",
+                  "path_safe": true
+                },
+                {
+                  "name": "TEM-simulator_1.3/INSTALLATION",
+                  "bytes": 503,
+                  "crc32": "ba299e1f",
+                  "sha256": "3d94c64ebf3f368f1ff85bc5af7eb535a37d8524934e22e42a7496f539876d58",
+                  "path_safe": true
+                }
+              ],
+              "elf_members": [],
+              "text_parameter_members": [
+                {
+                  "name": "TEM-simulator_1.3/TEM-simulator.exe",
+                  "tokens": [
+                    "voltage",
+                    "focal",
+                    "micrograph",
+                    "detector",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/macros.h",
+                  "tokens": [
+                    "voltage",
+                    "focal",
+                    "micrograph",
+                    "detector",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/geometry.c",
+                  "tokens": [
+                    "micrograph",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/wavefunction.c",
+                  "tokens": [
+                    "focal",
+                    "detector",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/optics.h",
+                  "tokens": [
+                    "focal",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/mrc.c",
+                  "tokens": [
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/electronbeam.c",
+                  "tokens": [
+                    "voltage",
+                    "micrograph",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/mrc.h",
+                  "tokens": [
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/electronbeam.h",
+                  "tokens": [
+                    "voltage",
+                    "detector"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/optics.c",
+                  "tokens": [
+                    "focal",
+                    "micrograph",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/TEM-simulator.c",
+                  "tokens": [
+                    "detector",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/particle.c",
+                  "tokens": [
+                    "micrograph"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/detector.c",
+                  "tokens": [
+                    "detector",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/pdb.c",
+                  "tokens": [
+                    "voltage"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/volume.c",
+                  "tokens": [
+                    "voltage",
+                    "micrograph",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/detector.h",
+                  "tokens": [
+                    "detector",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/simulation.h",
+                  "tokens": [
+                    "micrograph",
+                    "detector"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/Makefile",
+                  "tokens": [
+                    "detector"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/geometry.h",
+                  "tokens": [
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/simulation.c",
+                  "tokens": [
+                    "micrograph",
+                    "detector",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/wavefunction.h",
+                  "tokens": [
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/particleset.c",
+                  "tokens": [
+                    "micrograph"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/structs.h",
+                  "tokens": [
+                    "detector",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "TEM-simulator_1.3/src/sample.c",
+                  "tokens": [
+                    "micrograph",
+                    "tilt"
+                  ]
+                }
+              ]
+            }
+          },
+          "Simulation_example_TMV_v2.zip": {
+            "published": {
+              "primary_url": "https://sourceforge.net/projects/tem-simulator/files/Simulation_example_TMV_v2.zip/download",
+              "mirror_url": "https://downloads.sourceforge.net/project/tem-simulator/Simulation_example_TMV_v2.zip",
+              "bytes": 887170,
+              "md5": "a56518e96a88f922b0529a5e67a19ed3"
+            },
+            "retrieved": "2026-08-02",
+            "attempts": [
+              {
+                "url": "https://sourceforge.net/projects/tem-simulator/files/Simulation_example_TMV_v2.zip/download",
+                "final_url": "https://master.dl.sourceforge.net/project/tem-simulator/Simulation_example_TMV_v2.zip?viasf=1&fid=ca78df92fe7d8004&e=1785791337&st=UpP5NH0tmyTb-4XSkdm5iQ",
+                "bytes": 887170,
+                "md5": "a56518e96a88f922b0529a5e67a19ed3",
+                "sha256": "00e7cfd1e25c838a991c9550bd9a3a635c9f127f3ac1105058c6b73988fb208d",
+                "identity_match": true
+              }
+            ],
+            "identity_verified": true,
+            "archive": {
+              "is_zip": true,
+              "all_paths_safe": true,
+              "member_count": 6,
+              "members": [
+                {
+                  "name": "Simulation_example_TMV_v2/TMV_coord.txt",
+                  "bytes": 707,
+                  "crc32": "f92b327d",
+                  "sha256": "9ca84fbe23d7013cd4345aeb61c8f87f23fc3f1fb597c23c398a32b355d2e5f6",
+                  "path_safe": true
+                },
+                {
+                  "name": "Simulation_example_TMV_v2/expected_results.pdf",
+                  "bytes": 769127,
+                  "crc32": "eec00d25",
+                  "sha256": "9996cf5876635331ec72332ca301030b9a9c5a8941b3399445144733e72b8687",
+                  "path_safe": true
+                },
+                {
+                  "name": "Simulation_example_TMV_v2/input.txt",
+                  "bytes": 6996,
+                  "crc32": "41a0bf8a",
+                  "sha256": "a04db92216660616ed473afa1097155304a8d5e05311462f032084e6f82e6346",
+                  "path_safe": true
+                },
+                {
+                  "name": "Simulation_example_TMV_v2/README",
+                  "bytes": 244,
+                  "crc32": "c689999e",
+                  "sha256": "b30a8974167c05331585c17db5d2cf45df55bfce8c7afc326b457bc7db597da7",
+                  "path_safe": true
+                },
+                {
+                  "name": "Simulation_example_TMV_v2/2OM3.pdb",
+                  "bytes": 558981,
+                  "crc32": "7e4c5ddd",
+                  "sha256": "b7514a5ef772aef588c39c6b589dc73d8ca9c05b2d26193d64b58f28a484d6d1",
+                  "path_safe": true
+                },
+                {
+                  "name": "Simulation_example_TMV_v2/2OM3_transf.txt",
+                  "bytes": 6887,
+                  "crc32": "3ad59af1",
+                  "sha256": "012ffda05be9f2c6eb70d221ad475ff4863e9c1830bb76b3859c57ce86dd4b60",
+                  "path_safe": true
+                }
+              ],
+              "elf_members": [],
+              "text_parameter_members": [
+                {
+                  "name": "Simulation_example_TMV_v2/input.txt",
+                  "tokens": [
+                    "voltage",
+                    "focal",
+                    "micrograph",
+                    "detector",
+                    "tilt"
+                  ]
+                },
+                {
+                  "name": "Simulation_example_TMV_v2/2OM3.pdb",
+                  "tokens": [
+                    "voltage",
+                    "specimen",
+                    "micrograph",
+                    "detector",
+                    "tilt"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "cpu_capability": {
+          "elf_candidate_count": 0,
+          "x86_64_candidate_count": 0,
+          "help_probes": [],
+          "exact_paper_deck_identified": false,
+          "exact_optimizer_code_identified": false,
+          "exact_demonstration_executed": false
+        },
+        "negative_control": {
+          "name": "flip one byte in the pinned simulator archive",
+          "corrupted_md5": "64aab07760d4569d02cfe439adfa2373",
+          "identity_verifier_rejected_corruption": true,
+          "failed_as_intended": true
+        },
+        "falsification": {
+          "counterexample_found": false,
+          "all_paper_assumptions_satisfied": false,
+          "routes_completed": [
+            "MNIST exact-protocol throughput calibration",
+            "Warcraft official-data exact-protocol throughput calibration",
+            "pinned GenDR CPU capability and protocol audit",
+            "pinned TEM primary-source falsification audit"
+          ],
+          "conclusion": "The public simulator and example archives can audit provenance and CPU capability, but absence of the authors' exact deck and optimizer implementation cannot contradict an existential historical demonstration."
+        },
+        "environment": {
+          "estimated_required_cores": 1,
+          "selected_flavor": "hf/cpu-upgrade",
+          "selected_flavor_declared_vcpus": 8,
+          "visible_logical_cpus": 64,
+          "affinity_logical_cpus": 64,
+          "cgroup_quota_vcpus": 8.0,
+          "worker_limit": 8,
+          "declared_cost_usd_per_hour": 0.03,
+          "hardware_source_url": "https://huggingface.co/docs/huggingface_hub/guides/jobs",
+          "hardware_source_retrieved": "2026-08-02",
+          "gpu_requested": false
+        },
+        "runtime_seconds": 2.3595154681243002,
+        "verdict": "BLOCKED",
+        "reason": "No assumption-satisfying counterexample was established, and the undisclosed exact input deck, specimen mapping, learning rate, smoothing schedule, and optimization horizon prevent faithful execution."
+      }
+    }
+  },
+  "negative_control": {
+    "name": "Gaussian score applied to Laplace density",
+    "error": 0.05369396702682416,
+    "failed_as_intended": true
+  },
+  "section4_evidence": {
+    "summary": {
+      "resources": {
+        "estimated_required_cores": 32,
+        "selected_flavor": "hf/cpu-upgrade",
+        "selected_flavor_declared_vcpus": 8,
+        "visible_logical_cpus": 64,
+        "affinity_logical_cpus": 64,
+        "cgroup_quota_vcpus": 8.0,
+        "worker_limit": 8,
+        "declared_cost_usd_per_hour": 0.03,
+        "hardware_source_url": "https://huggingface.co/docs/huggingface_hub/guides/jobs",
+        "hardware_source_retrieved": "2026-08-02",
+        "gpu_requested": false
+      },
+      "workers": 8,
+      "sorting_repeats": 64,
+      "path_repeats": 24,
+      "path_oracle_blocks": {
+        "default": 4,
+        "Triangular": 32
+      },
+      "path_oracle_samples_per_block": 65536,
+      "path_oracle_samples_per_distribution_and_size": {
+        "Gaussian": 262144,
+        "Logistic": 262144,
+        "Gumbel": 262144,
+        "Cauchy": 262144,
+        "Laplace": 262144,
+        "Triangular": 2097152
+      },
+      "cell_count": 447,
+      "expected_cell_count": 447,
+      "coverage_pass": true,
+      "sorting_oracle_checks_pass": true,
+      "path_oracle_checks_pass": true,
+      "path_checks_pass": true,
+      "official_dataset_integrity_pass": true,
+      "non_vacuity_pass": true,
+      "negative_control_pass": true,
+      "claim4_verified": true,
+      "claim5_verified": true
+    },
+    "sorting_oracle_audit": [
+      {
+        "size": 3,
+        "distribution": "Gaussian",
+        "fd_step_disagreement": 2.4215180103333382e-09,
+        "row_sum_error": 2.220446049250313e-16,
+        "column_sum_error": 2.220446049250313e-16
+      },
+      {
+        "size": 3,
+        "distribution": "Logistic",
+        "fd_step_disagreement": 5.367311313657204e-10,
+        "row_sum_error": 3.9968028886505635e-15,
+        "column_sum_error": 5.995204332975845e-15
+      },
+      {
+        "size": 3,
+        "distribution": "Gumbel",
+        "fd_step_disagreement": 2.013698288297143e-09,
+        "row_sum_error": 2.1094237467877974e-15,
+        "column_sum_error": 5.773159728050814e-15
+      },
+      {
+        "size": 3,
+        "distribution": "Cauchy",
+        "fd_step_disagreement": 1.015995425810952e-09,
+        "row_sum_error": 0.0,
+        "column_sum_error": 2.220446049250313e-16
+      },
+      {
+        "size": 3,
+        "distribution": "Laplace",
+        "fd_step_disagreement": 1.9795464509250604e-09,
+        "row_sum_error": 6.661338147750939e-16,
+        "column_sum_error": 8.881784197001252e-16
+      },
+      {
+        "size": 3,
+        "distribution": "Triangular",
+        "fd_step_disagreement": 2.078904298509503e-08,
+        "row_sum_error": 1.1102230246251565e-16,
+        "column_sum_error": 1.1102230246251565e-16
+      },
+      {
+        "size": 5,
+        "distribution": "Gaussian",
+        "fd_step_disagreement": 3.693283840459133e-09,
+        "row_sum_error": 2.220446049250313e-16,
+        "column_sum_error": 8.881784197001252e-16
+      },
+      {
+        "size": 5,
+        "distribution": "Logistic",
+        "fd_step_disagreement": 8.734629608114943e-10,
+        "row_sum_error": 6.661338147750939e-16,
+        "column_sum_error": 6.661338147750939e-16
+      },
+      {
+        "size": 5,
+        "distribution": "Gumbel",
+        "fd_step_disagreement": 3.3959537935656933e-09,
+        "row_sum_error": 6.661338147750939e-15,
+        "column_sum_error": 8.43769498715119e-15
+      },
+      {
+        "size": 5,
+        "distribution": "Cauchy",
+        "fd_step_disagreement": 1.6305607661125594e-09,
+        "row_sum_error": 0.0,
+        "column_sum_error": 0.0
+      },
+      {
+        "size": 5,
+        "distribution": "Laplace",
+        "fd_step_disagreement": 3.6919618213826824e-09,
+        "row_sum_error": 1.1102230246251565e-15,
+        "column_sum_error": 7.993605777301127e-15
+      },
+      {
+        "size": 5,
+        "distribution": "Triangular",
+        "fd_step_disagreement": 4.0761545326973e-08,
+        "row_sum_error": 1.1102230246251565e-16,
+        "column_sum_error": 0.0
+      }
+    ],
+    "path_oracle_audit": [
+      {
+        "size": "8x8",
+        "distribution": "Gaussian",
+        "blocks": 4,
+        "samples_per_block": 65536,
+        "samples": 262144,
+        "selected_scale": 0.1,
+        "block_deviation_l2_mean": 0.25779905024751437,
+        "oracle_uncertainty_95": 0.47410214474803025,
+        "oracle_l2": 12.182670514678302,
+        "minimum_estimator_error": 4.147319583462861,
+        "uncertainty_over_minimum_error": 0.11431531503829089
+      },
+      {
+        "size": "8x8",
+        "distribution": "Logistic",
+        "blocks": 4,
+        "samples_per_block": 65536,
+        "samples": 262144,
+        "selected_scale": 0.1,
+        "block_deviation_l2_mean": 0.1514671334431295,
+        "oracle_uncertainty_95": 0.2787243935104547,
+        "oracle_l2": 7.094401114967617,
+        "minimum_estimator_error": 2.4499661022932395,
+        "uncertainty_over_minimum_error": 0.11376663262792108
+      },
+      {
+        "size": "8x8",
+        "distribution": "Gumbel",
+        "blocks": 4,
+        "samples_per_block": 65536,
+        "samples": 262144,
+        "selected_scale": 0.1,
+        "block_deviation_l2_mean": 0.30392590828009103,
+        "oracle_uncertainty_95": 0.5616805445532659,
+        "oracle_l2": 10.039791928287752,
+        "minimum_estimator_error": 4.215325158614764,
+        "uncertainty_over_minimum_error": 0.13324726407057166
+      },
+      {
+        "size": "8x8",
+        "distribution": "Cauchy",
+        "blocks": 4,
+        "samples_per_block": 65536,
+        "samples": 262144,
+        "selected_scale": 0.05,
+        "block_deviation_l2_mean": 0.44868524705865787,
+        "oracle_uncertainty_95": 0.8252059015334833,
+        "oracle_l2": 9.08336956779824,
+        "minimum_estimator_error": 6.277949899556849,
+        "uncertainty_over_minimum_error": 0.13144512376432524
+      },
+      {
+        "size": "8x8",
+        "distribution": "Laplace",
+        "blocks": 4,
+        "samples_per_block": 65536,
+        "samples": 262144,
+        "selected_scale": 0.1,
+        "block_deviation_l2_mean": 0.2402555897389464,
+        "oracle_uncertainty_95": 0.4415856130030203,
+        "oracle_l2": 9.732917953191073,
+        "minimum_estimator_error": 4.188703964246628,
+        "uncertainty_over_minimum_error": 0.10542297015311825
+      },
+      {
+        "size": "8x8",
+        "distribution": "Triangular",
+        "blocks": 32,
+        "samples_per_block": 65536,
+        "samples": 2097152,
+        "selected_scale": 0.2,
+        "block_deviation_l2_mean": 1.1288552305176127,
+        "oracle_uncertainty_95": 0.43620946090365526,
+        "oracle_l2": 14.360734153828012,
+        "minimum_estimator_error": 5.8217708684993115,
+        "uncertainty_over_minimum_error": 0.07492728084918562
+      },
+      {
+        "size": "12x12",
+        "distribution": "Gaussian",
+        "blocks": 4,
+        "samples_per_block": 65536,
+        "samples": 262144,
+        "selected_scale": 0.0025,
+        "block_deviation_l2_mean": 11.734607379553923,
+        "oracle_uncertainty_95": 21.570465674902863,
+        "oracle_l2": 371.32967240994657,
+        "minimum_estimator_error": 191.65386639183248,
+        "uncertainty_over_minimum_error": 0.1125490765252942
+      },
+      {
+        "size": "12x12",
+        "distribution": "Logistic",
+        "blocks": 4,
+        "samples_per_block": 65536,
+        "samples": 262144,
+        "selected_scale": 0.0025,
+        "block_deviation_l2_mean": 6.079806646932999,
+        "oracle_uncertainty_95": 11.17494019772521,
+        "oracle_l2": 214.10034228069975,
+        "minimum_estimator_error": 111.56464542662185,
+        "uncertainty_over_minimum_error": 0.1001656049279086
+      },
+      {
+        "size": "12x12",
+        "distribution": "Gumbel",
+        "blocks": 4,
+        "samples_per_block": 65536,
+        "samples": 262144,
+        "selected_scale": 0.0025,
+        "block_deviation_l2_mean": 11.790843233354844,
+        "oracle_uncertainty_95": 21.66634798373373,
+        "oracle_l2": 315.0469717085559,
+        "minimum_estimator_error": 191.07498573288808,
+        "uncertainty_over_minimum_error": 0.11339185974883205
+      },
+      {
+        "size": "12x12",
+        "distribution": "Cauchy",
+        "blocks": 4,
+        "samples_per_block": 65536,
+        "samples": 262144,
+        "selected_scale": 0.0025,
+        "block_deviation_l2_mean": 11.035058503136494,
+        "oracle_uncertainty_95": 20.288826115656533,
+        "oracle_l2": 155.42442035955062,
+        "minimum_estimator_error": 155.8232741830886,
+        "uncertainty_over_minimum_error": 0.13020408037259984
+      },
+      {
+        "size": "12x12",
+        "distribution": "Laplace",
+        "blocks": 4,
+        "samples_per_block": 65536,
+        "samples": 262144,
+        "selected_scale": 0.0025,
+        "block_deviation_l2_mean": 10.18718791246219,
+        "oracle_uncertainty_95": 18.76803041086815,
+        "oracle_l2": 301.14673362368865,
+        "minimum_estimator_error": 190.1289100016402,
+        "uncertainty_over_minimum_error": 0.09871213383964722
+      },
+      {
+        "size": "12x12",
+        "distribution": "Triangular",
+        "blocks": 32,
+        "samples_per_block": 65536,
+        "samples": 2097152,
+        "selected_scale": 0.0025,
+        "block_deviation_l2_mean": 218.36142686123995,
+        "oracle_uncertainty_95": 90.37751659390891,
+        "oracle_l2": 890.5123763528605,
+        "minimum_estimator_error": 545.9216567960672,
+        "uncertainty_over_minimum_error": 0.16555034127849239
+      }
+    ],
+    "path_checks": [
+      {
+        "size": "8x8",
+        "distribution": "Gaussian",
+        "scale": 0.1,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "8x8",
+        "distribution": "Logistic",
+        "scale": 0.1,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "8x8",
+        "distribution": "Gumbel",
+        "scale": 0.1,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "8x8",
+        "distribution": "Cauchy",
+        "scale": 0.05,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "8x8",
+        "distribution": "Laplace",
+        "scale": 0.1,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "8x8",
+        "distribution": "Triangular",
+        "scale": 0.2,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Gaussian",
+        "scale": 0.0025,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Logistic",
+        "scale": 0.0025,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Gumbel",
+        "scale": 0.0025,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Cauchy",
+        "scale": 0.0025,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Laplace",
+        "scale": 0.0025,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Triangular",
+        "scale": 0.0025,
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      }
+    ],
+    "warcraft_dataset_audit": {
+      "source_url": "https://edmond.mpg.de/api/access/datafile/102059",
+      "dataset_doi": "10.17617/3.YJCQ5S",
+      "published_filename": "warcraft_maps.tar.gz",
+      "published_bytes": 915169563,
+      "published_md5": "acea5ea60a47664ff189923a84814e96",
+      "verified_md5": "acea5ea60a47664ff189923a84814e96",
+      "members_used": {
+        "8": {
+          "member": "warcraft_shortest_path_oneskin/12x12/train_vertex_weights.npy",
+          "derivation": "top-left 8x8 crop of official 12x12 weights",
+          "source_array_shape": [
+            10000,
+            12,
+            12
+          ],
+          "array_shape": [
+            10000,
+            64
+          ],
+          "selected_index": 56,
+          "selection": "closest coefficient of variation to median among first 256 training maps",
+          "selected_map_sha256": "7c2c33f3ba979c0a6ccfbe4559884fa5b7c691b6f59e96d598d4b262e78b6af1",
+          "minimum_weight": 0.7998046875,
+          "maximum_weight": 7.69921875
+        },
+        "12": {
+          "member": "warcraft_shortest_path_oneskin/12x12/train_vertex_weights.npy",
+          "derivation": "native 12x12",
+          "source_array_shape": [
+            10000,
+            12,
+            12
+          ],
+          "array_shape": [
+            10000,
+            144
+          ],
+          "selected_index": 40,
+          "selection": "closest coefficient of variation to median among first 256 training maps",
+          "selected_map_sha256": "4901b0d8fb87207357f0f75956970ac83a93f48c5bd5b2397eed0da7a26f6f20",
+          "minimum_weight": 0.7998046875,
+          "maximum_weight": 9.203125
+        }
+      }
+    },
+    "path_scale_calibration": [
+      {
+        "size": "8x8",
+        "distribution": "Gaussian",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 580000,
+        "validation_seed": 580001,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.01953125
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.28125
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.4765625
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.59375
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.796875
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 0.95703125
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 0.98828125
+          }
+        ],
+        "selected_scale": 0.1,
+        "calibration_path_change_rate": 0.4765625,
+        "held_out_path_change_rate": 0.4453125,
+        "non_vacuous": true
+      },
+      {
+        "size": "8x8",
+        "distribution": "Logistic",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 580100,
+        "validation_seed": 580101,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.01953125
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.16796875
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.41796875
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.5703125
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.78125
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.91796875
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 0.97265625
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 0.99609375
+          }
+        ],
+        "selected_scale": 0.1,
+        "calibration_path_change_rate": 0.5703125,
+        "held_out_path_change_rate": 0.6015625,
+        "non_vacuous": true
+      },
+      {
+        "size": "8x8",
+        "distribution": "Gumbel",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 580200,
+        "validation_seed": 580201,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.0625
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.34375
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.5234375
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.671875
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.8515625
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 0.94921875
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 0.98046875
+          }
+        ],
+        "selected_scale": 0.1,
+        "calibration_path_change_rate": 0.5234375,
+        "held_out_path_change_rate": 0.51171875,
+        "non_vacuous": true
+      },
+      {
+        "size": "8x8",
+        "distribution": "Cauchy",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 580300,
+        "validation_seed": 580301,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.05078125
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.109375
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.21484375
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.35546875
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.55078125
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.73828125
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.84375
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.94140625
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 0.98046875
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 0.98046875
+          }
+        ],
+        "selected_scale": 0.05,
+        "calibration_path_change_rate": 0.55078125,
+        "held_out_path_change_rate": 0.62890625,
+        "non_vacuous": true
+      },
+      {
+        "size": "8x8",
+        "distribution": "Laplace",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 580400,
+        "validation_seed": 580401,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.07421875
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.33203125
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.55078125
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.70703125
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.875
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 0.96875
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 0.98046875
+          }
+        ],
+        "selected_scale": 0.1,
+        "calibration_path_change_rate": 0.55078125,
+        "held_out_path_change_rate": 0.53125,
+        "non_vacuous": true
+      },
+      {
+        "size": "8x8",
+        "distribution": "Triangular",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 580500,
+        "validation_seed": 580501,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.0
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.02734375
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.2109375
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.42578125
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.57421875
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 0.73828125
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 0.921875
+          }
+        ],
+        "selected_scale": 0.2,
+        "calibration_path_change_rate": 0.42578125,
+        "held_out_path_change_rate": 0.45703125,
+        "non_vacuous": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Gaussian",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 620000,
+        "validation_seed": 620001,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.6953125
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.69921875
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.69921875
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.69921875
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.79296875
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.87109375
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.94140625
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.984375
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 1.0
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 1.0
+          }
+        ],
+        "selected_scale": 0.0025,
+        "calibration_path_change_rate": 0.6953125,
+        "held_out_path_change_rate": 0.6953125,
+        "non_vacuous": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Logistic",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 620100,
+        "validation_seed": 620101,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.68359375
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.68359375
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.68359375
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.703125
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.84375
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.90234375
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.96484375
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.99609375
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 1.0
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 1.0
+          }
+        ],
+        "selected_scale": 0.0025,
+        "calibration_path_change_rate": 0.68359375,
+        "held_out_path_change_rate": 0.69140625,
+        "non_vacuous": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Gumbel",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 620200,
+        "validation_seed": 620201,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.6953125
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.6953125
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.6953125
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.69921875
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.8046875
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.8984375
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.95703125
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.984375
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 0.99609375
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 1.0
+          }
+        ],
+        "selected_scale": 0.0025,
+        "calibration_path_change_rate": 0.6953125,
+        "held_out_path_change_rate": 0.66796875,
+        "non_vacuous": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Cauchy",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 620300,
+        "validation_seed": 620301,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.70703125
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.7265625
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.75390625
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.8046875
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.9296875
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.9453125
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.98046875
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.984375
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 0.99609375
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 1.0
+          }
+        ],
+        "selected_scale": 0.0025,
+        "calibration_path_change_rate": 0.70703125,
+        "held_out_path_change_rate": 0.71875,
+        "non_vacuous": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Laplace",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 620400,
+        "validation_seed": 620401,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.65234375
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.65234375
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.65234375
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.66796875
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.765625
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.890625
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.94140625
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.98828125
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 0.99609375
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 1.0
+          }
+        ],
+        "selected_scale": 0.0025,
+        "calibration_path_change_rate": 0.65234375,
+        "held_out_path_change_rate": 0.69140625,
+        "non_vacuous": true
+      },
+      {
+        "size": "12x12",
+        "distribution": "Triangular",
+        "candidate_scales": [
+          0.0025,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.4,
+          0.8,
+          1.6
+        ],
+        "calibration_seed": 620500,
+        "validation_seed": 620501,
+        "samples_per_rate": 256,
+        "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+        "sweep": [
+          {
+            "scale": 0.0025,
+            "path_change_rate": 0.6875
+          },
+          {
+            "scale": 0.005,
+            "path_change_rate": 0.6875
+          },
+          {
+            "scale": 0.01,
+            "path_change_rate": 0.6875
+          },
+          {
+            "scale": 0.02,
+            "path_change_rate": 0.6875
+          },
+          {
+            "scale": 0.05,
+            "path_change_rate": 0.6875
+          },
+          {
+            "scale": 0.1,
+            "path_change_rate": 0.74609375
+          },
+          {
+            "scale": 0.2,
+            "path_change_rate": 0.83984375
+          },
+          {
+            "scale": 0.4,
+            "path_change_rate": 0.92578125
+          },
+          {
+            "scale": 0.8,
+            "path_change_rate": 0.96875
+          },
+          {
+            "scale": 1.6,
+            "path_change_rate": 0.99609375
+          }
+        ],
+        "selected_scale": 0.0025,
+        "calibration_path_change_rate": 0.6875,
+        "held_out_path_change_rate": 0.6953125,
+        "non_vacuous": true
+      }
+    ],
+    "negative_control": {
+      "name": "Gaussian score substituted for the Laplace score",
+      "correct_error": 0.0901736295163691,
+      "wrong_error": 0.5172255432500711,
+      "wrong_over_correct": 5.735884715122616
+    },
+    "ranking_contract": {
+      "verified": true,
+      "criterion": "paper target within 1% of cell minimum",
+      "cases": [
+        {
+          "size": "n=3",
+          "distribution": "Gaussian",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.0324962257400982,
+          "minimum_mean_l2_error": 0.0324962257400982,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=3",
+          "distribution": "Logistic",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.01597415896581181,
+          "minimum_mean_l2_error": 0.01597415896581181,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=3",
+          "distribution": "Gumbel",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.0378043647220381,
+          "minimum_mean_l2_error": 0.0378043647220381,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=3",
+          "distribution": "Cauchy",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.022869829325347868,
+          "minimum_mean_l2_error": 0.022869829325347868,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=3",
+          "distribution": "Laplace",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.028986913147536198,
+          "minimum_mean_l2_error": 0.028941844799594767,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=3",
+          "distribution": "Triangular",
+          "paper_target": "QMC-latin/LOO/no-antithetic",
+          "target_mean_l2_error": 0.15148197092660992,
+          "minimum_mean_l2_error": 0.15148197092660992,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=5",
+          "distribution": "Gaussian",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.10150918841623602,
+          "minimum_mean_l2_error": 0.10150918841623602,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=5",
+          "distribution": "Logistic",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.0567563077447842,
+          "minimum_mean_l2_error": 0.0567563077447842,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=5",
+          "distribution": "Gumbel",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.10604360142574334,
+          "minimum_mean_l2_error": 0.10604360142574334,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=5",
+          "distribution": "Cauchy",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.07447264421504468,
+          "minimum_mean_l2_error": 0.07447264421504468,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=5",
+          "distribution": "Laplace",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.09542132871453794,
+          "minimum_mean_l2_error": 0.0953225407381884,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=5",
+          "distribution": "Triangular",
+          "paper_target": "QMC-latin/LOO/no-antithetic",
+          "target_mean_l2_error": 0.32524880308720217,
+          "minimum_mean_l2_error": 0.32524880308720217,
+          "within_one_percent": true
+        }
+      ]
+    }
+  },
+  "section4_independent_checker": {
+    "checks": {
+      "row_count_447": true,
+      "all_mean_errors_finite": true,
+      "six_distributions": true,
+      "four_operator_sizes": true,
+      "summary_row_count_matches": true,
+      "official_dataset_md5_matches": true,
+      "official_8x8_and_12x12_maps_used": true,
+      "map_derivations_recorded": true,
+      "held_out_path_perturbations_non_vacuous": true,
+      "twelve_path_scale_calibrations": true,
+      "all_paths_valid": true,
+      "path_oracle_uncertainty_passes": true,
+      "path_oracle_power_matches_calibrated_design": true,
+      "wrong_score_control_passes": true,
+      "paper_ranking_passes": true
+    },
+    "sorting_cases": [
+      {
+        "size": "n=3",
+        "distribution": "Gaussian",
+        "target_strategy": "RQMC-cartesian",
+        "target_error": 0.0324962257400982,
+        "minimum_error": 0.0324962257400982,
+        "passed": true
+      },
+      {
+        "size": "n=3",
+        "distribution": "Logistic",
+        "target_strategy": "RQMC-cartesian",
+        "target_error": 0.01597415896581181,
+        "minimum_error": 0.01597415896581181,
+        "passed": true
+      },
+      {
+        "size": "n=3",
+        "distribution": "Gumbel",
+        "target_strategy": "RQMC-cartesian",
+        "target_error": 0.0378043647220381,
+        "minimum_error": 0.0378043647220381,
+        "passed": true
+      },
+      {
+        "size": "n=3",
+        "distribution": "Cauchy",
+        "target_strategy": "RQMC-cartesian",
+        "target_error": 0.022869829325347868,
+        "minimum_error": 0.022869829325347868,
+        "passed": true
+      },
+      {
+        "size": "n=3",
+        "distribution": "Laplace",
+        "target_strategy": "RQMC-cartesian",
+        "target_error": 0.028986913147536198,
+        "minimum_error": 0.028941844799594767,
+        "passed": true
+      },
+      {
+        "size": "n=3",
+        "distribution": "Triangular",
+        "target_strategy": "QMC-latin",
+        "target_error": 0.15148197092660992,
+        "minimum_error": 0.15148197092660992,
+        "passed": true
+      },
+      {
+        "size": "n=5",
+        "distribution": "Gaussian",
+        "target_strategy": "RQMC-cartesian",
+        "target_error": 0.10150918841623602,
+        "minimum_error": 0.10150918841623602,
+        "passed": true
+      },
+      {
+        "size": "n=5",
+        "distribution": "Logistic",
+        "target_strategy": "RQMC-cartesian",
+        "target_error": 0.0567563077447842,
+        "minimum_error": 0.0567563077447842,
+        "passed": true
+      },
+      {
+        "size": "n=5",
+        "distribution": "Gumbel",
+        "target_strategy": "RQMC-cartesian",
+        "target_error": 0.10604360142574334,
+        "minimum_error": 0.10604360142574334,
+        "passed": true
+      },
+      {
+        "size": "n=5",
+        "distribution": "Cauchy",
+        "target_strategy": "RQMC-cartesian",
+        "target_error": 0.07447264421504468,
+        "minimum_error": 0.07447264421504468,
+        "passed": true
+      },
+      {
+        "size": "n=5",
+        "distribution": "Laplace",
+        "target_strategy": "RQMC-cartesian",
+        "target_error": 0.09542132871453794,
+        "minimum_error": 0.0953225407381884,
+        "passed": true
+      },
+      {
+        "size": "n=5",
+        "distribution": "Triangular",
+        "target_strategy": "QMC-latin",
+        "target_error": 0.32524880308720217,
+        "minimum_error": 0.32524880308720217,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "mnist_independent_checker": {
+    "checks": {
+      "exact_disclosed_training_target_recorded": true,
+      "exact_batch_and_optimizer_recorded": true,
+      "exact_n5_four_digit_task": true,
+      "cited_cnn_shape": true,
+      "paper_256_sample_laplace_cell": true,
+      "measured_not_formula_derived": true,
+      "finite_throughput_projection": true,
+      "losses_finite": true,
+      "official_mnist_cardinality": true,
+      "raw_dataset_hashes_present": true,
+      "cpu_only": true,
+      "honest_blocked_verdict": true
+    },
+    "passed": true
+  },
+  "warcraft_independent_checker": {
+    "checks": {
+      "exact_disclosed_training_target_recorded": true,
+      "exact_optimizer_schedule_recorded": true,
+      "cited_primary_model_fixed": true,
+      "paper_variance_reduction_cell": true,
+      "official_archive_identity": true,
+      "official_cardinality": true,
+      "six_array_hashes_present": true,
+      "independent_path_oracle_confirms_quantization_compatible_labels": true,
+      "negative_control_fails_as_intended": true,
+      "measured_not_formula_derived": true,
+      "finite_losses_and_projection": true,
+      "full_test_predictions_are_paths": true,
+      "cpu_allocation_recorded": true,
+      "honest_blocked_verdict": true
+    },
+    "passed": true
+  },
+  "rendering_independent_checker": {
+    "checks": {
+      "exact_paper_scale_recorded": true,
+      "exact_optimizer_recorded": true,
+      "exact_pose_domain_recorded": true,
+      "pinned_primary_source": true,
+      "source_capability_audited": true,
+      "source_is_not_exact_paper_implementation": true,
+      "cpu_build_fails_for_cuda_reason": true,
+      "negative_control_fails_as_intended": true,
+      "cpu_allocation_recorded": true,
+      "honest_blocked_verdict": true
+    },
+    "passed": true
+  },
+  "tem_independent_checker": {
+    "checks": {
+      "exact_claim_logic_recorded": true,
+      "exact_image_and_ground_truth_recorded": true,
+      "exact_search_domains_recorded": true,
+      "exact_disclosed_optimizer_recorded": true,
+      "primary_archive_identities_verified": true,
+      "archives_are_safe_and_auditable": true,
+      "cpu_capability_recorded_without_proxy_claim": true,
+      "negative_control_fails_as_intended": true,
+      "four_distinct_routes_recorded": true,
+      "no_invalid_falsification": true,
+      "cpu_allocation_recorded": true,
+      "honest_blocked_verdict": true
+    },
+    "passed": true
+  },
+  "marimo_checker": {
+    "passed": true,
+    "stdout": "warning[markdown-indentation]: Markdown cell should be dedented for better readability\n --> notebooks/reproduction.py:13:1\n  13 | @app.cell\n  14 | def _(mo):\n     |     ^\n  15 |     mo.md(\n\nwarning[markdown-indentation]: Markdown cell should be dedented for better readability\n --> notebooks/reproduction.py:54:1\n  54 | @app.cell\n  55 | def _(mo):\n     |     ^\n  56 |     mo.md(\n\nwarning[markdown-indentation]: Markdown cell should be dedented for better readability\n --> notebooks/reproduction.py:93:1\n  93 | @app.cell\n  94 | def _(mo):\n     |     ^\n  95 |     mo.md(\n\nwarning[markdown-indentation]: Markdown cell should be dedented for better readability\n --> notebooks/reproduction.py:114:1\n 114 | @app.cell\n 115 | def _(mo):\n     |     ^\n 116 |     mo.md(\n\nFound 4 issues.\n",
+    "stderr": ""
+  },
+  "release_checker": {
+    "checks": {
+      "exists:README.md": true,
+      "exists:logbook.json": true,
+      "exists:pages/index.md": true,
+      "exists:pages/current/page.md": true,
+      "exists:pages/current/claims-1-3.md": true,
+      "exists:pages/current/claims-4-5.md": true,
+      "exists:pages/current/claim-6.md": true,
+      "exists:pages/current/visibility.md": true,
+      "exists:pages/current/release.md": true,
+      "exists:reports/full-reproduction/report.md": true,
+      "exists:notebooks/reproduction.py": true,
+      "exists:evidence/run_cbb3de08/cumulative_result.json": true,
+      "exists:evidence/run_cbb3de08/section4_raw.csv": true,
+      "cumulative_regressions_pass": true,
+      "exact_verdicts": true,
+      "checker:section4": true,
+      "checker:mnist": true,
+      "checker:warcraft": true,
+      "checker:rendering": true,
+      "checker:tem": true,
+      "section4_has_447_rows": true,
+      "six_evidence_figures": true,
+      "valid_svg:applications.svg": true,
+      "valid_svg:compute.svg": true,
+      "valid_svg:controls.svg": true,
+      "valid_svg:headline.svg": true,
+      "valid_svg:ranking.svg": true,
+      "valid_svg:section4-coverage.svg": true,
+      "current_navigation_first": true,
+      "historical_verifier_labeled": true,
+      "six_visibility_rows": true,
+      "visibility_has_no_missing_marker": true,
+      "protected_manifest_has_17_files": true,
+      "protected_verifier_hash_corrected": true,
+      "no_literal_secret_assignments": true
+    },
+    "passed": true
+  },
+  "checks": {
+    "claim_1": true,
+    "claim_2": true,
+    "claim_3": true,
+    "claim_4_historical_proxy": true,
+    "claim_4_faithful_benchmark": true,
+    "claim_5_ranking": true,
+    "section4_independent_checker": true,
+    "mnist_calibration_independent_checker": true,
+    "warcraft_calibration_independent_checker": true,
+    "rendering_capability_independent_checker": true,
+    "tem_falsification_independent_checker": true,
+    "marimo_notebook_checker": true,
+    "evaluator_visible_release_checker": true
+  },
+  "all_regressions_passed": true
+}

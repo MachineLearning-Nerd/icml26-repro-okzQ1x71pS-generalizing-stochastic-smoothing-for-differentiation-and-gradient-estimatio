@@ -1,0 +1,21 @@
+{
+  "run_id": "174c64f5-4aba-4818-a515-0ee0c9479741",
+  "experiment_branch": "orx/repair-publication-gate-and-red-team-candidate",
+  "git_sha": "f2a974d677660fa7168072c3c710ccf15bdc9efa",
+  "fixed_command": "uv sync --frozen --no-dev && .venv/bin/python -m repro.run",
+  "backend": "hf",
+  "flavor": "cpu-upgrade",
+  "estimated_required_cores": 32,
+  "selected_declared_vcpus": 8,
+  "actual_cgroup_vcpus": 8.0,
+  "worker_limit": 8,
+  "gpu_requested": false,
+  "job_runtime_seconds": 2656,
+  "scientific_runtime_seconds": 2611.389107635943,
+  "declared_cost_usd_per_hour": 0.03,
+  "estimated_scientific_cost_usd": 0.021761575896966194,
+  "all_regressions_passed": true,
+  "release_checker_passed": true,
+  "marimo_check_returned_zero": true,
+  "marimo_check_nonfatal_warnings": 4
+}

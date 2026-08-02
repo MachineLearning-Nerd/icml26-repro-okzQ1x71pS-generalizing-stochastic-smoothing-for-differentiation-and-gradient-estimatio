@@ -2,7 +2,7 @@
 
 ![Claims 1–5 verified; Claim 6 blocked](https://huggingface.co/spaces/DineshAI/okzQ1x71pS/resolve/main/reports/full-reproduction/images/headline.svg)
 
-Canonical evaluator entrypoint for arXiv 2410.08125. Code at Git SHA `75d1f2c6c76c2c642ba59319a097a79a4f5e504d` supersedes the **Historical rejected baseline** at judged Space revision `a1e96bb5ea2a3bc5106352c8ac10194358c04c57`.
+Canonical evaluator entrypoint for arXiv 2410.08125. Scientific code at Git SHA `75d1f2c6c76c2c642ba59319a097a79a4f5e504d` and evaluator-visible candidate `f2a974d677660fa7168072c3c710ccf15bdc9efa` supersede the **Historical rejected baseline** at judged Space revision `a1e96bb5ea2a3bc5106352c8ac10194358c04c57`.
 
 Fixed command: `uv sync --frozen --no-dev && .venv/bin/python -m repro.run`
 
@@ -27,3 +27,5 @@ Winning run `cbb3de08-48e9-48a0-87c9-5ffb65d6e9cb`: HF `cpu-upgrade`; 8 declared
 - [Raw cumulative JSON](https://huggingface.co/spaces/DineshAI/okzQ1x71pS/blob/main/evidence/run_cbb3de08/cumulative_result.json)
 
 Every current verifier exits nonzero on failed evidence. The cumulative run records `all_regressions_passed: true`.
+
+Publication-gate run `174c64f5-4aba-4818-a515-0ee0c9479741` reran every claim on HF `cpu-upgrade` and passed the release checker at 8 cgroup vCPUs, no GPU, 2611.389s scientific runtime, 44m16s job runtime, and estimated scientific cost $0.02176. [Gate evidence](https://huggingface.co/spaces/DineshAI/okzQ1x71pS/tree/main/evidence/run_174c64f5).

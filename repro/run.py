@@ -151,7 +151,9 @@ def main():
         "warcraft_calibration_independent_checker": warcraft_checker.returncode == 0,
         "rendering_capability_independent_checker": rendering_checker.returncode == 0,
         "tem_falsification_independent_checker": tem_checker.returncode == 0,
-        "marimo_notebook_checker": marimo_checker.returncode == 0,
+        "marimo_notebook_checker": marimo_checker.returncode == 0
+        and "warning[" not in marimo_checker.stdout
+        and "Found " not in marimo_checker.stdout,
         "evaluator_visible_release_checker": release_checker.returncode == 0,
     }
     checks = {name: bool(passed) for name, passed in checks.items()}
@@ -202,7 +204,9 @@ def main():
         "rendering_independent_checker": rendering_checker_output,
         "tem_independent_checker": tem_checker_output,
         "marimo_checker": {
-            "passed": marimo_checker.returncode == 0,
+            "passed": marimo_checker.returncode == 0
+            and "warning[" not in marimo_checker.stdout
+            and "Found " not in marimo_checker.stdout,
             "stdout": marimo_checker.stdout,
             "stderr": marimo_checker.stderr,
         },

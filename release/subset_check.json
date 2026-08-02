@@ -1,0 +1,16 @@
+{
+  "judged_space": "DineshAI/okzQ1x71pS",
+  "judged_revision": "a1e96bb5ea2a3bc5106352c8ac10194358c04c57",
+  "judged_manifest_paths": 17,
+  "missing_judged_paths_in_candidate": 0,
+  "intentionally_updated_judged_paths": [
+    "README.md",
+    "logbook.json",
+    "pages/index.md"
+  ],
+  "immutable_judged_paths_checked": 14,
+  "immutable_judged_paths_changed": 0,
+  "historical_verification_page_sha256": "11c2b8c23021317059dd3750509ae55dfb00566705b7304ee3c5e326563bfe1b",
+  "candidate_is_additive": true,
+  "check_date_utc": "2026-08-02T21:14:09Z"
+}

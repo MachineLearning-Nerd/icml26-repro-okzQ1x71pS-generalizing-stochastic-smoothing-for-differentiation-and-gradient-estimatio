@@ -1,0 +1,5 @@
+{
+  "passed": true,
+  "stdout": "warning[markdown-indentation]: Markdown cell should be dedented for better readability\n --> notebooks/reproduction.py:13:1\n  13 | @app.cell\n  14 | def _(mo):\n     |     ^\n  15 |     mo.md(\n\nwarning[markdown-indentation]: Markdown cell should be dedented for better readability\n --> notebooks/reproduction.py:54:1\n  54 | @app.cell\n  55 | def _(mo):\n     |     ^\n  56 |     mo.md(\n\nwarning[markdown-indentation]: Markdown cell should be dedented for better readability\n --> notebooks/reproduction.py:93:1\n  93 | @app.cell\n  94 | def _(mo):\n     |     ^\n  95 |     mo.md(\n\nwarning[markdown-indentation]: Markdown cell should be dedented for better readability\n --> notebooks/reproduction.py:114:1\n 114 | @app.cell\n 115 | def _(mo):\n     |     ^\n 116 |     mo.md(\n\nFound 4 issues.\n",
+  "stderr": ""
+}
