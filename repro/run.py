@@ -69,7 +69,7 @@ def main():
         "negative_control": {
             "name": "Gaussian score applied to Laplace density",
             "error": claim1["wrong_score_error"],
-            "failed_as_intended": claim1["wrong_score_error"] > 0.04,
+            "failed_as_intended": bool(claim1["wrong_score_error"] > 0.04),
         },
         "checks": checks,
         "all_regressions_passed": all(checks.values()),
