@@ -6,7 +6,9 @@ The model is the cited `CombRenset18`: ResNet18 through `layer1`, adaptive max p
 
 The tested smoothing cell uses 100 Logistic samples, independently randomized Latin hypercubes for each batch item, the LOO covariate, and MSE against the ground-truth hard path. The paper does not disclose the chosen Figure 6 gamma or the output-to-cost transform, so this reconstruction fixes gamma 0.1 from the disclosed Figure 7 sweep and interprets network outputs as log vertex costs.
 
-Before training, the independent oracle recomputes shortest paths from the official vertex weights for 64 held-out examples and requires exact equality with the published labels. A negative control cyclically shifts every flattened path label and must have less than 10% exact agreement. The checker exits nonzero if the archive, protocol, primary source commit, oracle, control, CPU allocation, throughput, finite-loss, or honest-BLOCKED contracts fail.
+Before training, the independent oracle recomputes shortest paths from the official vertex weights for 64 held-out examples. The current oracle requires valid paths and equality of objective cost. Exact binary encoding remains a diagnostic but is not an acceptance condition because tied optima can have distinct encodings. A negative control cyclically shifts every flattened path label and must yield fewer than 10% valid paths. The checker exits nonzero if the archive, protocol, primary source commit, oracle, control, CPU allocation, throughput, finite-loss, or honest-BLOCKED contracts fail.
+
+This supersedes the historical rejected exact-encoding verifier at frozen run `a53fa2d7-1c5b-4a06-82a5-b5007ded9f34`, which matched 61/64 encodings and therefore exited nonzero despite completing the scientific route.
 
 The fixed command remains:
 

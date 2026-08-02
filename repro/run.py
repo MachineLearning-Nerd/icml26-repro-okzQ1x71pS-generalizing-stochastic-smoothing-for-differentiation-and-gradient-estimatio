@@ -3,7 +3,6 @@ from __future__ import annotations
 import csv
 import io
 import json
-import os
 import platform
 import subprocess
 import sys
@@ -12,6 +11,8 @@ from pathlib import Path
 
 from .mnist_application import run_mnist_calibration
 from .numerics import baseline_variance_proxy, lemma3_check, theorem7_check, theorem8_check
+from .rendering_application import run_rendering_capability_audit
+from .resources import CPU_UPGRADE_USD_PER_HOUR, cpu_allocation
 from .section4 import run_section4
 from .warcraft_application import run_warcraft_calibration
 
@@ -36,6 +37,8 @@ def main():
     mnist = run_mnist_calibration()
     print("STAGE warcraft_calibration", flush=True)
     warcraft = run_warcraft_calibration()
+    print("STAGE rendering_capability_audit", flush=True)
+    rendering = run_rendering_capability_audit()
     print("STAGE independent_checkers", flush=True)
 
     csv_buffer = io.StringIO()
@@ -86,6 +89,20 @@ def main():
         if warcraft_checker.stdout.strip()
         else {"passed": False, "stderr": warcraft_checker.stderr}
     )
+    rendering_directory = Path(".openresearch/artifacts/claim_6/rendering_capability")
+    rendering_directory.mkdir(parents=True, exist_ok=True)
+    rendering_result_path = rendering_directory / "result.json"
+    rendering_result_path.write_text(json.dumps(rendering, indent=2) + "\n")
+    rendering_checker = subprocess.run(
+        [sys.executable, "-m", "repro.check_rendering", str(rendering_result_path)],
+        capture_output=True,
+        text=True,
+    )
+    rendering_checker_output = (
+        json.loads(rendering_checker.stdout)
+        if rendering_checker.stdout.strip()
+        else {"passed": False, "stderr": rendering_checker.stderr}
+    )
 
     checks = {
         "claim_1": max(claim1["laplace_error"], claim1["triangular_error"]) < 1e-8
@@ -99,21 +116,21 @@ def main():
         "section4_independent_checker": checker.returncode == 0,
         "mnist_calibration_independent_checker": mnist_checker.returncode == 0,
         "warcraft_calibration_independent_checker": warcraft_checker.returncode == 0,
+        "rendering_capability_independent_checker": rendering_checker.returncode == 0,
     }
     checks = {name: bool(passed) for name, passed in checks.items()}
     elapsed = time.perf_counter() - started
+    resources = cpu_allocation(required_cores=32)
     result = {
         "paper": "arXiv:2410.08125",
         "git_sha": git_sha(),
         "fixed_command": "uv sync --frozen --no-dev && .venv/bin/python -m repro.run",
         "environment": {
+            **resources,
             "python": platform.python_version(),
             "platform": platform.platform(),
-            "estimated_useful_cores": 32,
-            "selected_flavor": "hf/cpu-upgrade",
-            "actual_logical_cpus": os.cpu_count(),
-            "gpu_requested": False,
             "runtime_seconds": elapsed,
+            "estimated_cost_usd": elapsed / 3600.0 * CPU_UPGRADE_USD_PER_HOUR,
         },
         "claims": {
             "1": {"verdict": "VERIFIED", "metrics": claim1},
@@ -130,9 +147,10 @@ def main():
             },
             "6": {
                 "verdict": "BLOCKED",
-                "reason": "The exact-protocol MNIST and official-data Warcraft routes are bounded calibrations, not their disclosed full multi-seed runs; rendering and TEM remain unexecuted.",
+                "reason": "The MNIST and Warcraft routes are bounded calibrations; the exact cited renderer is CUDA-only and not the paper implementation; TEM remains unexecuted.",
                 "mnist_calibration": mnist,
                 "warcraft_calibration": warcraft,
+                "rendering_capability_audit": rendering,
             },
         },
         "negative_control": {
@@ -144,6 +162,7 @@ def main():
         "section4_independent_checker": checker_output,
         "mnist_independent_checker": mnist_checker_output,
         "warcraft_independent_checker": warcraft_checker_output,
+        "rendering_independent_checker": rendering_checker_output,
         "checks": checks,
         "all_regressions_passed": all(checks.values()),
     }
@@ -169,6 +188,12 @@ def main():
     print("=== WARCRAFT_INDEPENDENT_CHECKER ===")
     print(json.dumps(warcraft_checker_output, indent=2))
     print("=== END_WARCRAFT_INDEPENDENT_CHECKER ===")
+    print("=== RENDERING_CAPABILITY_AUDIT ===")
+    print(json.dumps(rendering, indent=2))
+    print("=== END_RENDERING_CAPABILITY_AUDIT ===")
+    print("=== RENDERING_INDEPENDENT_CHECKER ===")
+    print(json.dumps(rendering_checker_output, indent=2))
+    print("=== END_RENDERING_INDEPENDENT_CHECKER ===")
     print("=== RAW_SECTION4_CSV ===")
     print(raw_csv, end="")
     print("=== END_RAW_SECTION4_CSV ===")

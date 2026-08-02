@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import math
-import os
 import time
 from pathlib import Path
 
@@ -11,6 +10,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision.datasets import MNIST
+
+from .resources import cpu_allocation
 
 
 CALIBRATION_STEPS = 100
@@ -131,7 +132,8 @@ def _exact_match(model, images, pools, seed, batches=10):
 
 def run_mnist_calibration():
     torch.manual_seed(24_102_025)
-    threads = min(32, os.cpu_count() or 1)
+    resources = cpu_allocation(required_cores=32)
+    threads = resources["worker_limit"]
     torch.set_num_threads(threads)
     root = Path(".cache/openresearch/mnist")
     train = MNIST(root, train=True, download=True)
@@ -220,12 +222,7 @@ def run_mnist_calibration():
                 if path.is_file()
             },
         },
-        "environment": {
-            "estimated_useful_cores": 32,
-            "actual_logical_cpus": os.cpu_count(),
-            "torch_threads": threads,
-            "gpu_requested": False,
-        },
+        "environment": {**resources, "torch_threads": threads},
         "seeds": {
             "model": 24_102_025,
             "training_data": 31_415,

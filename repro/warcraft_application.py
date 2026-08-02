@@ -4,7 +4,6 @@ import hashlib
 import io
 import math
 import multiprocessing
-import os
 import tarfile
 import time
 from concurrent.futures import ProcessPoolExecutor
@@ -22,6 +21,7 @@ from .section4 import (
     shortest_path_batch,
     shortest_path_indicator,
 )
+from .resources import cpu_allocation
 
 
 SIZE = 12
@@ -214,8 +214,9 @@ def _exact_match(model, maps, targets):
 def run_warcraft_calibration():
     torch.manual_seed(24_103_025)
     rng = np.random.default_rng(31_416)
-    threads = min(32, os.cpu_count() or 1)
-    workers = min(32, os.cpu_count() or 1)
+    resources = cpu_allocation(required_cores=32)
+    threads = resources["worker_limit"]
+    workers = resources["worker_limit"]
     torch.set_num_threads(threads)
     arrays, member_audit = _load_official_arrays()
     train_maps = _channel_first(arrays["train_maps.npy"])
@@ -242,14 +243,26 @@ def run_warcraft_calibration():
     )
     oracle_labels = test_paths[:oracle_count].numpy()
     shifted_labels = np.roll(oracle_labels, 1, axis=1)
+    oracle_costs = np.sum(oracle_paths * test_weights[:oracle_count], axis=1)
+    official_costs = np.sum(oracle_labels * test_weights[:oracle_count], axis=1)
+    cost_tolerances = 1e-7 * np.maximum(1.0, np.abs(oracle_costs))
+    optimal_cost_matches = np.abs(official_costs - oracle_costs) <= cost_tolerances
+    exact_encoding_matches = np.all(oracle_paths == oracle_labels, axis=1)
+    official_paths_valid = np.asarray([_valid_path(path) for path in oracle_labels])
+    shifted_paths_valid = np.asarray([_valid_path(path) for path in shifted_labels])
     oracle_audit = {
         "examples": oracle_count,
-        "official_label_exact_match": float(np.mean(np.all(oracle_paths == oracle_labels, axis=1))),
+        "official_label_exact_encoding_match": float(np.mean(exact_encoding_matches)),
+        "official_label_optimal_cost_match": float(np.mean(optimal_cost_matches)),
+        "official_labels_all_valid_paths": bool(np.all(official_paths_valid)),
+        "alternative_optimal_encoding_count": int(np.sum(optimal_cost_matches & ~exact_encoding_matches)),
+        "maximum_absolute_cost_gap": float(np.max(np.abs(official_costs - oracle_costs))),
         "all_oracle_paths_valid": bool(all(_valid_path(path) for path in oracle_paths)),
         "negative_control": {
             "name": "cyclically shift every official path label by one flattened cell",
             "exact_match": float(np.mean(np.all(oracle_paths == shifted_labels, axis=1))),
-            "failed_as_intended": bool(np.mean(np.all(oracle_paths == shifted_labels, axis=1)) < 0.1),
+            "valid_path_fraction": float(np.mean(shifted_paths_valid)),
+            "failed_as_intended": bool(np.mean(shifted_paths_valid) < 0.1),
         },
     }
 
@@ -337,13 +350,7 @@ def run_warcraft_calibration():
             "members": member_audit,
         },
         "oracle_audit": oracle_audit,
-        "environment": {
-            "estimated_useful_cores": 32,
-            "actual_logical_cpus": os.cpu_count(),
-            "torch_threads": threads,
-            "path_workers": workers,
-            "gpu_requested": False,
-        },
+        "environment": {**resources, "torch_threads": threads, "path_workers": workers},
         "seeds": {"model": 24_103_025, "data_and_noise": 31_416},
         "verdict": "BLOCKED",
         "reason": "The disclosed 50-epoch, five-seed protocol was calibrated but not run; this route cannot establish the complete four-application claim.",

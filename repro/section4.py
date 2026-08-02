@@ -5,7 +5,6 @@ import hashlib
 import io
 import itertools
 import math
-import os
 import tarfile
 import urllib.request
 from concurrent.futures import ProcessPoolExecutor
@@ -15,6 +14,8 @@ import numpy as np
 from scipy.integrate import quad
 from scipy.special import expit, ndtr, ndtri
 from scipy.stats import qmc, t
+
+from .resources import cpu_allocation
 
 
 DISTRIBUTIONS = ("Gaussian", "Logistic", "Gumbel", "Cauchy", "Laplace", "Triangular")
@@ -701,7 +702,8 @@ def ranking_contract(rows):
 
 
 def run_section4():
-    workers = min(32, os.cpu_count() or 1)
+    resources = cpu_allocation(required_cores=32)
+    workers = resources["worker_limit"]
     sorting_rows, sorting_oracles, negative_control = benchmark_sorting()
     path_rows, path_oracles, path_checks, dataset_audit, calibration_audits = benchmark_shortest_paths(
         workers
@@ -737,7 +739,7 @@ def run_section4():
     return {
         "rows": rows,
         "summary": {
-            "estimated_useful_cores": 32,
+            "resources": resources,
             "workers": workers,
             "sorting_repeats": SORTING_REPEATS,
             "path_repeats": PATH_REPEATS,

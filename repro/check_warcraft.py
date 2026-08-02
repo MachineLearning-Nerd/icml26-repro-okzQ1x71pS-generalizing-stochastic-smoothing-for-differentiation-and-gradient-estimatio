@@ -37,11 +37,12 @@ def check(path):
             item["bytes"] > 0 and len(item["sha256"]) == 64
             for item in data["members"].values()
         ),
-        "independent_path_oracle_matches_labels": oracle["examples"] == 64
-        and oracle["official_label_exact_match"] == 1.0
+        "independent_path_oracle_confirms_optimal_labels": oracle["examples"] == 64
+        and oracle["official_label_optimal_cost_match"] == 1.0
+        and oracle["official_labels_all_valid_paths"]
         and oracle["all_oracle_paths_valid"],
         "negative_control_fails_as_intended": oracle["negative_control"]["failed_as_intended"]
-        and oracle["negative_control"]["exact_match"] < 0.1,
+        and oracle["negative_control"]["valid_path_fraction"] < 0.1,
         "measured_not_formula_derived": calibration["warmup_steps"] == 2
         and calibration["measured_steps"] == 20
         and calibration["measured_seconds"] > 0,
@@ -57,8 +58,10 @@ def check(path):
         ),
         "full_test_predictions_are_paths": calibration["initial_full_test"]["all_predictions_valid_paths"]
         and calibration["final_full_test"]["all_predictions_valid_paths"],
-        "cpu_only": result["environment"]["gpu_requested"] is False
-        and result["environment"]["path_workers"] == 32,
+        "cpu_allocation_recorded": result["environment"]["gpu_requested"] is False
+        and result["environment"]["selected_flavor_declared_vcpus"] == 8
+        and result["environment"]["path_workers"] == result["environment"]["worker_limit"]
+        and result["environment"]["path_workers"] <= 8,
         "honest_blocked_verdict": result["verdict"] == "BLOCKED"
         and "not run" in result["reason"],
     }

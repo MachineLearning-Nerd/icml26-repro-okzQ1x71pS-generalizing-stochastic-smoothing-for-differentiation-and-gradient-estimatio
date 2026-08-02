@@ -1,0 +1,6 @@
+{
+  "claim": "Section 4.4 optimizes four camera parameters for a Utah teapot by stochastic smoothing of a black-box hard renderer over 1,000 Adam steps and 768 seeds.",
+  "source_anchor": "Section 4.4 and Appendix D, Utah Teapot Camera Pose Optimization Experiments",
+  "acceptance": "VERIFIED only by the disclosed black-box smoothing experiment at the disclosed scale; a source capability failure or substitute renderer remains BLOCKED",
+  "current_verdict": "BLOCKED"
+}
