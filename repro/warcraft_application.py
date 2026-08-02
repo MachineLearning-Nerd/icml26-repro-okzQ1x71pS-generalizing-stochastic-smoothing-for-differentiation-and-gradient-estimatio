@@ -115,7 +115,7 @@ def _channel_first(maps):
         raise RuntimeError(f"expected four-dimensional Warcraft maps, got {maps.shape}")
     if maps.shape[-1] == 3:
         maps = np.moveaxis(maps, -1, 1)
-    if maps.shape[1:] != (3, SIZE, SIZE):
+    if maps.shape[1] != 3 or maps.shape[2:] != (96, 96):
         raise RuntimeError(f"unexpected Warcraft map shape {maps.shape}")
     return maps
 

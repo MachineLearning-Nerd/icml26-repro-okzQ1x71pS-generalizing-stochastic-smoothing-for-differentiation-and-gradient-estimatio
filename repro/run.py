@@ -24,14 +24,19 @@ def git_sha():
 
 def main():
     started = time.perf_counter()
+    print("STAGE claims_1_3", flush=True)
     claim1 = lemma3_check()
     claim2 = theorem7_check()
     claim3 = theorem8_check()
     variance_proxy = baseline_variance_proxy()
+    print("STAGE section_4", flush=True)
     section4 = run_section4()
     section4_rows = section4.pop("rows")
+    print("STAGE mnist_calibration", flush=True)
     mnist = run_mnist_calibration()
+    print("STAGE warcraft_calibration", flush=True)
     warcraft = run_warcraft_calibration()
+    print("STAGE independent_checkers", flush=True)
 
     csv_buffer = io.StringIO()
     writer = csv.DictWriter(csv_buffer, fieldnames=list(section4_rows[0]))

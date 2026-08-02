@@ -1,6 +1,6 @@
 # Warcraft route: official-data CPU calibration
 
-This route reconstructs the Section 4.3 application from the paper and the cited primary Warcraft repository at commit `027e82ee818530f2823851d6530e0d2c8657bbcb`. It uses the official 12x12 archive (DOI `10.17617/3.YJCQ5S`), all 10,000 training maps, and the full 1,000-map test split.
+This route reconstructs the Section 4.3 application from the paper and the cited primary Warcraft repository at commit `027e82ee818530f2823851d6530e0d2c8657bbcb`. It uses the official 12x12-grid archive (DOI `10.17617/3.YJCQ5S`), all 10,000 training maps, and the full 1,000-map test split. Each map image is RGB 96x96; vertex weights and paths are 12x12.
 
 The model is the cited `CombRenset18`: ResNet18 through `layer1`, adaptive max pooling to 12x12, and averaging the 64 channels. The declared paper protocol is Adam at 0.001, batch size 70, 50 epochs, learning-rate drops after epochs 30 and 40, and five seeds. The measured route executes two warm-up and 20 optimizer steps for an independently measured CPU throughput projection. It does not advance the epoch scheduler.
 
