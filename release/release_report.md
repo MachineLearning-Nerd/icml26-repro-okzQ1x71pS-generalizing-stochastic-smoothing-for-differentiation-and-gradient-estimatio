@@ -24,7 +24,8 @@ Current total score: `8/12`. Conservative projected total: `8–10/12`. Best-sup
 - Winning scientific branch/SHA: `orx/tem-primary-source-falsification-and-cumulative` / `75d1f2c6c76c2c642ba59319a097a79a4f5e504d`
 - Passing evaluator candidate branch/SHA: `orx/repair-publication-gate-and-red-team-candidate` / `f2a974d677660fa7168072c3c710ccf15bdc9efa`
 - Final warning-gate input: `orx/final-evaluator-blind-release-regression` / `bf2249b2c963820f1989bf572efe5f4399450f22`
-- Final release input: `orx/canonical-warning-free-marimo-release-regression` at its published branch tip
+- Canonical-call warning-gate input: `orx/canonical-warning-free-marimo-release-regression` / `9530144b25927123ddd6e427db337cc3763afa6b`
+- Final release input: `orx/formatter-exact-marimo-release-regression` at its published branch tip
 
 ## Experiment tree and compute
 
@@ -34,7 +35,7 @@ The tree descends from the fixed baseline through a small Section 4 bush, promot
 uv sync --frozen --no-dev && .venv/bin/python -m repro.run
 ```
 
-All 19 completed campaign jobs used HF `cpu-upgrade`; no GPU was requested. Through the frozen warning-gate run they consumed 42,681 job-seconds (11.856h), an estimated `$0.3557` at `$0.03/hour`. The canonical-format repair regression is reported separately after it terminates. The scientific winner used 2,287.088s (`$0.01906`); the passing publication-gate run used 2,611.389s (`$0.02176`) and 44m16s job time. Both recorded 8 declared/cgroup vCPUs, worker limit 8, and no GPU.
+All 20 completed campaign jobs used HF `cpu-upgrade`; no GPU was requested. Through the canonical-call warning-gate run they consumed 44,875 job-seconds (12.465h), an estimated `$0.3740` at `$0.03/hour`. The formatter-exact repair regression is reported separately after it terminates. The scientific winner used 2,287.088s (`$0.01906`); the passing publication-gate run used 2,611.389s (`$0.02176`) and 44m16s job time. Both recorded 8 declared/cgroup vCPUs, worker limit 8, and no GPU.
 
 Key run ledger (all invoked with the exact fixed command above):
 
@@ -51,6 +52,7 @@ Key run ledger (all invoked with the exact fixed command above):
 | `aa51605b` | failed | first evaluator product; packaging gate caught defects | 35m37s |
 | `174c64f5` | done | repaired evaluator product and release gate | 44m16s |
 | `d0be3d7e` | failed | all science/release checks passed; strict gate caught four Marimo warnings | 36m09s |
+| `d60247f7` | failed | all science/release checks passed; formatter audit localized source indentation | 36m34s |
 
 The complete run ledger remains in OpenResearch. Failed runs are retained as lineage evidence and are never presented as current verification.
 
