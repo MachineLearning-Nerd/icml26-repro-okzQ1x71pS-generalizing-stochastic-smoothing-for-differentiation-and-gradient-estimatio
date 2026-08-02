@@ -242,27 +242,43 @@ def run_warcraft_calibration():
         [shortest_path_indicator(np.log(np.maximum(row, 1e-12)), SIZE) for row in test_weights[:oracle_count]]
     )
     oracle_labels = test_paths[:oracle_count].numpy()
-    shifted_labels = np.roll(oracle_labels, 1, axis=1)
+    broken_labels = oracle_labels.copy()
+    broken_labels[:, 0] = 0
     oracle_costs = np.sum(oracle_paths * test_weights[:oracle_count], axis=1)
     official_costs = np.sum(oracle_labels * test_weights[:oracle_count], axis=1)
-    cost_tolerances = 1e-7 * np.maximum(1.0, np.abs(oracle_costs))
-    optimal_cost_matches = np.abs(official_costs - oracle_costs) <= cost_tolerances
+    stored_half_weights = test_weights[:oracle_count].astype(np.float16)
+    half_quantization_width = (
+        np.spacing(stored_half_weights).astype(np.float64) / 2.0
+    )
+    comparison_uncertainty = np.sum(
+        (oracle_paths + oracle_labels) * half_quantization_width, axis=1
+    )
+    cost_gaps = np.abs(official_costs - oracle_costs)
+    quantization_compatible = cost_gaps <= comparison_uncertainty
     exact_encoding_matches = np.all(oracle_paths == oracle_labels, axis=1)
     official_paths_valid = np.asarray([_valid_path(path) for path in oracle_labels])
-    shifted_paths_valid = np.asarray([_valid_path(path) for path in shifted_labels])
+    broken_paths_valid = np.asarray([_valid_path(path) for path in broken_labels])
     oracle_audit = {
         "examples": oracle_count,
         "official_label_exact_encoding_match": float(np.mean(exact_encoding_matches)),
-        "official_label_optimal_cost_match": float(np.mean(optimal_cost_matches)),
+        "official_label_exact_stored_cost_match": float(np.mean(cost_gaps == 0)),
+        "official_label_quantization_compatible_cost_match": float(
+            np.mean(quantization_compatible)
+        ),
         "official_labels_all_valid_paths": bool(np.all(official_paths_valid)),
-        "alternative_optimal_encoding_count": int(np.sum(optimal_cost_matches & ~exact_encoding_matches)),
-        "maximum_absolute_cost_gap": float(np.max(np.abs(official_costs - oracle_costs))),
+        "quantization_compatible_alternative_encoding_count": int(
+            np.sum(quantization_compatible & ~exact_encoding_matches)
+        ),
+        "maximum_absolute_cost_gap": float(np.max(cost_gaps)),
+        "minimum_quantization_uncertainty": float(np.min(comparison_uncertainty)),
+        "maximum_quantization_uncertainty": float(np.max(comparison_uncertainty)),
+        "source_weight_dtype": member_audit["test_vertex_weights.npy"]["dtype"],
         "all_oracle_paths_valid": bool(all(_valid_path(path) for path in oracle_paths)),
         "negative_control": {
-            "name": "cyclically shift every official path label by one flattened cell",
-            "exact_match": float(np.mean(np.all(oracle_paths == shifted_labels, axis=1))),
-            "valid_path_fraction": float(np.mean(shifted_paths_valid)),
-            "failed_as_intended": bool(np.mean(shifted_paths_valid) < 0.1),
+            "name": "remove the required start cell from every official path label",
+            "exact_match": float(np.mean(np.all(oracle_paths == broken_labels, axis=1))),
+            "valid_path_fraction": float(np.mean(broken_paths_valid)),
+            "failed_as_intended": bool(np.mean(broken_paths_valid) == 0.0),
         },
     }
 

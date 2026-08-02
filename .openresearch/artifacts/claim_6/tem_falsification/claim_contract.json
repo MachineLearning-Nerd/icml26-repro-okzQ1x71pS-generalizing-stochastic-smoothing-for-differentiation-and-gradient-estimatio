@@ -1,0 +1,8 @@
+{
+  "claim": "Section 4.5 reports a TEM-simulator v1.3 optimization demonstration over the disclosed two- and four-parameter domains.",
+  "source_anchor": "Section 4.5 and Appendix experimental details",
+  "quantifier": "existential historical empirical demonstration",
+  "assumptions": "The exact author input deck, TMV specimen mapping, smoothing implementation, initializations, optimizer schedule, and horizon must be fixed before a contrary outcome can be a valid counterexample.",
+  "falsification_acceptance": "FALSIFIED only if authenticated evidence satisfies every paper assumption and contradicts the exact reported demonstration; missing files, build failure, downscaling, or a substitute simulator cannot pass.",
+  "expected_verdict": "BLOCKED unless a valid counterexample is found"
+}

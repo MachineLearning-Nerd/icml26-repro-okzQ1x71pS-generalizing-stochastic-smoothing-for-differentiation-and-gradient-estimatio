@@ -14,6 +14,7 @@ from .numerics import baseline_variance_proxy, lemma3_check, theorem7_check, the
 from .rendering_application import run_rendering_capability_audit
 from .resources import CPU_UPGRADE_USD_PER_HOUR, cpu_allocation
 from .section4 import run_section4
+from .tem_application import run_tem_falsification_audit
 from .warcraft_application import run_warcraft_calibration
 
 
@@ -39,6 +40,8 @@ def main():
     warcraft = run_warcraft_calibration()
     print("STAGE rendering_capability_audit", flush=True)
     rendering = run_rendering_capability_audit()
+    print("STAGE tem_falsification_audit", flush=True)
+    tem = run_tem_falsification_audit()
     print("STAGE independent_checkers", flush=True)
 
     csv_buffer = io.StringIO()
@@ -103,6 +106,20 @@ def main():
         if rendering_checker.stdout.strip()
         else {"passed": False, "stderr": rendering_checker.stderr}
     )
+    tem_directory = Path(".openresearch/artifacts/claim_6/tem_falsification")
+    tem_directory.mkdir(parents=True, exist_ok=True)
+    tem_result_path = tem_directory / "result.json"
+    tem_result_path.write_text(json.dumps(tem, indent=2) + "\n")
+    tem_checker = subprocess.run(
+        [sys.executable, "-m", "repro.check_tem", str(tem_result_path)],
+        capture_output=True,
+        text=True,
+    )
+    tem_checker_output = (
+        json.loads(tem_checker.stdout)
+        if tem_checker.stdout.strip()
+        else {"passed": False, "stderr": tem_checker.stderr}
+    )
 
     checks = {
         "claim_1": max(claim1["laplace_error"], claim1["triangular_error"]) < 1e-8
@@ -117,6 +134,7 @@ def main():
         "mnist_calibration_independent_checker": mnist_checker.returncode == 0,
         "warcraft_calibration_independent_checker": warcraft_checker.returncode == 0,
         "rendering_capability_independent_checker": rendering_checker.returncode == 0,
+        "tem_falsification_independent_checker": tem_checker.returncode == 0,
     }
     checks = {name: bool(passed) for name, passed in checks.items()}
     elapsed = time.perf_counter() - started
@@ -147,10 +165,11 @@ def main():
             },
             "6": {
                 "verdict": "BLOCKED",
-                "reason": "The MNIST and Warcraft routes are bounded calibrations; the exact cited renderer is CUDA-only and not the paper implementation; TEM remains unexecuted.",
+                "reason": "Four distinct routes are complete, but MNIST and Warcraft remain bounded calibrations, the cited renderer is CUDA-only and not the paper implementation, and the TEM route found no valid counterexample or complete protocol.",
                 "mnist_calibration": mnist,
                 "warcraft_calibration": warcraft,
                 "rendering_capability_audit": rendering,
+                "tem_falsification_audit": tem,
             },
         },
         "negative_control": {
@@ -163,6 +182,7 @@ def main():
         "mnist_independent_checker": mnist_checker_output,
         "warcraft_independent_checker": warcraft_checker_output,
         "rendering_independent_checker": rendering_checker_output,
+        "tem_independent_checker": tem_checker_output,
         "checks": checks,
         "all_regressions_passed": all(checks.values()),
     }
@@ -194,6 +214,12 @@ def main():
     print("=== RENDERING_INDEPENDENT_CHECKER ===")
     print(json.dumps(rendering_checker_output, indent=2))
     print("=== END_RENDERING_INDEPENDENT_CHECKER ===")
+    print("=== TEM_FALSIFICATION_AUDIT ===")
+    print(json.dumps(tem, indent=2))
+    print("=== END_TEM_FALSIFICATION_AUDIT ===")
+    print("=== TEM_INDEPENDENT_CHECKER ===")
+    print(json.dumps(tem_checker_output, indent=2))
+    print("=== END_TEM_INDEPENDENT_CHECKER ===")
     print("=== RAW_SECTION4_CSV ===")
     print(raw_csv, end="")
     print("=== END_RAW_SECTION4_CSV ===")

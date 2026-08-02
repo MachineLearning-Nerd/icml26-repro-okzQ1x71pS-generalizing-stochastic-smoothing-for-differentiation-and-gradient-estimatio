@@ -37,12 +37,14 @@ def check(path):
             item["bytes"] > 0 and len(item["sha256"]) == 64
             for item in data["members"].values()
         ),
-        "independent_path_oracle_confirms_optimal_labels": oracle["examples"] == 64
-        and oracle["official_label_optimal_cost_match"] == 1.0
+        "independent_path_oracle_confirms_quantization_compatible_labels": oracle["examples"] == 64
+        and oracle["source_weight_dtype"] == "float16"
+        and oracle["official_label_quantization_compatible_cost_match"] == 1.0
         and oracle["official_labels_all_valid_paths"]
         and oracle["all_oracle_paths_valid"],
         "negative_control_fails_as_intended": oracle["negative_control"]["failed_as_intended"]
-        and oracle["negative_control"]["valid_path_fraction"] < 0.1,
+        and oracle["negative_control"]["valid_path_fraction"] == 0.0
+        and "required start cell" in oracle["negative_control"]["name"],
         "measured_not_formula_derived": calibration["warmup_steps"] == 2
         and calibration["measured_steps"] == 20
         and calibration["measured_seconds"] > 0,
