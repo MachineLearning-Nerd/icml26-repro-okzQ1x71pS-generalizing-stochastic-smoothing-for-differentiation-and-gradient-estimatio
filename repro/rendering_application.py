@@ -43,12 +43,13 @@ def _safe_extract(bundle, destination):
 
 
 def _source_files(bundle):
+    source_root = bundle.namelist()[0].split("/", 1)[0]
     result = {}
     for relative_path in EXPECTED_HASHES:
-        matches = [name for name in bundle.namelist() if name.endswith(f"/{relative_path}")]
-        if len(matches) != 1:
-            raise RuntimeError(f"expected one {relative_path}, found {matches}")
-        result[relative_path] = bundle.read(matches[0])
+        archive_path = f"{source_root}/{relative_path}"
+        if archive_path not in bundle.namelist():
+            raise RuntimeError(f"missing {archive_path}")
+        result[relative_path] = bundle.read(archive_path)
     return result
 
 
