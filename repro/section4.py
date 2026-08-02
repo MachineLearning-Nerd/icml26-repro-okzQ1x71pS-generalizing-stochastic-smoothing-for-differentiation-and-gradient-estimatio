@@ -1,10 +1,15 @@
 from __future__ import annotations
 
 import heapq
+import hashlib
+import io
 import itertools
 import math
 import os
+import tarfile
+import urllib.request
 from concurrent.futures import ProcessPoolExecutor
+from pathlib import Path
 
 import numpy as np
 from scipy.integrate import quad
@@ -21,7 +26,19 @@ PATH_REPEATS = 24
 PATH_ORACLE_BLOCKS = 4
 PATH_ORACLE_SAMPLES_PER_BLOCK = 65536
 NOISE_SCALE = 1.0
-PATH_NOISE_SCALE = 0.05
+WARCRAFT_URL = "https://edmond.mpg.de/api/access/datafile/102059"
+WARCRAFT_MD5 = "acea5ea60a47664ff189923a84814e96"
+WARCRAFT_BYTES = 915169563
+PATH_SCALE_CANDIDATES = (0.0025, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.4, 0.8, 1.6)
+PATH_CALIBRATION_SAMPLES = 256
+
+
+def _md5(path):
+    digest = hashlib.md5()
+    with path.open("rb") as handle:
+        while chunk := handle.read(8 * 1024 * 1024):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def inverse_cdf(name, uniforms):
@@ -348,34 +365,156 @@ def shortest_path_batch(log_costs, size):
     return np.asarray([shortest_path_indicator(costs, size) for costs in log_costs])
 
 
-def path_input(size):
-    rows, columns = np.indices((size, size))
-    costs = 1.4 + 0.18 * np.sin(rows * 0.7) + 0.16 * np.cos(columns * 0.5)
-    costs += 0.07 * np.sin((rows + columns) * 1.1) + 0.03 * (rows - columns) ** 2 / size
-    return np.log(costs.reshape(-1))
+def _download_warcraft_archive():
+    cache = Path(".cache/openresearch")
+    cache.mkdir(parents=True, exist_ok=True)
+    archive = cache / "warcraft_maps.tar.gz"
+    if archive.exists() and archive.stat().st_size == WARCRAFT_BYTES:
+        digest = _md5(archive)
+        if digest == WARCRAFT_MD5:
+            return archive
+    request = urllib.request.Request(WARCRAFT_URL, headers={"User-Agent": "OpenResearch-Reproduction/1.0"})
+    digest = hashlib.md5()
+    downloaded = 0
+    temporary = archive.with_suffix(".partial")
+    with urllib.request.urlopen(request, timeout=120) as response, temporary.open("wb") as output:
+        while chunk := response.read(8 * 1024 * 1024):
+            output.write(chunk)
+            digest.update(chunk)
+            downloaded += len(chunk)
+            if downloaded % (128 * 1024 * 1024) < len(chunk):
+                print(f"Warcraft download: {downloaded}/{WARCRAFT_BYTES} bytes", flush=True)
+    if downloaded != WARCRAFT_BYTES or digest.hexdigest() != WARCRAFT_MD5:
+        temporary.unlink(missing_ok=True)
+        raise RuntimeError(
+            f"Warcraft archive integrity failure: bytes={downloaded}, md5={digest.hexdigest()}"
+        )
+    temporary.replace(archive)
+    return archive
+
+
+def _official_warcraft_inputs():
+    archive = _download_warcraft_archive()
+    arrays = {}
+    members_used = {}
+    with tarfile.open(archive, "r:gz") as bundle:
+        members = bundle.getmembers()
+        for size in (8, 12):
+            suffix = f"/{size}x{size}/train_vertex_weights.npy"
+            matches = [
+                member
+                for member in members
+                if member.name == suffix[1:] or member.name.endswith(suffix)
+            ]
+            if len(matches) != 1:
+                raise RuntimeError(f"expected one archive member ending {suffix}, found {len(matches)}")
+            handle = bundle.extractfile(matches[0])
+            if handle is None:
+                raise RuntimeError(f"could not read {matches[0].name}")
+            weights = np.load(io.BytesIO(handle.read()), allow_pickle=False)
+            weights = np.asarray(weights, dtype=np.float64).reshape(len(weights), -1)
+            if weights.shape[1] != size * size or np.any(~np.isfinite(weights)):
+                raise RuntimeError(f"invalid official Warcraft array shape {weights.shape}")
+            sample = weights[: min(256, len(weights))]
+            coefficients = sample.std(axis=1) / np.maximum(sample.mean(axis=1), 1e-12)
+            median = float(np.median(coefficients))
+            index = int(np.argmin(np.abs(coefficients - median)))
+            positive = np.maximum(weights[index], 1e-8)
+            arrays[size] = np.log(positive)
+            members_used[size] = {
+                "member": matches[0].name,
+                "array_shape": list(weights.shape),
+                "selected_index": index,
+                "selection": "closest coefficient of variation to median among first 256 training maps",
+                "selected_map_sha256": hashlib.sha256(weights[index].tobytes()).hexdigest(),
+                "minimum_weight": float(weights[index].min()),
+                "maximum_weight": float(weights[index].max()),
+            }
+    audit = {
+        "source_url": WARCRAFT_URL,
+        "dataset_doi": "10.17617/3.YJCQ5S",
+        "published_filename": "warcraft_maps.tar.gz",
+        "published_bytes": WARCRAFT_BYTES,
+        "published_md5": WARCRAFT_MD5,
+        "verified_md5": _md5(archive),
+        "members_used": members_used,
+    }
+    return arrays, audit
+
+
+def _path_change_rate(inputs, size, distribution, scale, seed, samples):
+    baseline = shortest_path_indicator(inputs, size)
+    sampler = qmc.Sobol(len(inputs), scramble=True, seed=seed)
+    uniforms = sampler.random_base2(int(math.log2(samples)))
+    noise = inverse_cdf(distribution, uniforms)
+    paths = shortest_path_batch(inputs + scale * noise, size)
+    return float(np.mean(np.any(paths != baseline, axis=1)))
+
+
+def calibrate_path_scales(inputs_by_size):
+    scales = {}
+    audits = []
+    for size, inputs in inputs_by_size.items():
+        for distribution_index, distribution in enumerate(DISTRIBUTIONS):
+            calibration_seed = 500_000 + 10_000 * size + 100 * distribution_index
+            sweep = [
+                {
+                    "scale": scale,
+                    "path_change_rate": _path_change_rate(
+                        inputs, size, distribution, scale, calibration_seed, PATH_CALIBRATION_SAMPLES
+                    ),
+                }
+                for scale in PATH_SCALE_CANDIDATES
+            ]
+            selected = min(sweep, key=lambda item: (abs(item["path_change_rate"] - 0.5), item["scale"]))
+            validation_seed = calibration_seed + 1
+            validation_rate = _path_change_rate(
+                inputs,
+                size,
+                distribution,
+                selected["scale"],
+                validation_seed,
+                PATH_CALIBRATION_SAMPLES,
+            )
+            scales[(size, distribution)] = selected["scale"]
+            audits.append(
+                {
+                    "size": f"{size}x{size}",
+                    "distribution": distribution,
+                    "candidate_scales": list(PATH_SCALE_CANDIDATES),
+                    "calibration_seed": calibration_seed,
+                    "validation_seed": validation_seed,
+                    "samples_per_rate": PATH_CALIBRATION_SAMPLES,
+                    "selection_target": "path change rate closest to 0.5; smaller scale breaks ties",
+                    "sweep": sweep,
+                    "selected_scale": selected["scale"],
+                    "calibration_path_change_rate": selected["path_change_rate"],
+                    "held_out_path_change_rate": validation_rate,
+                    "non_vacuous": bool(0.1 <= validation_rate <= 0.9),
+                }
+            )
+    return scales, audits
 
 
 def _path_oracle_half(specification):
-    size, distribution, seed = specification
-    inputs = path_input(size)
+    size, distribution, seed, inputs, scale = specification
     sampler = qmc.Sobol(len(inputs), scramble=True, seed=seed)
     uniforms = sampler.random_base2(int(math.log2(PATH_ORACLE_SAMPLES_PER_BLOCK)))
     noise = inverse_cdf(distribution, uniforms)
-    values = shortest_path_batch(inputs + PATH_NOISE_SCALE * noise, size)
-    scores = score(distribution, noise) / PATH_NOISE_SCALE
+    values = shortest_path_batch(inputs + scale * noise, size)
+    scores = score(distribution, noise) / scale
     return size, distribution, seed, values.T @ scores / len(values)
 
 
 def _path_trial(specification):
-    size, distribution, strategy, antithetic, repeat, oracle = specification
-    inputs = path_input(size)
+    size, distribution, strategy, antithetic, repeat, oracle, inputs, scale = specification
     dimension = len(inputs)
     seed = 1_000_000 + 10_000 * size + 1_000 * DISTRIBUTIONS.index(distribution)
     seed += 100 * STRATEGIES.index(strategy) + 10 * int(antithetic) + repeat
     uniforms = draw_uniforms(strategy, dimension, 1024, seed, antithetic)
     noise = inverse_cdf(distribution, uniforms)
-    values = shortest_path_batch(inputs + PATH_NOISE_SCALE * noise, size)
-    scores = score(distribution, noise) / PATH_NOISE_SCALE
+    values = shortest_path_batch(inputs + scale * noise, size)
+    scores = score(distribution, noise) / scale
     baseline = shortest_path_indicator(inputs, size)
     errors = {}
     for covariate in COVARIATES:
@@ -400,12 +539,16 @@ def _valid_path(indicator, size):
 
 
 def benchmark_shortest_paths(workers):
+    inputs_by_size, dataset_audit = _official_warcraft_inputs()
+    scales, calibration_audits = calibrate_path_scales(inputs_by_size)
     oracle_specs = []
     for size in (8, 12):
         for distribution_index, distribution in enumerate(DISTRIBUTIONS):
             for block in range(PATH_ORACLE_BLOCKS):
                 seed = 700_000 + 10_000 * size + 100 * distribution_index + block
-                oracle_specs.append((size, distribution, seed))
+                oracle_specs.append(
+                    (size, distribution, seed, inputs_by_size[size], scales[(size, distribution)])
+                )
 
     with ProcessPoolExecutor(max_workers=workers) as executor:
         oracle_halves = list(executor.map(_path_oracle_half, oracle_specs))
@@ -429,6 +572,7 @@ def benchmark_shortest_paths(workers):
                     "blocks": len(blocks),
                     "samples_per_block": PATH_ORACLE_SAMPLES_PER_BLOCK,
                     "samples": len(blocks) * PATH_ORACLE_SAMPLES_PER_BLOCK,
+                    "selected_scale": scales[(size, distribution)],
                     "block_deviation_l2_mean": float(deviations.mean()),
                     "oracle_uncertainty_95": uncertainty,
                     "oracle_l2": float(np.linalg.norm(oracle)),
@@ -443,7 +587,16 @@ def benchmark_shortest_paths(workers):
                 for antithetic in antithetic_options:
                     for repeat in range(PATH_REPEATS):
                         trial_specs.append(
-                            (size, distribution, strategy, antithetic, repeat, grouped_oracles[(size, distribution)])
+                            (
+                                size,
+                                distribution,
+                                strategy,
+                                antithetic,
+                                repeat,
+                                grouped_oracles[(size, distribution)],
+                                inputs_by_size[size],
+                                scales[(size, distribution)],
+                            )
                         )
 
     with ProcessPoolExecutor(max_workers=workers) as executor:
@@ -480,19 +633,24 @@ def benchmark_shortest_paths(workers):
 
     path_checks = []
     for size in (8, 12):
-        inputs = path_input(size)
-        uniforms = draw_uniforms("RQMC-latin", size * size, 16, 900_000 + size)
-        noise = inverse_cdf("Gaussian", uniforms)
-        paths = shortest_path_batch(inputs + PATH_NOISE_SCALE * noise, size)
-        path_checks.append(
-            {
-                "size": f"{size}x{size}",
-                "paths_checked": len(paths),
-                "all_binary": bool(np.all((paths == 0.0) | (paths == 1.0))),
-                "all_connected_8_neighborhood": bool(all(_valid_path(path, size) for path in paths)),
-            }
-        )
-    return rows, oracle_audits, path_checks
+        for distribution_index, distribution in enumerate(DISTRIBUTIONS):
+            inputs = inputs_by_size[size]
+            uniforms = draw_uniforms(
+                "RQMC-latin", size * size, 16, 900_000 + 100 * size + distribution_index
+            )
+            noise = inverse_cdf(distribution, uniforms)
+            paths = shortest_path_batch(inputs + scales[(size, distribution)] * noise, size)
+            path_checks.append(
+                {
+                    "size": f"{size}x{size}",
+                    "distribution": distribution,
+                    "scale": scales[(size, distribution)],
+                    "paths_checked": len(paths),
+                    "all_binary": bool(np.all((paths == 0.0) | (paths == 1.0))),
+                    "all_connected_8_neighborhood": bool(all(_valid_path(path, size) for path in paths)),
+                }
+            )
+    return rows, oracle_audits, path_checks, dataset_audit, calibration_audits
 
 
 def ranking_contract(rows):
@@ -536,7 +694,9 @@ def ranking_contract(rows):
 def run_section4():
     workers = min(32, os.cpu_count() or 1)
     sorting_rows, sorting_oracles, negative_control = benchmark_sorting()
-    path_rows, path_oracles, path_checks = benchmark_shortest_paths(workers)
+    path_rows, path_oracles, path_checks, dataset_audit, calibration_audits = benchmark_shortest_paths(
+        workers
+    )
     rows = sorting_rows + path_rows
     ranking = ranking_contract(rows)
     expected_cells = 447
@@ -552,12 +712,16 @@ def run_section4():
     path_oracle_checks_pass = all(
         audit["uncertainty_over_minimum_error"] < 0.2 for audit in path_oracles
     )
+    non_vacuity_pass = all(audit["non_vacuous"] for audit in calibration_audits)
+    dataset_pass = dataset_audit["verified_md5"] == WARCRAFT_MD5
     control_pass = negative_control["wrong_over_correct"] > 1.25
     coverage_pass = len(rows) == expected_cells and all(np.isfinite(row["mean_l2_error"]) for row in rows)
     claim4_verified = (
         coverage_pass
+        and dataset_pass
         and oracle_checks_pass
         and path_oracle_checks_pass
+        and non_vacuity_pass
         and path_checks_pass
         and control_pass
     )
@@ -579,6 +743,8 @@ def run_section4():
             "sorting_oracle_checks_pass": bool(oracle_checks_pass),
             "path_oracle_checks_pass": bool(path_oracle_checks_pass),
             "path_checks_pass": bool(path_checks_pass),
+            "official_dataset_integrity_pass": bool(dataset_pass),
+            "non_vacuity_pass": bool(non_vacuity_pass),
             "negative_control_pass": bool(control_pass),
             "claim4_verified": bool(claim4_verified),
             "claim5_verified": bool(ranking["verified"]),
@@ -586,6 +752,8 @@ def run_section4():
         "sorting_oracle_audit": sorting_oracles,
         "path_oracle_audit": path_oracles,
         "path_checks": path_checks,
+        "warcraft_dataset_audit": dataset_audit,
+        "path_scale_calibration": calibration_audits,
         "negative_control": negative_control,
         "ranking_contract": ranking,
     }

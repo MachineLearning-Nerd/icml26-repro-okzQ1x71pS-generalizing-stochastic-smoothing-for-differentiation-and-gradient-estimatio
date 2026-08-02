@@ -1,10 +1,10 @@
 # Claims 4–5 — Section 4 operator benchmark
 
-Current status: **BLOCKED**, pending the corrective HF run.
+Current status: **Claim 5 VERIFIED; Claim 4 BLOCKED pending the official-data HF run.**
 
 The current verifier is `repro/section4.py`, superseding both the judged 1D proxy and a **Historical rejected baseline** that used the wrong Cartesian randomization. It covers six distributions, hard sorting at `n=3,5`, 8-neighborhood paths at `8x8,12x12`, 1,000/1,024 samples, and all 447 feasible sampling/covariate/antithetic cells.
 
-The verifier uses exact quadrature/finite-difference sorting oracles, independently jittered Cartesian cells, four independently scrambled Sobol path-oracle blocks totaling 262,144 samples per distribution/grid, confidence intervals, path-validity checks, a wrong-score negative control, and a separate raw-file checker. The fixed command will print the complete raw CSV between `RAW_SECTION4_CSV` markers and exit nonzero when the contract fails.
+The verifier uses exact quadrature/finite-difference sorting oracles, independently jittered Cartesian cells, official MD5-verified Warcraft maps, held-out path-change calibration, four independently scrambled Sobol path-oracle blocks totaling 262,144 samples per distribution/grid, confidence intervals, path-validity checks, a wrong-score negative control, and a separate raw-file checker. The fixed command will print the complete raw CSV between `RAW_SECTION4_CSV` markers and exit nonzero when the contract fails.
 
 Exact source quantifiers, acceptance thresholds, deviations, and method are under `.openresearch/artifacts/claims_4_5/`.
 

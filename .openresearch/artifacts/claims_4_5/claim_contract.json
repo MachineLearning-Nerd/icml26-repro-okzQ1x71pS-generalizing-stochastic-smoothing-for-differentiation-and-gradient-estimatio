@@ -20,6 +20,9 @@
     "path_oracle_independent_blocks": 4,
     "path_oracle_total_samples_per_distribution_and_size": 262144,
     "path_oracle_95pct_uncertainty_below_fraction_of_minimum_estimator_error": 0.2,
+    "warcraft_archive_md5": "acea5ea60a47664ff189923a84814e96",
+    "path_scale_candidates": [0.0025, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.4, 0.8, 1.6],
+    "held_out_path_change_rate_interval": [0.1, 0.9],
     "wrong_score_error_ratio_above": 1.25,
     "claim_5_target_within_fraction_of_cell_minimum": 1.01
   }

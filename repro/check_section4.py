@@ -57,6 +57,22 @@ def check(result_path, csv_path):
         "four_operator_sizes": sorted({row["size"] for row in rows})
         == ["12x12", "8x8", "n=3", "n=5"],
         "summary_row_count_matches": summary["cell_count"] == len(rows),
+        "official_dataset_md5_matches": result["warcraft_dataset_audit"]["verified_md5"]
+        == result["warcraft_dataset_audit"]["published_md5"]
+        == "acea5ea60a47664ff189923a84814e96",
+        "official_8x8_and_12x12_maps_used": set(
+            result["warcraft_dataset_audit"]["members_used"]
+        )
+        == {"8", "12"},
+        "held_out_path_perturbations_non_vacuous": all(
+            0.1 <= audit["held_out_path_change_rate"] <= 0.9
+            for audit in result["path_scale_calibration"]
+        ),
+        "twelve_path_scale_calibrations": len(result["path_scale_calibration"]) == 12,
+        "all_paths_valid": all(
+            audit["all_binary"] and audit["all_connected_8_neighborhood"]
+            for audit in result["path_checks"]
+        ),
         "path_oracle_uncertainty_passes": all(
             audit["uncertainty_over_minimum_error"] < 0.2
             for audit in result["path_oracle_audit"]
