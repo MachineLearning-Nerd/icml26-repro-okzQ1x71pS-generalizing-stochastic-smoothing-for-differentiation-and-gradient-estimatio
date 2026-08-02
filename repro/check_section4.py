@@ -83,6 +83,11 @@ def check(result_path, csv_path):
             audit["uncertainty_over_minimum_error"] < 0.2
             for audit in result["path_oracle_audit"]
         ),
+        "path_oracle_power_matches_calibrated_design": all(
+            audit["blocks"] == (32 if audit["distribution"] == "Triangular" else 4)
+            and audit["samples"] == audit["blocks"] * 65536
+            for audit in result["path_oracle_audit"]
+        ),
         "wrong_score_control_passes": result["negative_control"]["wrong_over_correct"] > 1.25,
         "paper_ranking_passes": ranking_pass,
     }

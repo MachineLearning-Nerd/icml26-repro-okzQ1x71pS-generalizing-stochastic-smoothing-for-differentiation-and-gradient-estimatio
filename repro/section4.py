@@ -23,7 +23,10 @@ STRATEGIES = ("MC", "QMC-latin", "RQMC-latin", "RQMC-cartesian")
 COVARIATES = ("none", "f(x)", "LOO")
 SORTING_REPEATS = 64
 PATH_REPEATS = 24
-PATH_ORACLE_BLOCKS = 4
+PATH_ORACLE_BLOCKS = {
+    "default": 4,
+    "Triangular": 32,
+}
 PATH_ORACLE_SAMPLES_PER_BLOCK = 65536
 NOISE_SCALE = 1.0
 WARCRAFT_URL = "https://edmond.mpg.de/api/access/datafile/102059"
@@ -549,7 +552,8 @@ def benchmark_shortest_paths(workers):
     oracle_specs = []
     for size in (8, 12):
         for distribution_index, distribution in enumerate(DISTRIBUTIONS):
-            for block in range(PATH_ORACLE_BLOCKS):
+            blocks = PATH_ORACLE_BLOCKS.get(distribution, PATH_ORACLE_BLOCKS["default"])
+            for block in range(blocks):
                 seed = 700_000 + 10_000 * size + 100 * distribution_index + block
                 oracle_specs.append(
                     (size, distribution, seed, inputs_by_size[size], scales[(size, distribution)])
@@ -739,9 +743,11 @@ def run_section4():
             "path_repeats": PATH_REPEATS,
             "path_oracle_blocks": PATH_ORACLE_BLOCKS,
             "path_oracle_samples_per_block": PATH_ORACLE_SAMPLES_PER_BLOCK,
-            "path_oracle_samples_per_distribution_and_size": (
-                PATH_ORACLE_BLOCKS * PATH_ORACLE_SAMPLES_PER_BLOCK
-            ),
+            "path_oracle_samples_per_distribution_and_size": {
+                name: PATH_ORACLE_BLOCKS.get(name, PATH_ORACLE_BLOCKS["default"])
+                * PATH_ORACLE_SAMPLES_PER_BLOCK
+                for name in DISTRIBUTIONS
+            },
             "cell_count": len(rows),
             "expected_cell_count": expected_cells,
             "coverage_pass": bool(coverage_pass),
