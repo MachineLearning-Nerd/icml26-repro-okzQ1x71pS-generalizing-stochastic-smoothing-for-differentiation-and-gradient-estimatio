@@ -16,9 +16,10 @@ DISTRIBUTIONS = ("Gaussian", "Logistic", "Gumbel", "Cauchy", "Laplace", "Triangu
 SYMMETRIC_DISTRIBUTIONS = {"Gaussian", "Logistic", "Cauchy", "Laplace", "Triangular"}
 STRATEGIES = ("MC", "QMC-latin", "RQMC-latin", "RQMC-cartesian")
 COVARIATES = ("none", "f(x)", "LOO")
-SORTING_REPEATS = 24
-PATH_REPEATS = 12
-PATH_ORACLE_SAMPLES_PER_SCRAMBLE = 16384
+SORTING_REPEATS = 64
+PATH_REPEATS = 24
+PATH_ORACLE_BLOCKS = 4
+PATH_ORACLE_SAMPLES_PER_BLOCK = 65536
 NOISE_SCALE = 1.0
 PATH_NOISE_SCALE = 0.05
 
@@ -60,17 +61,16 @@ def _cartesian_uniforms(dimension, samples, rng, antithetic):
     side = round(samples ** (1.0 / dimension))
     if side**dimension != samples:
         raise ValueError(f"{samples} is not a Cartesian power in dimension {dimension}")
-    axes = []
-    for _ in range(dimension):
-        if antithetic:
-            if side % 2:
-                raise ValueError("antithetic Cartesian axes require an even side length")
-            first = (np.arange(side // 2) + rng.random(side // 2)) / side
-            axis = np.concatenate([first, 1.0 - first[::-1]])
-        else:
-            axis = (np.arange(side) + rng.random(side)) / side
-        axes.append(axis)
-    return np.asarray(list(itertools.product(*axes)), dtype=np.float64)
+    cells = np.asarray(list(itertools.product(range(side), repeat=dimension)), dtype=np.float64)
+    if not antithetic:
+        return (cells + rng.random(cells.shape)) / side
+
+    mirrored = side - 1 - cells
+    flat = np.ravel_multi_index(cells.astype(int).T, (side,) * dimension)
+    mirrored_flat = np.ravel_multi_index(mirrored.astype(int).T, (side,) * dimension)
+    first_cells = cells[flat < mirrored_flat]
+    first = (first_cells + rng.random(first_cells.shape)) / side
+    return np.concatenate([first, 1.0 - first], axis=0)
 
 
 def draw_uniforms(strategy, dimension, samples, seed, antithetic=False):
@@ -359,7 +359,7 @@ def _path_oracle_half(specification):
     size, distribution, seed = specification
     inputs = path_input(size)
     sampler = qmc.Sobol(len(inputs), scramble=True, seed=seed)
-    uniforms = sampler.random_base2(int(math.log2(PATH_ORACLE_SAMPLES_PER_SCRAMBLE)))
+    uniforms = sampler.random_base2(int(math.log2(PATH_ORACLE_SAMPLES_PER_BLOCK)))
     noise = inverse_cdf(distribution, uniforms)
     values = shortest_path_batch(inputs + PATH_NOISE_SCALE * noise, size)
     scores = score(distribution, noise) / PATH_NOISE_SCALE
@@ -403,8 +403,9 @@ def benchmark_shortest_paths(workers):
     oracle_specs = []
     for size in (8, 12):
         for distribution_index, distribution in enumerate(DISTRIBUTIONS):
-            oracle_specs.append((size, distribution, 700_000 + 100 * size + 2 * distribution_index))
-            oracle_specs.append((size, distribution, 700_001 + 100 * size + 2 * distribution_index))
+            for block in range(PATH_ORACLE_BLOCKS):
+                seed = 700_000 + 10_000 * size + 100 * distribution_index + block
+                oracle_specs.append((size, distribution, seed))
 
     with ProcessPoolExecutor(max_workers=workers) as executor:
         oracle_halves = list(executor.map(_path_oracle_half, oracle_specs))
@@ -413,18 +414,24 @@ def benchmark_shortest_paths(workers):
     oracle_audits = []
     for size in (8, 12):
         for distribution in DISTRIBUTIONS:
-            halves = [item[3] for item in oracle_halves if item[0] == size and item[1] == distribution]
-            oracle = (halves[0] + halves[1]) / 2.0
+            blocks = [item[3] for item in oracle_halves if item[0] == size and item[1] == distribution]
+            oracle = np.mean(blocks, axis=0)
             grouped_oracles[(size, distribution)] = oracle
-            disagreement = float(np.linalg.norm(halves[0] - halves[1]) / 2.0)
+            deviations = np.asarray([np.linalg.norm(block - oracle) for block in blocks])
+            uncertainty = float(
+                t.ppf(0.975, len(blocks) - 1)
+                * math.sqrt(float(np.sum(deviations**2)) / (len(blocks) * (len(blocks) - 1)))
+            )
             oracle_audits.append(
                 {
                     "size": f"{size}x{size}",
                     "distribution": distribution,
-                    "samples": 2 * PATH_ORACLE_SAMPLES_PER_SCRAMBLE,
-                    "half_disagreement_l2": disagreement,
+                    "blocks": len(blocks),
+                    "samples_per_block": PATH_ORACLE_SAMPLES_PER_BLOCK,
+                    "samples": len(blocks) * PATH_ORACLE_SAMPLES_PER_BLOCK,
+                    "block_deviation_l2_mean": float(deviations.mean()),
+                    "oracle_uncertainty_95": uncertainty,
                     "oracle_l2": float(np.linalg.norm(oracle)),
-                    "relative_half_disagreement": disagreement / max(float(np.linalg.norm(oracle)), 1e-12),
                 }
             )
 
@@ -460,6 +467,16 @@ def benchmark_shortest_paths(workers):
         )
         for (size, distribution, strategy, covariate, antithetic), values in errors.items()
     ]
+
+    for audit in oracle_audits:
+        case_errors = [
+            row["mean_l2_error"]
+            for row in rows
+            if row["size"] == audit["size"] and row["distribution"] == audit["distribution"]
+        ]
+        minimum_error = min(case_errors)
+        audit["minimum_estimator_error"] = minimum_error
+        audit["uncertainty_over_minimum_error"] = audit["oracle_uncertainty_95"] / minimum_error
 
     path_checks = []
     for size in (8, 12):
@@ -533,7 +550,7 @@ def run_section4():
         check["all_binary"] and check["all_connected_8_neighborhood"] for check in path_checks
     )
     path_oracle_checks_pass = all(
-        audit["relative_half_disagreement"] < 0.5 for audit in path_oracles
+        audit["uncertainty_over_minimum_error"] < 0.2 for audit in path_oracles
     )
     control_pass = negative_control["wrong_over_correct"] > 1.25
     coverage_pass = len(rows) == expected_cells and all(np.isfinite(row["mean_l2_error"]) for row in rows)
@@ -551,7 +568,11 @@ def run_section4():
             "workers": workers,
             "sorting_repeats": SORTING_REPEATS,
             "path_repeats": PATH_REPEATS,
-            "path_oracle_samples_per_distribution_and_size": 2 * PATH_ORACLE_SAMPLES_PER_SCRAMBLE,
+            "path_oracle_blocks": PATH_ORACLE_BLOCKS,
+            "path_oracle_samples_per_block": PATH_ORACLE_SAMPLES_PER_BLOCK,
+            "path_oracle_samples_per_distribution_and_size": (
+                PATH_ORACLE_BLOCKS * PATH_ORACLE_SAMPLES_PER_BLOCK
+            ),
             "cell_count": len(rows),
             "expected_cell_count": expected_cells,
             "coverage_pass": bool(coverage_pass),

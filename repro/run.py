@@ -6,6 +6,7 @@ import json
 import os
 import platform
 import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -28,6 +29,27 @@ def main():
     section4 = run_section4()
     section4_rows = section4.pop("rows")
 
+    csv_buffer = io.StringIO()
+    writer = csv.DictWriter(csv_buffer, fieldnames=list(section4_rows[0]))
+    writer.writeheader()
+    writer.writerows(section4_rows)
+    raw_csv = csv_buffer.getvalue()
+    section4_directory = Path(".openresearch/artifacts/claims_4_5")
+    section4_directory.mkdir(parents=True, exist_ok=True)
+    section4_result_path = section4_directory / "section4_result.json"
+    section4_csv_path = section4_directory / "raw_results.csv"
+    section4_result_path.write_text(json.dumps(section4, indent=2) + "\n")
+    section4_csv_path.write_text(raw_csv)
+    checker = subprocess.run(
+        [sys.executable, "-m", "repro.check_section4", str(section4_result_path), str(section4_csv_path)],
+        capture_output=True,
+        text=True,
+    )
+    checker_output = json.loads(checker.stdout) if checker.stdout.strip() else {
+        "passed": False,
+        "stderr": checker.stderr,
+    }
+
     checks = {
         "claim_1": max(claim1["laplace_error"], claim1["triangular_error"]) < 1e-8
         and claim1["wrong_score_error"] > 0.04,
@@ -37,6 +59,7 @@ def main():
         and variance_proxy["all_finite"],
         "claim_4_faithful_benchmark": section4["summary"]["claim4_verified"],
         "claim_5_ranking": section4["summary"]["claim5_verified"],
+        "section4_independent_checker": checker.returncode == 0,
     }
     checks = {name: bool(passed) for name, passed in checks.items()}
     elapsed = time.perf_counter() - started
@@ -77,6 +100,7 @@ def main():
             "failed_as_intended": bool(claim1["wrong_score_error"] > 0.04),
         },
         "section4_evidence": section4,
+        "section4_independent_checker": checker_output,
         "checks": checks,
         "all_regressions_passed": all(checks.values()),
     }
@@ -84,17 +108,12 @@ def main():
     output = Path(".openresearch/artifacts/baseline/raw_output.json")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2) + "\n")
-    csv_buffer = io.StringIO()
-    writer = csv.DictWriter(csv_buffer, fieldnames=list(section4_rows[0]))
-    writer.writeheader()
-    writer.writerows(section4_rows)
-    raw_csv = csv_buffer.getvalue()
-    section4_output = Path(".openresearch/artifacts/claims_4_5/raw_results.csv")
-    section4_output.parent.mkdir(parents=True, exist_ok=True)
-    section4_output.write_text(raw_csv)
     print("=== EVAL.md ===")
     print(json.dumps(result, indent=2))
     print("=== END EVAL.md ===")
+    print("=== INDEPENDENT_CHECKER ===")
+    print(json.dumps(checker_output, indent=2))
+    print("=== END_INDEPENDENT_CHECKER ===")
     print("=== RAW_SECTION4_CSV ===")
     print(raw_csv, end="")
     print("=== END_RAW_SECTION4_CSV ===")

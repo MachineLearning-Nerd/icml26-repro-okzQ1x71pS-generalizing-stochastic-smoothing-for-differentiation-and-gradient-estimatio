@@ -1,0 +1,621 @@
+{
+  "paper": "arXiv:2410.08125",
+  "git_sha": "1deb3262fbb425f3ff53020c4e64e9cb661fa85f",
+  "fixed_command": "uv sync --frozen --no-dev && .venv/bin/python -m repro.run",
+  "environment": {
+    "python": "3.12.12",
+    "platform": "Linux-6.12.94-123.192.amzn2023.x86_64-x86_64-with-glibc2.36",
+    "estimated_useful_cores": 32,
+    "selected_flavor": "hf/cpu-upgrade",
+    "actual_logical_cpus": 64,
+    "gpu_requested": false,
+    "runtime_seconds": 783.2421948029987
+  },
+  "claims": {
+    "1": {
+      "verdict": "VERIFIED",
+      "metrics": {
+        "laplace_error": 0.0,
+        "triangular_error": 0.0,
+        "wrong_score_error": 0.05369396702682416
+      }
+    },
+    "2": {
+      "verdict": "VERIFIED",
+      "metrics": {
+        "grad_x_error": 9.952129398360654e-12,
+        "grad_scale_error": 1.5252021867695476e-11
+      }
+    },
+    "3": {
+      "verdict": "VERIFIED",
+      "metrics": {
+        "grad_cov_x_error": 2.3664403769885212e-11,
+        "grad_cov_scale_error": 5.203468766978858e-10
+      }
+    },
+    "4": {
+      "verdict": "BLOCKED",
+      "metrics": {
+        "estimated_useful_cores": 32,
+        "workers": 32,
+        "sorting_repeats": 24,
+        "path_repeats": 12,
+        "path_oracle_samples_per_distribution_and_size": 32768,
+        "cell_count": 447,
+        "expected_cell_count": 447,
+        "coverage_pass": true,
+        "sorting_oracle_checks_pass": true,
+        "path_oracle_checks_pass": false,
+        "path_checks_pass": true,
+        "negative_control_pass": true,
+        "claim4_verified": false,
+        "claim5_verified": false
+      },
+      "historical_rejected_baseline": {
+        "seed": 2024,
+        "samples": 64,
+        "repeats": 150,
+        "combination_count": 108,
+        "all_finite": true,
+        "variances": {
+          "Gaussian/MC/none": 0.04341706716143551,
+          "Gaussian/MC/f(x)": 0.028039688081967447,
+          "Gaussian/MC/LOO": 0.01448952071094095,
+          "Gaussian/MC-antithetic/none": 0.001747635942974533,
+          "Gaussian/MC-antithetic/f(x)": 0.001747635942974533,
+          "Gaussian/MC-antithetic/LOO": 0.001803556770577901,
+          "Gaussian/QMC-cart/none": 3.102169037939172e-33,
+          "Gaussian/QMC-cart/f(x)": 3.102169037939172e-33,
+          "Gaussian/QMC-cart/LOO": 0.0,
+          "Gaussian/RQMC-cart/none": 0.0020523738074564642,
+          "Gaussian/RQMC-cart/f(x)": 0.0017801793148551415,
+          "Gaussian/RQMC-cart/LOO": 0.0014976331897409234,
+          "Gaussian/QMC-latin/none": 3.102169037939172e-33,
+          "Gaussian/QMC-latin/f(x)": 3.102169037939172e-33,
+          "Gaussian/QMC-latin/LOO": 0.0,
+          "Gaussian/RQMC-latin/none": 0.0016246242317908483,
+          "Gaussian/RQMC-latin/f(x)": 0.0014078559223847334,
+          "Gaussian/RQMC-latin/LOO": 0.0011834923367972827,
+          "Logistic/MC/none": 0.04242687830045065,
+          "Logistic/MC/f(x)": 0.032097300701475644,
+          "Logistic/MC/LOO": 0.012874359240561146,
+          "Logistic/MC-antithetic/none": 0.00034735020331046364,
+          "Logistic/MC-antithetic/f(x)": 0.00034735020331046364,
+          "Logistic/MC-antithetic/LOO": 0.0003584647096900124,
+          "Logistic/QMC-cart/none": 7.75542259484793e-34,
+          "Logistic/QMC-cart/f(x)": 7.75542259484793e-34,
+          "Logistic/QMC-cart/LOO": 7.75542259484793e-34,
+          "Logistic/RQMC-cart/none": 0.0004892473342805854,
+          "Logistic/RQMC-cart/f(x)": 0.0004831852770314547,
+          "Logistic/RQMC-cart/LOO": 0.000482792227224834,
+          "Logistic/QMC-latin/none": 7.75542259484793e-34,
+          "Logistic/QMC-latin/f(x)": 7.75542259484793e-34,
+          "Logistic/QMC-latin/LOO": 7.75542259484793e-34,
+          "Logistic/RQMC-latin/none": 0.0006013243379843834,
+          "Logistic/RQMC-latin/f(x)": 0.0005942184636682571,
+          "Logistic/RQMC-latin/LOO": 0.0005944933398897513,
+          "Gumbel/MC/none": 0.03965832697673658,
+          "Gumbel/MC/f(x)": 0.02554240366379699,
+          "Gumbel/MC/LOO": 0.010745642386220638,
+          "Gumbel/MC-antithetic/none": 0.0026907513079484787,
+          "Gumbel/MC-antithetic/f(x)": 0.003777926689677608,
+          "Gumbel/MC-antithetic/LOO": 0.013635412771520913,
+          "Gumbel/QMC-cart/none": 1.2408676151756689e-32,
+          "Gumbel/QMC-cart/f(x)": 1.2408676151756689e-32,
+          "Gumbel/QMC-cart/LOO": 1.2408676151756689e-32,
+          "Gumbel/RQMC-cart/none": 0.0013280542153093983,
+          "Gumbel/RQMC-cart/f(x)": 0.0009998914123938525,
+          "Gumbel/RQMC-cart/LOO": 0.0005169094454518286,
+          "Gumbel/QMC-latin/none": 1.2408676151756689e-32,
+          "Gumbel/QMC-latin/f(x)": 1.2408676151756689e-32,
+          "Gumbel/QMC-latin/LOO": 1.2408676151756689e-32,
+          "Gumbel/RQMC-latin/none": 0.0015176157330648256,
+          "Gumbel/RQMC-latin/f(x)": 0.0011694222624970983,
+          "Gumbel/RQMC-latin/LOO": 0.0006631778710858459,
+          "Cauchy/MC/none": 0.02707141077508725,
+          "Cauchy/MC/f(x)": 0.019281024554585368,
+          "Cauchy/MC/LOO": 9.322550537330672,
+          "Cauchy/MC-antithetic/none": 0.0004814786049081582,
+          "Cauchy/MC-antithetic/f(x)": 0.00048147860490815826,
+          "Cauchy/MC-antithetic/LOO": 0.0004968849497868015,
+          "Cauchy/QMC-cart/none": 3.102169037939172e-33,
+          "Cauchy/QMC-cart/f(x)": 3.102169037939172e-33,
+          "Cauchy/QMC-cart/LOO": 3.102169037939172e-33,
+          "Cauchy/RQMC-cart/none": 7.095154039229264e-06,
+          "Cauchy/RQMC-cart/f(x)": 7.743021465757042e-06,
+          "Cauchy/RQMC-cart/LOO": 0.0021216899284199,
+          "Cauchy/QMC-latin/none": 3.102169037939172e-33,
+          "Cauchy/QMC-latin/f(x)": 3.102169037939172e-33,
+          "Cauchy/QMC-latin/LOO": 3.102169037939172e-33,
+          "Cauchy/RQMC-latin/none": 7.327112053684019e-06,
+          "Cauchy/RQMC-latin/f(x)": 8.673477683565002e-06,
+          "Cauchy/RQMC-latin/LOO": 0.02878398620798702,
+          "Laplace/MC/none": 0.027914719691871915,
+          "Laplace/MC/f(x)": 0.019507031764141737,
+          "Laplace/MC/LOO": 0.01416036460674754,
+          "Laplace/MC-antithetic/none": 0.0003648487362723782,
+          "Laplace/MC-antithetic/f(x)": 0.00036484873627237816,
+          "Laplace/MC-antithetic/LOO": 0.00037652316043629665,
+          "Laplace/QMC-cart/none": 3.102169037939172e-33,
+          "Laplace/QMC-cart/f(x)": 0.0,
+          "Laplace/QMC-cart/LOO": 3.102169037939172e-33,
+          "Laplace/RQMC-cart/none": 0.0004357373361826112,
+          "Laplace/RQMC-cart/f(x)": 0.0004357373361826112,
+          "Laplace/RQMC-cart/LOO": 0.00044968005265910195,
+          "Laplace/QMC-latin/none": 3.102169037939172e-33,
+          "Laplace/QMC-latin/f(x)": 0.0,
+          "Laplace/QMC-latin/LOO": 3.102169037939172e-33,
+          "Laplace/RQMC-latin/none": 0.000544610460321659,
+          "Laplace/RQMC-latin/f(x)": 0.000544610460321659,
+          "Laplace/RQMC-latin/LOO": 0.000562036897323637,
+          "Triangular/MC/none": 0.2439870011517541,
+          "Triangular/MC/f(x)": 0.12014632324411632,
+          "Triangular/MC/LOO": 0.10648482926957868,
+          "Triangular/MC-antithetic/none": 0.14221546502588517,
+          "Triangular/MC-antithetic/f(x)": 0.14221546502588545,
+          "Triangular/MC-antithetic/LOO": 0.14676607325422686,
+          "Triangular/QMC-cart/none": 1.2408676151756689e-32,
+          "Triangular/QMC-cart/f(x)": 0.0,
+          "Triangular/QMC-cart/LOO": 1.2408676151756689e-32,
+          "Triangular/RQMC-cart/none": 0.06965855906506677,
+          "Triangular/RQMC-cart/f(x)": 0.023162475489837357,
+          "Triangular/RQMC-cart/LOO": 0.01734781714984717,
+          "Triangular/QMC-latin/none": 1.2408676151756689e-32,
+          "Triangular/QMC-latin/f(x)": 0.0,
+          "Triangular/QMC-latin/LOO": 1.2408676151756689e-32,
+          "Triangular/RQMC-latin/none": 0.020265312465560726,
+          "Triangular/RQMC-latin/f(x)": 0.009538650631555349,
+          "Triangular/RQMC-latin/LOO": 0.008010130620041245
+        }
+      }
+    },
+    "5": {
+      "verdict": "BLOCKED",
+      "metrics": {
+        "verified": false,
+        "criterion": "paper target within 1% of cell minimum",
+        "cases": [
+          {
+            "size": "n=3",
+            "distribution": "Gaussian",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.13918929983037673,
+            "minimum_mean_l2_error": 0.05766533495978763,
+            "within_one_percent": false
+          },
+          {
+            "size": "n=3",
+            "distribution": "Logistic",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.06055573423784203,
+            "minimum_mean_l2_error": 0.02976389588955683,
+            "within_one_percent": false
+          },
+          {
+            "size": "n=3",
+            "distribution": "Gumbel",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.1509133733696759,
+            "minimum_mean_l2_error": 0.05497138392811016,
+            "within_one_percent": false
+          },
+          {
+            "size": "n=3",
+            "distribution": "Cauchy",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.05364481695836216,
+            "minimum_mean_l2_error": 0.04501850241197625,
+            "within_one_percent": false
+          },
+          {
+            "size": "n=3",
+            "distribution": "Laplace",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.06686580157191709,
+            "minimum_mean_l2_error": 0.06302780336263979,
+            "within_one_percent": false
+          },
+          {
+            "size": "n=3",
+            "distribution": "Triangular",
+            "paper_target": "QMC-latin/LOO/no-antithetic",
+            "target_mean_l2_error": 0.15043682707278946,
+            "minimum_mean_l2_error": 0.15043682707278946,
+            "within_one_percent": true
+          },
+          {
+            "size": "n=5",
+            "distribution": "Gaussian",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.5521358659448748,
+            "minimum_mean_l2_error": 0.1227692633004945,
+            "within_one_percent": false
+          },
+          {
+            "size": "n=5",
+            "distribution": "Logistic",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.2869151351425875,
+            "minimum_mean_l2_error": 0.07208474228557084,
+            "within_one_percent": false
+          },
+          {
+            "size": "n=5",
+            "distribution": "Gumbel",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.5687539267827326,
+            "minimum_mean_l2_error": 0.1260687030460327,
+            "within_one_percent": false
+          },
+          {
+            "size": "n=5",
+            "distribution": "Cauchy",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.22466283918567678,
+            "minimum_mean_l2_error": 0.08881148712144805,
+            "within_one_percent": false
+          },
+          {
+            "size": "n=5",
+            "distribution": "Laplace",
+            "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+            "target_mean_l2_error": 0.3723307006838958,
+            "minimum_mean_l2_error": 0.12406881631579014,
+            "within_one_percent": false
+          },
+          {
+            "size": "n=5",
+            "distribution": "Triangular",
+            "paper_target": "QMC-latin/LOO/no-antithetic",
+            "target_mean_l2_error": 0.3226427541322164,
+            "minimum_mean_l2_error": 0.3226055440964972,
+            "within_one_percent": true
+          }
+        ]
+      }
+    },
+    "6": {
+      "verdict": "BLOCKED",
+      "reason": "No MNIST, Warcraft, rendering, or cryo-ET application was executable in the judged artifact."
+    }
+  },
+  "negative_control": {
+    "name": "Gaussian score applied to Laplace density",
+    "error": 0.05369396702682416,
+    "failed_as_intended": true
+  },
+  "section4_evidence": {
+    "summary": {
+      "estimated_useful_cores": 32,
+      "workers": 32,
+      "sorting_repeats": 24,
+      "path_repeats": 12,
+      "path_oracle_samples_per_distribution_and_size": 32768,
+      "cell_count": 447,
+      "expected_cell_count": 447,
+      "coverage_pass": true,
+      "sorting_oracle_checks_pass": true,
+      "path_oracle_checks_pass": false,
+      "path_checks_pass": true,
+      "negative_control_pass": true,
+      "claim4_verified": false,
+      "claim5_verified": false
+    },
+    "sorting_oracle_audit": [
+      {
+        "size": 3,
+        "distribution": "Gaussian",
+        "fd_step_disagreement": 2.4215180103333382e-09,
+        "row_sum_error": 2.220446049250313e-16,
+        "column_sum_error": 2.220446049250313e-16
+      },
+      {
+        "size": 3,
+        "distribution": "Logistic",
+        "fd_step_disagreement": 5.367311313657204e-10,
+        "row_sum_error": 3.9968028886505635e-15,
+        "column_sum_error": 5.995204332975845e-15
+      },
+      {
+        "size": 3,
+        "distribution": "Gumbel",
+        "fd_step_disagreement": 2.013698288297143e-09,
+        "row_sum_error": 2.1094237467877974e-15,
+        "column_sum_error": 5.773159728050814e-15
+      },
+      {
+        "size": 3,
+        "distribution": "Cauchy",
+        "fd_step_disagreement": 1.015995425810952e-09,
+        "row_sum_error": 0.0,
+        "column_sum_error": 2.220446049250313e-16
+      },
+      {
+        "size": 3,
+        "distribution": "Laplace",
+        "fd_step_disagreement": 1.9795464509250604e-09,
+        "row_sum_error": 6.661338147750939e-16,
+        "column_sum_error": 8.881784197001252e-16
+      },
+      {
+        "size": 3,
+        "distribution": "Triangular",
+        "fd_step_disagreement": 2.078904298509503e-08,
+        "row_sum_error": 1.1102230246251565e-16,
+        "column_sum_error": 1.1102230246251565e-16
+      },
+      {
+        "size": 5,
+        "distribution": "Gaussian",
+        "fd_step_disagreement": 3.693283840459133e-09,
+        "row_sum_error": 2.220446049250313e-16,
+        "column_sum_error": 8.881784197001252e-16
+      },
+      {
+        "size": 5,
+        "distribution": "Logistic",
+        "fd_step_disagreement": 8.734629608114943e-10,
+        "row_sum_error": 6.661338147750939e-16,
+        "column_sum_error": 6.661338147750939e-16
+      },
+      {
+        "size": 5,
+        "distribution": "Gumbel",
+        "fd_step_disagreement": 3.3959537935656933e-09,
+        "row_sum_error": 6.661338147750939e-15,
+        "column_sum_error": 8.43769498715119e-15
+      },
+      {
+        "size": 5,
+        "distribution": "Cauchy",
+        "fd_step_disagreement": 1.6305607661125594e-09,
+        "row_sum_error": 0.0,
+        "column_sum_error": 0.0
+      },
+      {
+        "size": 5,
+        "distribution": "Laplace",
+        "fd_step_disagreement": 3.6919618213826824e-09,
+        "row_sum_error": 1.1102230246251565e-15,
+        "column_sum_error": 7.993605777301127e-15
+      },
+      {
+        "size": 5,
+        "distribution": "Triangular",
+        "fd_step_disagreement": 4.0761545326973e-08,
+        "row_sum_error": 1.1102230246251565e-16,
+        "column_sum_error": 0.0
+      }
+    ],
+    "path_oracle_audit": [
+      {
+        "size": "8x8",
+        "distribution": "Gaussian",
+        "samples": 32768,
+        "half_disagreement_l2": 0.006411040325088012,
+        "oracle_l2": 0.007600162896411585,
+        "relative_half_disagreement": 0.8435398572989774
+      },
+      {
+        "size": "8x8",
+        "distribution": "Logistic",
+        "samples": 32768,
+        "half_disagreement_l2": 0.1313996929593403,
+        "oracle_l2": 0.48046557621769453,
+        "relative_half_disagreement": 0.273484094310649
+      },
+      {
+        "size": "8x8",
+        "distribution": "Gumbel",
+        "samples": 32768,
+        "half_disagreement_l2": 0.07874428911768243,
+        "oracle_l2": 0.10190404452918846,
+        "relative_half_disagreement": 0.7727297722233943
+      },
+      {
+        "size": "8x8",
+        "distribution": "Cauchy",
+        "samples": 32768,
+        "half_disagreement_l2": 0.7770532605317909,
+        "oracle_l2": 3.893282934479435,
+        "relative_half_disagreement": 0.1995881813905954
+      },
+      {
+        "size": "8x8",
+        "distribution": "Laplace",
+        "samples": 32768,
+        "half_disagreement_l2": 0.08341074368094,
+        "oracle_l2": 0.11479153646379807,
+        "relative_half_disagreement": 0.7266279923628806
+      },
+      {
+        "size": "8x8",
+        "distribution": "Triangular",
+        "samples": 32768,
+        "half_disagreement_l2": 40.324051055808276,
+        "oracle_l2": 40.1893431926638,
+        "relative_half_disagreement": 1.0033518304217788
+      },
+      {
+        "size": "12x12",
+        "distribution": "Gaussian",
+        "samples": 32768,
+        "half_disagreement_l2": 0.01109677412648336,
+        "oracle_l2": 0.012030031063671396,
+        "relative_half_disagreement": 0.9224227325558361
+      },
+      {
+        "size": "12x12",
+        "distribution": "Logistic",
+        "samples": 32768,
+        "half_disagreement_l2": 0.3725070993545181,
+        "oracle_l2": 1.2709967225046161,
+        "relative_half_disagreement": 0.2930826592695365
+      },
+      {
+        "size": "12x12",
+        "distribution": "Gumbel",
+        "samples": 32768,
+        "half_disagreement_l2": 0.17019642637114513,
+        "oracle_l2": 0.19897533820661512,
+        "relative_half_disagreement": 0.8553644281001995
+      },
+      {
+        "size": "12x12",
+        "distribution": "Cauchy",
+        "samples": 32768,
+        "half_disagreement_l2": 1.5795197166132495,
+        "oracle_l2": 6.041045990490678,
+        "relative_half_disagreement": 0.2614646071391611
+      },
+      {
+        "size": "12x12",
+        "distribution": "Laplace",
+        "samples": 32768,
+        "half_disagreement_l2": 0.24014987855201714,
+        "oracle_l2": 0.36591581532822287,
+        "relative_half_disagreement": 0.6562981661139874
+      },
+      {
+        "size": "12x12",
+        "distribution": "Triangular",
+        "samples": 32768,
+        "half_disagreement_l2": 8.337514484606373,
+        "oracle_l2": 7.665368036761289,
+        "relative_half_disagreement": 1.0876861286531356
+      }
+    ],
+    "path_checks": [
+      {
+        "size": "8x8",
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      },
+      {
+        "size": "12x12",
+        "paths_checked": 16,
+        "all_binary": true,
+        "all_connected_8_neighborhood": true
+      }
+    ],
+    "negative_control": {
+      "name": "Gaussian score substituted for the Laplace score",
+      "correct_error": 0.4840051171033477,
+      "wrong_error": 1.1322902095042087,
+      "wrong_over_correct": 2.339417848060551
+    },
+    "ranking_contract": {
+      "verified": false,
+      "criterion": "paper target within 1% of cell minimum",
+      "cases": [
+        {
+          "size": "n=3",
+          "distribution": "Gaussian",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.13918929983037673,
+          "minimum_mean_l2_error": 0.05766533495978763,
+          "within_one_percent": false
+        },
+        {
+          "size": "n=3",
+          "distribution": "Logistic",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.06055573423784203,
+          "minimum_mean_l2_error": 0.02976389588955683,
+          "within_one_percent": false
+        },
+        {
+          "size": "n=3",
+          "distribution": "Gumbel",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.1509133733696759,
+          "minimum_mean_l2_error": 0.05497138392811016,
+          "within_one_percent": false
+        },
+        {
+          "size": "n=3",
+          "distribution": "Cauchy",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.05364481695836216,
+          "minimum_mean_l2_error": 0.04501850241197625,
+          "within_one_percent": false
+        },
+        {
+          "size": "n=3",
+          "distribution": "Laplace",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.06686580157191709,
+          "minimum_mean_l2_error": 0.06302780336263979,
+          "within_one_percent": false
+        },
+        {
+          "size": "n=3",
+          "distribution": "Triangular",
+          "paper_target": "QMC-latin/LOO/no-antithetic",
+          "target_mean_l2_error": 0.15043682707278946,
+          "minimum_mean_l2_error": 0.15043682707278946,
+          "within_one_percent": true
+        },
+        {
+          "size": "n=5",
+          "distribution": "Gaussian",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.5521358659448748,
+          "minimum_mean_l2_error": 0.1227692633004945,
+          "within_one_percent": false
+        },
+        {
+          "size": "n=5",
+          "distribution": "Logistic",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.2869151351425875,
+          "minimum_mean_l2_error": 0.07208474228557084,
+          "within_one_percent": false
+        },
+        {
+          "size": "n=5",
+          "distribution": "Gumbel",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.5687539267827326,
+          "minimum_mean_l2_error": 0.1260687030460327,
+          "within_one_percent": false
+        },
+        {
+          "size": "n=5",
+          "distribution": "Cauchy",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.22466283918567678,
+          "minimum_mean_l2_error": 0.08881148712144805,
+          "within_one_percent": false
+        },
+        {
+          "size": "n=5",
+          "distribution": "Laplace",
+          "paper_target": "RQMC-cartesian/LOO/no-antithetic",
+          "target_mean_l2_error": 0.3723307006838958,
+          "minimum_mean_l2_error": 0.12406881631579014,
+          "within_one_percent": false
+        },
+        {
+          "size": "n=5",
+          "distribution": "Triangular",
+          "paper_target": "QMC-latin/LOO/no-antithetic",
+          "target_mean_l2_error": 0.3226427541322164,
+          "minimum_mean_l2_error": 0.3226055440964972,
+          "within_one_percent": true
+        }
+      ]
+    }
+  },
+  "checks": {
+    "claim_1": true,
+    "claim_2": true,
+    "claim_3": true,
+    "claim_4_historical_proxy": true,
+    "claim_4_faithful_benchmark": false,
+    "claim_5_ranking": false
+  },
+  "all_regressions_passed": false
+}

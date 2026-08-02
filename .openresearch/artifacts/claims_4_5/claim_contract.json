@@ -17,7 +17,9 @@
     "all_metrics_finite": true,
     "sorting_oracle_bistochastic_error_below": 2e-7,
     "sorting_oracle_fd_step_disagreement_below": 5e-4,
-    "path_oracle_relative_half_disagreement_below": 0.5,
+    "path_oracle_independent_blocks": 4,
+    "path_oracle_total_samples_per_distribution_and_size": 262144,
+    "path_oracle_95pct_uncertainty_below_fraction_of_minimum_estimator_error": 0.2,
     "wrong_score_error_ratio_above": 1.25,
     "claim_5_target_within_fraction_of_cell_minimum": 1.01
   }

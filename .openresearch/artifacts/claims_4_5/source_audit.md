@@ -6,6 +6,7 @@
 - Figure 2 uses sorting sizes `n=3,5`; Figure 3 uses `8x8,12x12` path maps.
 - Both figures use 1,024 samples, except Cartesian sorting at `n=3`, which uses `10^3=1,000`.
 - The three axes are sampling strategy, covariate, and antithetic pairing. Tables 2–3 enumerate up to 24 feasible combinations per setting.
+- Section 3 defines Cartesian RQMC by subdividing the unit hypercube into cells and independently sampling a point from each cell, rather than jittering a tensor product of one point per axis.
 - The prose conclusion selects Cartesian RQMC + LOO + no antithetic whenever Cartesian sampling is feasible. The immediately preceding paragraph explicitly identifies triangular noise as an exception, selecting Latin QMC because boundary scores dominate.
 
 The paper does not disclose the exact cost maps, sorting input vectors, repeat count, or implementation code. This reconstruction therefore cannot use absolute table values as an acceptance criterion; it tests the complete disclosed domain and the disclosed ranking pattern.
