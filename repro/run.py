@@ -31,6 +31,7 @@ def main():
         "claim_4_baseline_scope": variance_proxy["combination_count"] == 108
         and variance_proxy["all_finite"],
     }
+    checks = {name: bool(passed) for name, passed in checks.items()}
     elapsed = time.perf_counter() - started
     result = {
         "paper": "arXiv:2410.08125",
