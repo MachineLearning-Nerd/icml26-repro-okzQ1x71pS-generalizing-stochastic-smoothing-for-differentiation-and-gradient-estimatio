@@ -48,7 +48,7 @@ def _sha256(path):
 
 
 def _digit_pools(targets):
-    return [torch.flatnonzero(targets == digit) for digit in range(10)]
+    return [torch.nonzero(targets == digit, as_tuple=False).flatten() for digit in range(10)]
 
 
 def _multi_mnist_batch(images, pools, generator):
@@ -65,7 +65,7 @@ def _multi_mnist_batch(images, pools, generator):
     )
     for column, labels in enumerate(digit_columns):
         for digit, pool in enumerate(pools):
-            positions = torch.flatnonzero(labels == digit)
+            positions = torch.nonzero(labels == digit, as_tuple=False).flatten()
             if len(positions) == 0:
                 continue
             offsets = torch.randint(len(pool), (len(positions),), generator=generator)
