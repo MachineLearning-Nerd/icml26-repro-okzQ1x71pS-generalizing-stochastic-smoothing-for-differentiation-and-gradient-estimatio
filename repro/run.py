@@ -10,6 +10,7 @@ import sys
 import time
 from pathlib import Path
 
+from .mnist_application import run_mnist_calibration
 from .numerics import baseline_variance_proxy, lemma3_check, theorem7_check, theorem8_check
 from .section4 import run_section4
 
@@ -28,6 +29,7 @@ def main():
     variance_proxy = baseline_variance_proxy()
     section4 = run_section4()
     section4_rows = section4.pop("rows")
+    mnist = run_mnist_calibration()
 
     csv_buffer = io.StringIO()
     writer = csv.DictWriter(csv_buffer, fieldnames=list(section4_rows[0]))
@@ -49,6 +51,20 @@ def main():
         "passed": False,
         "stderr": checker.stderr,
     }
+    mnist_directory = Path(".openresearch/artifacts/claim_6/mnist_calibration")
+    mnist_directory.mkdir(parents=True, exist_ok=True)
+    mnist_result_path = mnist_directory / "result.json"
+    mnist_result_path.write_text(json.dumps(mnist, indent=2) + "\n")
+    mnist_checker = subprocess.run(
+        [sys.executable, "-m", "repro.check_mnist", str(mnist_result_path)],
+        capture_output=True,
+        text=True,
+    )
+    mnist_checker_output = (
+        json.loads(mnist_checker.stdout)
+        if mnist_checker.stdout.strip()
+        else {"passed": False, "stderr": mnist_checker.stderr}
+    )
 
     checks = {
         "claim_1": max(claim1["laplace_error"], claim1["triangular_error"]) < 1e-8
@@ -60,6 +76,7 @@ def main():
         "claim_4_faithful_benchmark": section4["summary"]["claim4_verified"],
         "claim_5_ranking": section4["summary"]["claim5_verified"],
         "section4_independent_checker": checker.returncode == 0,
+        "mnist_calibration_independent_checker": mnist_checker.returncode == 0,
     }
     checks = {name: bool(passed) for name, passed in checks.items()}
     elapsed = time.perf_counter() - started
@@ -91,7 +108,8 @@ def main():
             },
             "6": {
                 "verdict": "BLOCKED",
-                "reason": "No MNIST, Warcraft, rendering, or cryo-ET application was executable in the judged artifact.",
+                "reason": "The exact-protocol MNIST throughput route is a calibration, not the disclosed 100,000-step x 12-seed application run; the other three applications remain unexecuted.",
+                "mnist_calibration": mnist,
             },
         },
         "negative_control": {
@@ -101,6 +119,7 @@ def main():
         },
         "section4_evidence": section4,
         "section4_independent_checker": checker_output,
+        "mnist_independent_checker": mnist_checker_output,
         "checks": checks,
         "all_regressions_passed": all(checks.values()),
     }
@@ -114,6 +133,12 @@ def main():
     print("=== INDEPENDENT_CHECKER ===")
     print(json.dumps(checker_output, indent=2))
     print("=== END_INDEPENDENT_CHECKER ===")
+    print("=== MNIST_CALIBRATION ===")
+    print(json.dumps(mnist, indent=2))
+    print("=== END_MNIST_CALIBRATION ===")
+    print("=== MNIST_INDEPENDENT_CHECKER ===")
+    print(json.dumps(mnist_checker_output, indent=2))
+    print("=== END_MNIST_INDEPENDENT_CHECKER ===")
     print("=== RAW_SECTION4_CSV ===")
     print(raw_csv, end="")
     print("=== END_RAW_SECTION4_CSV ===")

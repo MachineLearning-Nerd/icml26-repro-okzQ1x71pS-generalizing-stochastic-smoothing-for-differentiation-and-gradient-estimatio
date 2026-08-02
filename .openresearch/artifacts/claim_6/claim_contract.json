@@ -1,0 +1,7 @@
+{
+  "claim": "Sections 4.2-4.5 demonstrate generalized stochastic smoothing on n=5 four-digit MNIST sorting, Warcraft shortest-path prediction, Utah-teapot pose recovery, and TEM simulation optimization.",
+  "source_anchors": ["Section 4.2", "Section 4.3", "Section 4.4", "Section 4.5", "Appendix: Experimental Details"],
+  "quantifier": "all four named application demonstrations",
+  "acceptance": "VERIFIED only if every named application is executed at the disclosed scale with its stated data, model or simulator, optimization protocol, seeds, metrics, controls, and independent checks; otherwise BLOCKED unless a valid assumption-satisfying counterexample falsifies the exact claim",
+  "current_verdict": "BLOCKED"
+}
