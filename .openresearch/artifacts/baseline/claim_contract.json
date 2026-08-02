@@ -1,0 +1,20 @@
+{
+  "paper": "arXiv:2410.08125",
+  "source_sha256": "053740ba5182819585699124d6672d9772e91b5d080cb3b047d74f7dd54dc8fd",
+  "claim": "Lemma 3: if mu is absolutely continuous and the stated integrability conditions hold, the smoothed function is differentiable everywhere and its gradient equals the score expectation outside the zero-measure nondifferentiability set.",
+  "assumptions": [
+    "f and its score-weighted convolution are finite as characterized in the paper appendix",
+    "mu is an absolutely continuous probability density",
+    "the undefined-gradient set Omega has measure zero"
+  ],
+  "numerical_domain": {
+    "function": "f(x)=abs(x)",
+    "x": 0.37,
+    "densities": ["unit-scale Laplace", "unit-scale symmetric triangular"]
+  },
+  "acceptance": {
+    "maximum_identity_error": 1e-8,
+    "minimum_wrong_score_error": 0.04
+  },
+  "verdict_semantics": "The numerical check is a cumulative regression for the already judged VERIFIED claim; the paper's symbolic proof and assumptions remain part of the contract."
+}
