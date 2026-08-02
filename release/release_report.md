@@ -23,7 +23,8 @@ Current total score: `8/12`. Conservative projected total: `8–10/12`. Best-sup
 - Judge Head: `a1e96bb5ea2a3bc5106352c8ac10194358c04c57`
 - Winning scientific branch/SHA: `orx/tem-primary-source-falsification-and-cumulative` / `75d1f2c6c76c2c642ba59319a097a79a4f5e504d`
 - Passing evaluator candidate branch/SHA: `orx/repair-publication-gate-and-red-team-candidate` / `f2a974d677660fa7168072c3c710ccf15bdc9efa`
-- Final release input: `orx/final-evaluator-blind-release-regression` at its published branch tip
+- Final warning-gate input: `orx/final-evaluator-blind-release-regression` / `bf2249b2c963820f1989bf572efe5f4399450f22`
+- Final release input: `orx/canonical-warning-free-marimo-release-regression` at its published branch tip
 
 ## Experiment tree and compute
 
@@ -33,7 +34,7 @@ The tree descends from the fixed baseline through a small Section 4 bush, promot
 uv sync --frozen --no-dev && .venv/bin/python -m repro.run
 ```
 
-All 18 completed campaign jobs used HF `cpu-upgrade`; no GPU was requested. Through the passing evaluator candidate they consumed 40,512 job-seconds (11.253h), an estimated `$0.3376` at `$0.03/hour`. The final regression is reported separately after it terminates. The scientific winner used 2,287.088s (`$0.01906`); the passing publication-gate run used 2,611.389s (`$0.02176`) and 44m16s job time. Both recorded 8 declared/cgroup vCPUs, worker limit 8, and no GPU.
+All 19 completed campaign jobs used HF `cpu-upgrade`; no GPU was requested. Through the frozen warning-gate run they consumed 42,681 job-seconds (11.856h), an estimated `$0.3557` at `$0.03/hour`. The canonical-format repair regression is reported separately after it terminates. The scientific winner used 2,287.088s (`$0.01906`); the passing publication-gate run used 2,611.389s (`$0.02176`) and 44m16s job time. Both recorded 8 declared/cgroup vCPUs, worker limit 8, and no GPU.
 
 Key run ledger (all invoked with the exact fixed command above):
 
@@ -49,6 +50,7 @@ Key run ledger (all invoked with the exact fixed command above):
 | `cbb3de08` | done | TEM falsification plus scientific cumulative winner | 39m00s |
 | `aa51605b` | failed | first evaluator product; packaging gate caught defects | 35m37s |
 | `174c64f5` | done | repaired evaluator product and release gate | 44m16s |
+| `d0be3d7e` | failed | all science/release checks passed; strict gate caught four Marimo warnings | 36m09s |
 
 The complete run ledger remains in OpenResearch. Failed runs are retained as lineage evidence and are never presented as current verification.
 
@@ -60,7 +62,7 @@ The complete run ledger remains in OpenResearch. Failed runs are retained as lin
 - Durable contracts and limitations: `.openresearch/artifacts/`
 - Visual report and six figures: `reports/full-reproduction/`
 - Tutorial notebook: `notebooks/reproduction.py`
-- Evaluator traversal: `release/red_team_1.md`, `release/red_team_2.md`
+- Evaluator traversals: `release/red_team_1.md`, `release/red_team_2.md`, `release/red_team_3.md`
 - Visibility matrix: `release/visibility_matrix.md`
 - Historical subset proof: `release/subset_check.json`
 - Exact text operations: `release/upload_allowlist.txt`
@@ -78,4 +80,4 @@ Startup and orchestration commands used: `orx skill`, the four named `orx skill 
 orx exp run <experiment-id> --flavor cpu-upgrade --timeout 14400 --image ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 ```
 
-Exact publication action after the final regression passes: submit only the 92 newline-delimited paths in `release/upload_allowlist.txt` as text additions/updates in one Hugging Face `create_commit` API call to the existing Space `DineshAI/okzQ1x71pS`; do not delete any path and do not create another Space. Then download that exact revision, verify hashes/traversal, mark awaiting judge, and fast-forward the same text commit lineage to GitHub `main`.
+Exact publication action after the final regression passes: submit only the 93 newline-delimited paths in `release/upload_allowlist.txt` as text additions/updates in one Hugging Face `create_commit` API call to the existing Space `DineshAI/okzQ1x71pS`; do not delete any path and do not create another Space. Then download that exact revision, verify hashes/traversal, mark awaiting judge, and fast-forward the same text commit lineage to GitHub `main`.

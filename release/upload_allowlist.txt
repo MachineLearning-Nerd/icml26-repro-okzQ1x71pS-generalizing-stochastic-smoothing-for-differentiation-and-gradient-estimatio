@@ -62,6 +62,7 @@ pages/index.md
 pyproject.toml
 release/red_team_1.md
 release/red_team_2.md
+release/red_team_3.md
 release/release_report.md
 release/subset_check.json
 release/upload_allowlist.txt

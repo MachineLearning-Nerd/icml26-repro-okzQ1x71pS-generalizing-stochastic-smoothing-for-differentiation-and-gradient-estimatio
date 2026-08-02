@@ -91,7 +91,7 @@ def main():
 
     allowlist_path = ROOT / "release" / "upload_allowlist.txt"
     allowlist = allowlist_path.read_text().splitlines()
-    checks["exact_upload_allowlist_has_92_paths"] = len(allowlist) == 92 and len(set(allowlist)) == 92
+    checks["exact_upload_allowlist_has_93_paths"] = len(allowlist) == 93 and len(set(allowlist)) == 93
     checks["all_allowlist_paths_exist"] = all((ROOT / path).is_file() for path in allowlist)
     checks["allowlist_is_text_only"] = all(
         (ROOT / path).suffix.lower() in {".csv", ".json", ".lock", ".md", ".py", ".sha256", ".svg", ".toml", ".txt"}

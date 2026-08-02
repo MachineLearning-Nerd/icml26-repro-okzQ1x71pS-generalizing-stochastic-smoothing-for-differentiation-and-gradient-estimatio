@@ -12,8 +12,7 @@ def _():
 
 @app.cell
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
 # Generalized stochastic smoothing: evidence first
 
 ![Five claims verified and one blocked](https://huggingface.co/spaces/DineshAI/okzQ1x71pS/resolve/main/reports/full-reproduction/images/headline.svg)
@@ -34,8 +33,7 @@ required to read it.
 
 Previous live judged score: **8/12**. The **8–10/12** projected range and
 **10/12 best-supported possibility are forecasts**, not a new judge result.
-"""
-    )
+""")
     return
 
 
@@ -53,8 +51,7 @@ def _():
 
 @app.cell
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
 ## What is stochastic smoothing?
 
 A discontinuous or combinatorial function can be replaced by its expectation
@@ -66,8 +63,7 @@ differentiable everywhere, including Laplace and triangular densities.
 The reproduction reconstructs the identities independently with quadrature and
 finite differences. A deliberately wrong Gaussian score applied to the Laplace
 density produces a large error, showing that the verifier is not vacuous.
-"""
-    )
+""")
     return
 
 
@@ -92,8 +88,7 @@ def _(mo, results):
 
 @app.cell
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
 ## The full estimator benchmark
 
 The historical judged artifact used a one-dimensional proxy. The current run
@@ -106,15 +101,13 @@ cases; the documented triangular feasibility exception uses Latin RQMC.
 
 [Download the 447-row raw CSV](https://huggingface.co/spaces/DineshAI/okzQ1x71pS/resolve/main/evidence/run_cbb3de08/section4_raw.csv)
 or read the [independent checker output](https://huggingface.co/spaces/DineshAI/okzQ1x71pS/resolve/main/evidence/run_cbb3de08/section4_checker.json).
-"""
-    )
+""")
     return
 
 
 @app.cell
 def _(mo):
-    mo.md(
-        r"""
+    mo.md(r"""
 ## Why the applications remain blocked
 
 MNIST and Warcraft match the disclosed data and model ingredients, but the
@@ -127,8 +120,7 @@ unavailable; no assumption-satisfying counterexample was found.
 That distinction matters: partial evidence is useful for estimating feasibility,
 but it is not silently upgraded into verification. The complete four-route audit is
 on the [canonical Claim 6 page](https://huggingface.co/spaces/DineshAI/okzQ1x71pS/blob/main/pages/current/claim-6.md).
-"""
-    )
+""")
     return
 
 
