@@ -13,6 +13,7 @@ from pathlib import Path
 from .mnist_application import run_mnist_calibration
 from .numerics import baseline_variance_proxy, lemma3_check, theorem7_check, theorem8_check
 from .section4 import run_section4
+from .warcraft_application import run_warcraft_calibration
 
 
 def git_sha():
@@ -30,6 +31,7 @@ def main():
     section4 = run_section4()
     section4_rows = section4.pop("rows")
     mnist = run_mnist_calibration()
+    warcraft = run_warcraft_calibration()
 
     csv_buffer = io.StringIO()
     writer = csv.DictWriter(csv_buffer, fieldnames=list(section4_rows[0]))
@@ -65,6 +67,20 @@ def main():
         if mnist_checker.stdout.strip()
         else {"passed": False, "stderr": mnist_checker.stderr}
     )
+    warcraft_directory = Path(".openresearch/artifacts/claim_6/warcraft_calibration")
+    warcraft_directory.mkdir(parents=True, exist_ok=True)
+    warcraft_result_path = warcraft_directory / "result.json"
+    warcraft_result_path.write_text(json.dumps(warcraft, indent=2) + "\n")
+    warcraft_checker = subprocess.run(
+        [sys.executable, "-m", "repro.check_warcraft", str(warcraft_result_path)],
+        capture_output=True,
+        text=True,
+    )
+    warcraft_checker_output = (
+        json.loads(warcraft_checker.stdout)
+        if warcraft_checker.stdout.strip()
+        else {"passed": False, "stderr": warcraft_checker.stderr}
+    )
 
     checks = {
         "claim_1": max(claim1["laplace_error"], claim1["triangular_error"]) < 1e-8
@@ -77,6 +93,7 @@ def main():
         "claim_5_ranking": section4["summary"]["claim5_verified"],
         "section4_independent_checker": checker.returncode == 0,
         "mnist_calibration_independent_checker": mnist_checker.returncode == 0,
+        "warcraft_calibration_independent_checker": warcraft_checker.returncode == 0,
     }
     checks = {name: bool(passed) for name, passed in checks.items()}
     elapsed = time.perf_counter() - started
@@ -108,8 +125,9 @@ def main():
             },
             "6": {
                 "verdict": "BLOCKED",
-                "reason": "The exact-protocol MNIST throughput route is a calibration, not the disclosed 100,000-step x 12-seed application run; the other three applications remain unexecuted.",
+                "reason": "The exact-protocol MNIST and official-data Warcraft routes are bounded calibrations, not their disclosed full multi-seed runs; rendering and TEM remain unexecuted.",
                 "mnist_calibration": mnist,
+                "warcraft_calibration": warcraft,
             },
         },
         "negative_control": {
@@ -120,6 +138,7 @@ def main():
         "section4_evidence": section4,
         "section4_independent_checker": checker_output,
         "mnist_independent_checker": mnist_checker_output,
+        "warcraft_independent_checker": warcraft_checker_output,
         "checks": checks,
         "all_regressions_passed": all(checks.values()),
     }
@@ -139,6 +158,12 @@ def main():
     print("=== MNIST_INDEPENDENT_CHECKER ===")
     print(json.dumps(mnist_checker_output, indent=2))
     print("=== END_MNIST_INDEPENDENT_CHECKER ===")
+    print("=== WARCRAFT_CALIBRATION ===")
+    print(json.dumps(warcraft, indent=2))
+    print("=== END_WARCRAFT_CALIBRATION ===")
+    print("=== WARCRAFT_INDEPENDENT_CHECKER ===")
+    print(json.dumps(warcraft_checker_output, indent=2))
+    print("=== END_WARCRAFT_INDEPENDENT_CHECKER ===")
     print("=== RAW_SECTION4_CSV ===")
     print(raw_csv, end="")
     print("=== END_RAW_SECTION4_CSV ===")
