@@ -1,0 +1,16 @@
+[local file] bytes 0–219488 of 219488
+{
+  "checks": {
+    "exact_paper_scale_recorded": true,
+    "exact_optimizer_recorded": true,
+    "exact_pose_domain_recorded": true,
+    "pinned_primary_source": true,
+    "source_capability_audited": true,
+    "source_is_not_exact_paper_implementation": true,
+    "cpu_build_fails_for_cuda_reason": true,
+    "negative_control_fails_as_intended": true,
+    "cpu_allocation_recorded": true,
+    "honest_blocked_verdict": true
+  },
+  "passed": true
+}

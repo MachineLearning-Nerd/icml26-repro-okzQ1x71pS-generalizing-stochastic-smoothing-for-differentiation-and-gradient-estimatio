@@ -1,0 +1,17 @@
+{
+  "run_id": "cbb3de08-48e9-48a0-87c9-5ffb65d6e9cb",
+  "experiment_branch": "orx/tem-primary-source-falsification-and-cumulative",
+  "git_sha": "75d1f2c6c76c2c642ba59319a097a79a4f5e504d",
+  "fixed_command": "uv sync --frozen --no-dev && .venv/bin/python -m repro.run",
+  "backend": "hf",
+  "flavor": "cpu-upgrade",
+  "estimated_required_cores": 32,
+  "selected_declared_vcpus": 8,
+  "actual_cgroup_vcpus": 8.0,
+  "worker_limit": 8,
+  "gpu_requested": false,
+  "job_runtime_seconds": 2340,
+  "scientific_runtime_seconds": 2287.0881601369474,
+  "declared_cost_usd_per_hour": 0.03,
+  "estimated_scientific_cost_usd": 0.019059068001141228
+}

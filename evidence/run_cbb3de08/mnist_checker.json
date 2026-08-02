@@ -1,0 +1,18 @@
+[local file] bytes 0–219488 of 219488
+{
+  "checks": {
+    "exact_disclosed_training_target_recorded": true,
+    "exact_batch_and_optimizer_recorded": true,
+    "exact_n5_four_digit_task": true,
+    "cited_cnn_shape": true,
+    "paper_256_sample_laplace_cell": true,
+    "measured_not_formula_derived": true,
+    "finite_throughput_projection": true,
+    "losses_finite": true,
+    "official_mnist_cardinality": true,
+    "raw_dataset_hashes_present": true,
+    "cpu_only": true,
+    "honest_blocked_verdict": true
+  },
+  "passed": true
+}

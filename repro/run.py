@@ -120,6 +120,22 @@ def main():
         if tem_checker.stdout.strip()
         else {"passed": False, "stderr": tem_checker.stderr}
     )
+    print("STAGE evaluator_visible_release", flush=True)
+    marimo_checker = subprocess.run(
+        [sys.executable, "-m", "marimo", "check", "notebooks/reproduction.py"],
+        capture_output=True,
+        text=True,
+    )
+    release_checker = subprocess.run(
+        [sys.executable, "-m", "repro.check_release"],
+        capture_output=True,
+        text=True,
+    )
+    release_checker_output = (
+        json.loads(release_checker.stdout)
+        if release_checker.stdout.strip()
+        else {"passed": False, "stderr": release_checker.stderr}
+    )
 
     checks = {
         "claim_1": max(claim1["laplace_error"], claim1["triangular_error"]) < 1e-8
@@ -135,6 +151,8 @@ def main():
         "warcraft_calibration_independent_checker": warcraft_checker.returncode == 0,
         "rendering_capability_independent_checker": rendering_checker.returncode == 0,
         "tem_falsification_independent_checker": tem_checker.returncode == 0,
+        "marimo_notebook_checker": marimo_checker.returncode == 0,
+        "evaluator_visible_release_checker": release_checker.returncode == 0,
     }
     checks = {name: bool(passed) for name, passed in checks.items()}
     elapsed = time.perf_counter() - started
@@ -183,6 +201,12 @@ def main():
         "warcraft_independent_checker": warcraft_checker_output,
         "rendering_independent_checker": rendering_checker_output,
         "tem_independent_checker": tem_checker_output,
+        "marimo_checker": {
+            "passed": marimo_checker.returncode == 0,
+            "stdout": marimo_checker.stdout,
+            "stderr": marimo_checker.stderr,
+        },
+        "release_checker": release_checker_output,
         "checks": checks,
         "all_regressions_passed": all(checks.values()),
     }
@@ -220,6 +244,12 @@ def main():
     print("=== TEM_INDEPENDENT_CHECKER ===")
     print(json.dumps(tem_checker_output, indent=2))
     print("=== END_TEM_INDEPENDENT_CHECKER ===")
+    print("=== MARIMO_CHECKER ===")
+    print(json.dumps(result["marimo_checker"], indent=2))
+    print("=== END_MARIMO_CHECKER ===")
+    print("=== RELEASE_CHECKER ===")
+    print(json.dumps(release_checker_output, indent=2))
+    print("=== END_RELEASE_CHECKER ===")
     print("=== RAW_SECTION4_CSV ===")
     print(raw_csv, end="")
     print("=== END_RAW_SECTION4_CSV ===")

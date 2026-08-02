@@ -1,0 +1,724 @@
+[local file] bytes 0–219488 of 219488
+{
+  "route": "mandatory fourth route dedicated to falsification via pinned TEM primary sources",
+  "exact_claim": "Section 4.5 reports that generalized stochastic smoothing was used to optimize TEM-simulator v1.3 micrograph parameters in disclosed two- and four-dimensional searches.",
+  "claim_logic": {
+    "quantifier": "existential historical empirical demonstration",
+    "domain": "the authors' exact TEM-simulator v1.3 input deck, TMV specimen asset, smoothing estimator, initializations, optimizer schedule, and stopping horizon",
+    "assumptions": [
+      "400x400 simulated micrographs",
+      "ground truth 300 kV acceleration voltage, 3 mm focal length, centered specimen",
+      "two-parameter voltage [0,1000] kV and x-position [-5,5] nm search",
+      "four-parameter voltage [0,600] kV, focal length [0,6] mm, x/y-position [-3,3] nm search",
+      "Adam betas (0.5,0.9)",
+      "20 random-search repetitions"
+    ],
+    "falsification_requirement": "authenticated evidence satisfying every stated assumption and showing that the reported demonstration did not occur or that its exact reported outcome is impossible"
+  },
+  "paper_protocol": {
+    "simulator": "TEM-simulator v1.3",
+    "image_shape": [
+      400,
+      400
+    ],
+    "ground_truth": {
+      "acceleration_voltage_kv": 300,
+      "focal_length_mm": 3,
+      "x_position_nm": 0,
+      "y_position_nm": 0
+    },
+    "two_parameter_domain": {
+      "acceleration_voltage_kv": [
+        0,
+        1000
+      ],
+      "x_position_nm": [
+        -5,
+        5
+      ]
+    },
+    "four_parameter_domain": {
+      "acceleration_voltage_kv": [
+        0,
+        600
+      ],
+      "focal_length_mm": [
+        0,
+        6
+      ],
+      "x_position_nm": [
+        -3,
+        3
+      ],
+      "y_position_nm": [
+        -3,
+        3
+      ]
+    },
+    "optimizer": "Adam",
+    "adam_betas": [
+      0.5,
+      0.9
+    ],
+    "random_search_repetitions": 20,
+    "paper_reported_single_sample_runtime_seconds_on_one_xeon_core": 67
+  },
+  "primary_source_audit": {
+    "TEM-simulator_1.3.zip": {
+      "published": {
+        "primary_url": "https://sourceforge.net/projects/tem-simulator/files/TEM-simulator_1.3.zip/download",
+        "mirror_url": "https://downloads.sourceforge.net/project/tem-simulator/TEM-simulator_1.3.zip",
+        "bytes": 425791,
+        "md5": "5c47d4946ecc222f27be7dce03e0228b"
+      },
+      "retrieved": "2026-08-02",
+      "attempts": [
+        {
+          "url": "https://sourceforge.net/projects/tem-simulator/files/TEM-simulator_1.3.zip/download",
+          "final_url": "https://master.dl.sourceforge.net/project/tem-simulator/TEM-simulator_1.3.zip?viasf=1&fid=2543efb92574b18d&e=1785785117&st=geoFHNerCjQEh8l3o0GKuw",
+          "bytes": 425791,
+          "md5": "5c47d4946ecc222f27be7dce03e0228b",
+          "sha256": "4cee7519ffc578afaf0830061bd243aa767d24c93b980e27aefd601f859e8fa0",
+          "identity_match": true
+        }
+      ],
+      "identity_verified": true,
+      "archive": {
+        "is_zip": true,
+        "all_paths_safe": true,
+        "member_count": 46,
+        "members": [
+          {
+            "name": "TEM-simulator_1.3/manual.pdf",
+            "bytes": 237638,
+            "crc32": "524dbd40",
+            "sha256": "afca31d6a971372a4a125c8755d00cd9881ebf6229c38fc36dc956f7304e0525",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/COPYING",
+            "bytes": 35145,
+            "crc32": "b3447a29",
+            "sha256": "8ff66dd3e82666481488eb17ffe8e4c8383a510fb1e057962522509f1b9ac02e",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/TEM-simulator.exe",
+            "bytes": 174592,
+            "crc32": "60e18f18",
+            "sha256": "ba48937da394a1c51b253b9889e2ad30b8d1d71c10962baeff47823e4c677e38",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/macros.h",
+            "bytes": 12696,
+            "crc32": "b197e8fb",
+            "sha256": "19260f4b58ab0e953f28e6719b84afdbb5c2c9a75313a4f3d43b211b4c89b5bb",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/geometry.c",
+            "bytes": 17600,
+            "crc32": "f9d0d369",
+            "sha256": "a82bb585d13a09ab47cb8d1e84b3295f18a0c01700ee26f76f7c5fbb3cbfa442",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/matrix.h",
+            "bytes": 2347,
+            "crc32": "8008c34e",
+            "sha256": "8eba9c7bc825466ca2df7d5c2f3ff91945791c1c2bd5da629b5e2d343d60647c",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/wavefunction.c",
+            "bytes": 20710,
+            "crc32": "3e6d3a80",
+            "sha256": "52d35d56fea2e6ab66e13d2f5a7b6902188f27f1b76b6a79cc350837f623dfef",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/optics.h",
+            "bytes": 5444,
+            "crc32": "2924397c",
+            "sha256": "ded6d22840043c50a3b594e440a3957233de127111adfc06187c61749037e8f2",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/functions.h",
+            "bytes": 2385,
+            "crc32": "4870d235",
+            "sha256": "4b7dd2a622dd6d5a2581384dcb8dc73a9ad59894bb326415ed1d1c021f735996",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/mrc.c",
+            "bytes": 18820,
+            "crc32": "42be670e",
+            "sha256": "dc50102dfb79fc45af1fe4e5d48a3a2a6366426aa1d15f73af6918c0e7f5c3a7",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/electronbeam.c",
+            "bytes": 14093,
+            "crc32": "86091519",
+            "sha256": "ce47fe2b33dab4252d2cfaf85132200924cfdbcf7e39fc2ff6ac1db95ee9e587",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/input.c",
+            "bytes": 26832,
+            "crc32": "9e2fb2a9",
+            "sha256": "b499e25721b536f8094ba90f9236b3342ad44fe5a45ddde07c8b0869095e3cef",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/mrc.h",
+            "bytes": 3028,
+            "crc32": "d57e3f69",
+            "sha256": "94a51e9408f2b35519772c17c4b36e962eb772f17f0bd4d71c6e50205bc42e08",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/electronbeam.h",
+            "bytes": 10599,
+            "crc32": "4f344657",
+            "sha256": "da15aee66b350c418389c873e47052777115eedeb4682459aea141234d53cf77",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/random.h",
+            "bytes": 1476,
+            "crc32": "64968e03",
+            "sha256": "afb1876a9a73977eeea666dbf6853050e9ac3eb2b3b00a8324156567e515a86a",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/optics.c",
+            "bytes": 10286,
+            "crc32": "5f5e3544",
+            "sha256": "4e2b14c739d9aea77a926ed313e5b1783ea53e52e4449994a8f22a3c920e458f",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/TEM-simulator.c",
+            "bytes": 5293,
+            "crc32": "31e12624",
+            "sha256": "fff2c9422f15844b433c9bfebabb5b30070531b246a8c07cfd48c8378337c379",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/matrix.c",
+            "bytes": 11369,
+            "crc32": "78d9c1b1",
+            "sha256": "3eac8aacd227201a036c58a75120e7560bebf9ade698150112a87b4e9a6779b7",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/particle.c",
+            "bytes": 29952,
+            "crc32": "18829aac",
+            "sha256": "e7b06896df723cde80545bfc245513e74aaeb82776775096b09810f715e003eb",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/detector.c",
+            "bytes": 18340,
+            "crc32": "1c035b1b",
+            "sha256": "f51641d3a3b7a8dc011fb86cfe4ff7fc5fda01d111bf36fa05a8d8dda65ec2f4",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/functions.c",
+            "bytes": 6571,
+            "crc32": "90bb0e0e",
+            "sha256": "cb6ac4a23d33c1073b074ccf822492b271d2ee3292936a3a0fd3615c6c0885ff",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/misc.c",
+            "bytes": 4651,
+            "crc32": "120a6842",
+            "sha256": "f9f678fb64fbd5c0999b4d20a378e39b1b5ce6b7cd423b642fd07c8904e54551",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/pdb.c",
+            "bytes": 34340,
+            "crc32": "71e885a4",
+            "sha256": "2464a293bef4b8e8d28f44cc83051b532c1f8428fad836ddd433c5769380c8e9",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/volume.c",
+            "bytes": 16629,
+            "crc32": "4ec48631",
+            "sha256": "13c4c35e117930ea49bce7be1840e17a7c42dbd358da05e349d2a7944a601259",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/detector.h",
+            "bytes": 6750,
+            "crc32": "8b0432fd",
+            "sha256": "6566179ac08a324f9a486bd0c2597db6774ef86d6cad01a8032be0708fbe77d5",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/simulation.h",
+            "bytes": 11945,
+            "crc32": "50bf2a3a",
+            "sha256": "098ebef6a10cc753eb60a71ea93188c60996f545c3ca23c0496ae00ea106b986",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/Makefile",
+            "bytes": 3892,
+            "crc32": "42237d95",
+            "sha256": "8c41d1b1d59a5a972cbbefc9d03cd5e05d1b1ac73a3bddbf70dab6507b0fa9d2",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/misc.h",
+            "bytes": 1592,
+            "crc32": "3a43a9c8",
+            "sha256": "e6f1e934d036482c0c1ea0ec13ee793d8e1e10ad5caaab0687ada016a47ed1d6",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/random.c",
+            "bytes": 5056,
+            "crc32": "c5e887b8",
+            "sha256": "8274ff22c896940485f329696cb6b050d318c758bae16bba2e887f65836f571b",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/geometry.h",
+            "bytes": 6041,
+            "crc32": "dd4f3450",
+            "sha256": "fb45479f3c0abd0b0b3849ca16e2e9f3fd93b06aeea0fa759d7416afed2907c5",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/log.h",
+            "bytes": 1167,
+            "crc32": "786aeca9",
+            "sha256": "acbd1794770da48c3773ffd3116fa66262c1970b0b4b1a9f7892a221dca964a7",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/particle.h",
+            "bytes": 4652,
+            "crc32": "dece5bf8",
+            "sha256": "22305cfdbe212787da1986bae6e1a8f3d4ad1412ee8cbd661eaf0edca5ffc5a7",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/particleset.h",
+            "bytes": 3614,
+            "crc32": "2e35b96d",
+            "sha256": "1e60698ab1aef7fb0be6af1d12d6c21251da549825cdb4c10a6ada2cde38bef4",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/simulation.c",
+            "bytes": 24631,
+            "crc32": "bdafc484",
+            "sha256": "3ddeb2791775b4f4a00a701d6ac28c64a1eef687cc505e962fa172e33571e70f",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/wavefunction.h",
+            "bytes": 1641,
+            "crc32": "8819e82f",
+            "sha256": "c78c7a28d9374239c1a5ab11e011653dc1c65d3bc6d2bdb6b2449793c0f6b9bc",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/particleset.c",
+            "bytes": 17711,
+            "crc32": "5743d894",
+            "sha256": "418a4864842c4297dfdbf23ba792da18a4d49a303d22de969e29c5784ee8b30c",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/input.h",
+            "bytes": 9024,
+            "crc32": "fd4f0fa5",
+            "sha256": "412f27fe505f8849649a41cd206a5c6b3c5a44ea2716ad2215bf9282d8c9659b",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/structs.h",
+            "bytes": 3197,
+            "crc32": "f844cc06",
+            "sha256": "e1f95a42c2953e8ef441c2b805227dce4f73adc8cd98390a09d50b0db4f4196b",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/volume.h",
+            "bytes": 3182,
+            "crc32": "13503c68",
+            "sha256": "bc9f0105c0db878200ead7f7461bd27fd5c27d0d9d8d0288f7184be9bdf9f297",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/sample.h",
+            "bytes": 3290,
+            "crc32": "489963a1",
+            "sha256": "3ee579a76effee4e3d7149e859d50e2901b974d355b04883c8c174d14c9aea33",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/array.h",
+            "bytes": 14901,
+            "crc32": "949f77e9",
+            "sha256": "b4761e4d5fb481d028e9db1a17c70a3ed386bf7a30a8c766000d2a6660e7f3ce",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/sample.c",
+            "bytes": 9956,
+            "crc32": "131f89f2",
+            "sha256": "e5b17bcc181ca8435eecd317568340c52b077734972209ad85e49674063ed680",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/log.c",
+            "bytes": 4485,
+            "crc32": "befdadb6",
+            "sha256": "c01f2141286a398f937d0995739d4c1c2d6a71a90875acd15845bce9a8c9ca2d",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/pdb.h",
+            "bytes": 1117,
+            "crc32": "f014061b",
+            "sha256": "b93845e2a8c78568d5019e4d5e94c2ff942b6c9cfd3b9e69787e0abba207081e",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/src/array.c",
+            "bytes": 14973,
+            "crc32": "cbacafed",
+            "sha256": "2f16617855788e84560cb6e0820d40fdbb22a244152213d3ff808c800eda696f",
+            "path_safe": true
+          },
+          {
+            "name": "TEM-simulator_1.3/INSTALLATION",
+            "bytes": 503,
+            "crc32": "ba299e1f",
+            "sha256": "3d94c64ebf3f368f1ff85bc5af7eb535a37d8524934e22e42a7496f539876d58",
+            "path_safe": true
+          }
+        ],
+        "elf_members": [],
+        "text_parameter_members": [
+          {
+            "name": "TEM-simulator_1.3/TEM-simulator.exe",
+            "tokens": [
+              "voltage",
+              "focal",
+              "micrograph",
+              "detector",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/macros.h",
+            "tokens": [
+              "voltage",
+              "focal",
+              "micrograph",
+              "detector",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/geometry.c",
+            "tokens": [
+              "micrograph",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/wavefunction.c",
+            "tokens": [
+              "focal",
+              "detector",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/optics.h",
+            "tokens": [
+              "focal",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/mrc.c",
+            "tokens": [
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/electronbeam.c",
+            "tokens": [
+              "voltage",
+              "micrograph",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/mrc.h",
+            "tokens": [
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/electronbeam.h",
+            "tokens": [
+              "voltage",
+              "detector"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/optics.c",
+            "tokens": [
+              "focal",
+              "micrograph",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/TEM-simulator.c",
+            "tokens": [
+              "detector",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/particle.c",
+            "tokens": [
+              "micrograph"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/detector.c",
+            "tokens": [
+              "detector",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/pdb.c",
+            "tokens": [
+              "voltage"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/volume.c",
+            "tokens": [
+              "voltage",
+              "micrograph",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/detector.h",
+            "tokens": [
+              "detector",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/simulation.h",
+            "tokens": [
+              "micrograph",
+              "detector"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/Makefile",
+            "tokens": [
+              "detector"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/geometry.h",
+            "tokens": [
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/simulation.c",
+            "tokens": [
+              "micrograph",
+              "detector",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/wavefunction.h",
+            "tokens": [
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/particleset.c",
+            "tokens": [
+              "micrograph"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/structs.h",
+            "tokens": [
+              "detector",
+              "tilt"
+            ]
+          },
+          {
+            "name": "TEM-simulator_1.3/src/sample.c",
+            "tokens": [
+              "micrograph",
+              "tilt"
+            ]
+          }
+        ]
+      }
+    },
+    "Simulation_example_TMV_v2.zip": {
+      "published": {
+        "primary_url": "https://sourceforge.net/projects/tem-simulator/files/Simulation_example_TMV_v2.zip/download",
+        "mirror_url": "https://downloads.sourceforge.net/project/tem-simulator/Simulation_example_TMV_v2.zip",
+        "bytes": 887170,
+        "md5": "a56518e96a88f922b0529a5e67a19ed3"
+      },
+      "retrieved": "2026-08-02",
+      "attempts": [
+        {
+          "url": "https://sourceforge.net/projects/tem-simulator/files/Simulation_example_TMV_v2.zip/download",
+          "final_url": "https://master.dl.sourceforge.net/project/tem-simulator/Simulation_example_TMV_v2.zip?viasf=1&fid=ca78df92fe7d8004&e=1785785118&st=Us2UkAcCD2F0tZ9TkKgFGg",
+          "bytes": 887170,
+          "md5": "a56518e96a88f922b0529a5e67a19ed3",
+          "sha256": "00e7cfd1e25c838a991c9550bd9a3a635c9f127f3ac1105058c6b73988fb208d",
+          "identity_match": true
+        }
+      ],
+      "identity_verified": true,
+      "archive": {
+        "is_zip": true,
+        "all_paths_safe": true,
+        "member_count": 6,
+        "members": [
+          {
+            "name": "Simulation_example_TMV_v2/TMV_coord.txt",
+            "bytes": 707,
+            "crc32": "f92b327d",
+            "sha256": "9ca84fbe23d7013cd4345aeb61c8f87f23fc3f1fb597c23c398a32b355d2e5f6",
+            "path_safe": true
+          },
+          {
+            "name": "Simulation_example_TMV_v2/expected_results.pdf",
+            "bytes": 769127,
+            "crc32": "eec00d25",
+            "sha256": "9996cf5876635331ec72332ca301030b9a9c5a8941b3399445144733e72b8687",
+            "path_safe": true
+          },
+          {
+            "name": "Simulation_example_TMV_v2/input.txt",
+            "bytes": 6996,
+            "crc32": "41a0bf8a",
+            "sha256": "a04db92216660616ed473afa1097155304a8d5e05311462f032084e6f82e6346",
+            "path_safe": true
+          },
+          {
+            "name": "Simulation_example_TMV_v2/README",
+            "bytes": 244,
+            "crc32": "c689999e",
+            "sha256": "b30a8974167c05331585c17db5d2cf45df55bfce8c7afc326b457bc7db597da7",
+            "path_safe": true
+          },
+          {
+            "name": "Simulation_example_TMV_v2/2OM3.pdb",
+            "bytes": 558981,
+            "crc32": "7e4c5ddd",
+            "sha256": "b7514a5ef772aef588c39c6b589dc73d8ca9c05b2d26193d64b58f28a484d6d1",
+            "path_safe": true
+          },
+          {
+            "name": "Simulation_example_TMV_v2/2OM3_transf.txt",
+            "bytes": 6887,
+            "crc32": "3ad59af1",
+            "sha256": "012ffda05be9f2c6eb70d221ad475ff4863e9c1830bb76b3859c57ce86dd4b60",
+            "path_safe": true
+          }
+        ],
+        "elf_members": [],
+        "text_parameter_members": [
+          {
+            "name": "Simulation_example_TMV_v2/input.txt",
+            "tokens": [
+              "voltage",
+              "focal",
+              "micrograph",
+              "detector",
+              "tilt"
+            ]
+          },
+          {
+            "name": "Simulation_example_TMV_v2/2OM3.pdb",
+            "tokens": [
+              "voltage",
+              "specimen",
+              "micrograph",
+              "detector",
+              "tilt"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "cpu_capability": {
+    "elf_candidate_count": 0,
+    "x86_64_candidate_count": 0,
+    "help_probes": [],
+    "exact_paper_deck_identified": false,
+    "exact_optimizer_code_identified": false,
+    "exact_demonstration_executed": false
+  },
+  "negative_control": {
+    "name": "flip one byte in the pinned simulator archive",
+    "corrupted_md5": "64aab07760d4569d02cfe439adfa2373",
+    "identity_verifier_rejected_corruption": true,
+    "failed_as_intended": true
+  },
+  "falsification": {
+    "counterexample_found": false,
+    "all_paper_assumptions_satisfied": false,
+    "routes_completed": [
+      "MNIST exact-protocol throughput calibration",
+      "Warcraft official-data exact-protocol throughput calibration",
+      "pinned GenDR CPU capability and protocol audit",
+      "pinned TEM primary-source falsification audit"
+    ],
+    "conclusion": "The public simulator and example archives can audit provenance and CPU capability, but absence of the authors' exact deck and optimizer implementation cannot contradict an existential historical demonstration."
+  },
+  "environment": {
+    "estimated_required_cores": 1,
+    "selected_flavor": "hf/cpu-upgrade",
+    "selected_flavor_declared_vcpus": 8,
+    "visible_logical_cpus": 64,
+    "affinity_logical_cpus": 64,
+    "cgroup_quota_vcpus": 8.0,
+    "worker_limit": 8,
+    "declared_cost_usd_per_hour": 0.03,
+    "hardware_source_url": "https://huggingface.co/docs/huggingface_hub/guides/jobs",
+    "hardware_source_retrieved": "2026-08-02",
+    "gpu_requested": false
+  },
+  "runtime_seconds": 3.279254131950438,
+  "verdict": "BLOCKED",
+  "reason": "No assumption-satisfying counterexample was established, and the undisclosed exact input deck, specimen mapping, learning rate, smoothing schedule, and optimization horizon prevent faithful execution."
+}

@@ -1,0 +1,204 @@
+[local file] bytes 0–219488 of 219488
+{
+  "route": "official-data exact-protocol CPU throughput calibration, not full training",
+  "paper_protocol": {
+    "dataset": "official Warcraft 12x12 split",
+    "epochs": 50,
+    "seeds": 5,
+    "batch_size": 70,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "scheduler_milestones_epochs": [
+      30,
+      40
+    ],
+    "scheduler_gamma": 0.1,
+    "model": "ResNet18 conv1/bn1/relu/maxpool/layer1, AdaptiveMaxPool2d(12,12), mean over 64 channels",
+    "model_source_commit": "027e82ee818530f2823851d6530e0d2c8657bbcb",
+    "distribution": "Logistic",
+    "samples": 100,
+    "sampling": "randomized Latin hypercube",
+    "covariate": "LOO",
+    "smoothing_target": "shortest-path algorithm",
+    "loss": "MSE against ground-truth hard path"
+  },
+  "reconstruction_choices": {
+    "gamma": 0.1,
+    "gamma_reason": "fixed disclosed Figure 7 sweep value; the paper does not identify a single selected gamma for Figure 6",
+    "cost_parameterization": "network output is log vertex cost and is exponentiated by the shortest-path oracle",
+    "noise_independence": "one independently randomized Latin design per batch item and step",
+    "scheduler_instantiated_but_not_advanced": 0
+  },
+  "calibration": {
+    "warmup_steps": 2,
+    "measured_steps": 20,
+    "measured_seconds": 23.44709363509901,
+    "seconds_per_step": 1.1723546817549504,
+    "steps_per_paper_epoch": 143,
+    "projected_single_seed_hours": 2.3284266595966376,
+    "projected_five_seed_serial_hours": 11.642133297983188,
+    "losses": [
+      0.08285531401634216,
+      0.07275325059890747,
+      0.06802745908498764,
+      0.0721411257982254,
+      0.06676332652568817,
+      0.07080452144145966,
+      0.06734919548034668,
+      0.06249305605888367,
+      0.059436339884996414,
+      0.05525725334882736,
+      0.06252962350845337,
+      0.058948785066604614,
+      0.05890214443206787,
+      0.05997835844755173,
+      0.05352960154414177,
+      0.054037630558013916,
+      0.04113267734646797,
+      0.03752830624580383,
+      0.0427711121737957,
+      0.04223703593015671
+    ],
+    "loss_first_five_mean": 0.07250809520483018,
+    "loss_last_five_mean": 0.04354135245084763,
+    "all_losses_finite": true,
+    "initial_full_test": {
+      "exact_match": 0.031,
+      "all_predictions_valid_paths": true,
+      "predicted_path_length_mean": 12.2
+    },
+    "final_full_test": {
+      "exact_match": 0.125,
+      "all_predictions_valid_paths": true,
+      "predicted_path_length_mean": 14.335
+    }
+  },
+  "data_audit": {
+    "source_url": "https://edmond.mpg.de/api/access/datafile/102059",
+    "dataset_doi": "10.17617/3.YJCQ5S",
+    "archive_bytes": 915169563,
+    "archive_md5": "acea5ea60a47664ff189923a84814e96",
+    "train_examples": 10000,
+    "test_examples": 1000,
+    "normalization_mean": [
+      61.479557037353516,
+      69.89927673339844,
+      30.895349502563477
+    ],
+    "normalization_std": [
+      40.66614532470703,
+      16.572311401367188,
+      40.823368072509766
+    ],
+    "members": {
+      "train_maps.npy": {
+        "member": "warcraft_shortest_path_oneskin/12x12/train_maps.npy",
+        "bytes": 276480128,
+        "sha256": "865aef23321a5ef545d8aabef728807acb45ed714ec891f40d8c6f7edf4d9747",
+        "shape": [
+          10000,
+          96,
+          96,
+          3
+        ],
+        "dtype": "uint8"
+      },
+      "train_vertex_weights.npy": {
+        "member": "warcraft_shortest_path_oneskin/12x12/train_vertex_weights.npy",
+        "bytes": 2880128,
+        "sha256": "9f1a404bf1c0d5ccd7b35b840d1e9bb5d3106b85d8650f5b86e3cf0c33473c74",
+        "shape": [
+          10000,
+          12,
+          12
+        ],
+        "dtype": "float16"
+      },
+      "train_shortest_paths.npy": {
+        "member": "warcraft_shortest_path_oneskin/12x12/train_shortest_paths.npy",
+        "bytes": 1440128,
+        "sha256": "e7c90de089597406563eaca9ece2a8ae26233c8dd7489297562921929f25cb7e",
+        "shape": [
+          10000,
+          12,
+          12
+        ],
+        "dtype": "uint8"
+      },
+      "test_maps.npy": {
+        "member": "warcraft_shortest_path_oneskin/12x12/test_maps.npy",
+        "bytes": 27648128,
+        "sha256": "d49da77bcaed83b7edbad70e8ec90fa2b644aa1b45fbbc6df5667165f876e359",
+        "shape": [
+          1000,
+          96,
+          96,
+          3
+        ],
+        "dtype": "uint8"
+      },
+      "test_vertex_weights.npy": {
+        "member": "warcraft_shortest_path_oneskin/12x12/test_vertex_weights.npy",
+        "bytes": 288128,
+        "sha256": "91509402dbc46ac05176fe367b514fef623586351e38ce5e2a1354286f8bbfc0",
+        "shape": [
+          1000,
+          12,
+          12
+        ],
+        "dtype": "float16"
+      },
+      "test_shortest_paths.npy": {
+        "member": "warcraft_shortest_path_oneskin/12x12/test_shortest_paths.npy",
+        "bytes": 144128,
+        "sha256": "18444e24f671beeab6abd883bda71f308f90bd48a67a47126d0fabd0fe23e585",
+        "shape": [
+          1000,
+          12,
+          12
+        ],
+        "dtype": "uint8"
+      }
+    }
+  },
+  "oracle_audit": {
+    "examples": 64,
+    "official_label_exact_encoding_match": 0.953125,
+    "official_label_exact_stored_cost_match": 0.953125,
+    "official_label_quantization_compatible_cost_match": 1.0,
+    "official_labels_all_valid_paths": true,
+    "quantization_compatible_alternative_encoding_count": 3,
+    "maximum_absolute_cost_gap": 0.0009765625,
+    "minimum_quantization_uncertainty": 0.0078125,
+    "maximum_quantization_uncertainty": 0.0693359375,
+    "source_weight_dtype": "float16",
+    "all_oracle_paths_valid": true,
+    "negative_control": {
+      "name": "remove the required start cell from every official path label",
+      "exact_match": 0.0,
+      "valid_path_fraction": 0.0,
+      "failed_as_intended": true
+    }
+  },
+  "environment": {
+    "estimated_required_cores": 32,
+    "selected_flavor": "hf/cpu-upgrade",
+    "selected_flavor_declared_vcpus": 8,
+    "visible_logical_cpus": 64,
+    "affinity_logical_cpus": 64,
+    "cgroup_quota_vcpus": 8.0,
+    "worker_limit": 8,
+    "declared_cost_usd_per_hour": 0.03,
+    "hardware_source_url": "https://huggingface.co/docs/huggingface_hub/guides/jobs",
+    "hardware_source_retrieved": "2026-08-02",
+    "gpu_requested": false,
+    "torch_threads": 8,
+    "path_workers": 8
+  },
+  "seeds": {
+    "model": 24103025,
+    "data_and_noise": 31416
+  },
+  "verdict": "BLOCKED",
+  "reason": "The disclosed 50-epoch, five-seed protocol was calibrated but not run; this route cannot establish the complete four-application claim."
+}

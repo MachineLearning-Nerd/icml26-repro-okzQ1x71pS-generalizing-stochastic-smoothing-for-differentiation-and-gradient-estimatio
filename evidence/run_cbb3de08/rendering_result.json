@@ -1,0 +1,110 @@
+[local file] bytes 0–219488 of 219488
+{
+  "route": "pinned cited-source CPU capability and protocol audit; no substitute renderer",
+  "paper_protocol": {
+    "asset": "Utah teapot",
+    "camera_degrees_of_freedom": 4,
+    "initial_orientation_error_degrees": [
+      15,
+      75
+    ],
+    "ground_truth_camera_angle_degrees": 20,
+    "ground_truth_camera_distance": [
+      2.5,
+      4.0
+    ],
+    "initial_camera_distance": [
+      2.0,
+      10.0
+    ],
+    "initial_camera_angle_degrees": [
+      10,
+      30
+    ],
+    "optimizer": "Adam",
+    "adam_betas": [
+      0.5,
+      0.99
+    ],
+    "initial_learning_rate": 0.3,
+    "scheduler": "CosineAnnealingLR",
+    "steps": 1000,
+    "seeds": 768,
+    "success_orientation_error_below_degrees": 5,
+    "smoothing": "black-box hard rendering algorithm in four-dimensional camera coordinates"
+  },
+  "source_audit": {
+    "repository": "Felix-Petersen/gendr",
+    "commit": "c89269cb38eef7a95be703154f676a56d791958f",
+    "archive_url": "https://github.com/Felix-Petersen/gendr/archive/c89269cb38eef7a95be703154f676a56d791958f.zip",
+    "archive_bytes": 361993,
+    "archive_sha256": "120837ad58376d12fe5ea181b302103331c6d02d77e8913969a39836d6f42245",
+    "retrieved": "2026-08-02",
+    "files": {
+      "experiments/opt_camera.py": {
+        "url": "https://raw.githubusercontent.com/Felix-Petersen/gendr/c89269cb38eef7a95be703154f676a56d791958f/experiments/opt_camera.py",
+        "bytes": 13409,
+        "sha256": "926ad20864e018fb9b945ac374f57b146d676f8bb15f78b1364bbbe05b0359f1",
+        "expected_sha256": "926ad20864e018fb9b945ac374f57b146d676f8bb15f78b1364bbbe05b0359f1"
+      },
+      "experiments/data/teapot.obj": {
+        "url": "https://raw.githubusercontent.com/Felix-Petersen/gendr/c89269cb38eef7a95be703154f676a56d791958f/experiments/data/teapot.obj",
+        "bytes": 152595,
+        "sha256": "2f833c87e691d949dfa1325df94efe3c25e95b948c7f147e2d08e3ffb719fcda",
+        "expected_sha256": "2f833c87e691d949dfa1325df94efe3c25e95b948c7f147e2d08e3ffb719fcda"
+      },
+      "setup.py": {
+        "url": "https://raw.githubusercontent.com/Felix-Petersen/gendr/c89269cb38eef7a95be703154f676a56d791958f/setup.py",
+        "bytes": 2171,
+        "sha256": "fe2452a26d699ca09269054086444370f3c5f3e1bed1db2366c0a4ca8fd588a6",
+        "expected_sha256": "fe2452a26d699ca09269054086444370f3c5f3e1bed1db2366c0a4ca8fd588a6"
+      },
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/Felix-Petersen/gendr/c89269cb38eef7a95be703154f676a56d791958f/README.md",
+        "bytes": 5309,
+        "sha256": "b1bf5f6c79136ae674798f7e439de58ce1b4188faae37d509d1452797f184a03",
+        "expected_sha256": "b1bf5f6c79136ae674798f7e439de58ce1b4188faae37d509d1452797f184a03"
+      }
+    },
+    "mesh": {
+      "vertices": 1292,
+      "faces": 2464
+    },
+    "camera_script_hardcodes_cuda": true,
+    "setup_cuda_extension_count": 4,
+    "setup_cuda_kernel_count": 4,
+    "readme_explicitly_requires_cuda": true,
+    "cited_script_uses_normal_angles_not_uniform_sphere": true,
+    "cited_script_uses_internal_differentiable_renderer_not_black_box_sampling": true
+  },
+  "capability_test": {
+    "command": "/repo/.venv/bin/python setup.py build_ext",
+    "returncode": 1,
+    "failed": true,
+    "output_tail": "\nTraceback (most recent call last):\n  File \"<temporary-source>/gendr-c89269cb38eef7a95be703154f676a56d791958f/setup.py\", line 13, in <module>\n    CUDAExtension('gendr.cuda.load_textures', [\n  File \"/repo/.venv/lib/python3.12/site-packages/torch/utils/cpp_extension.py\", line 1279, in CUDAExtension\n    library_dirs += library_paths(device_type=\"cuda\")\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/repo/.venv/lib/python3.12/site-packages/torch/utils/cpp_extension.py\", line 1490, in library_paths\n    if (not os.path.exists(_join_cuda_home(lib_dir)) and\n                           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/repo/.venv/lib/python3.12/site-packages/torch/utils/cpp_extension.py\", line 2889, in _join_cuda_home\n    raise OSError('CUDA_HOME environment variable is not set. '\nOSError: CUDA_HOME environment variable is not set. Please set it to your CUDA install root.\n",
+    "torch_cuda_available": false,
+    "torch_cuda_build": null,
+    "nvcc_path": null
+  },
+  "negative_control": {
+    "name": "replace only the camera script device token with cpu",
+    "shallow_patch_still_requires_four_cuda_extensions": true,
+    "failed_as_intended": true
+  },
+  "environment": {
+    "estimated_required_cores": 1,
+    "selected_flavor": "hf/cpu-upgrade",
+    "selected_flavor_declared_vcpus": 8,
+    "visible_logical_cpus": 64,
+    "affinity_logical_cpus": 64,
+    "cgroup_quota_vcpus": 8.0,
+    "worker_limit": 8,
+    "declared_cost_usd_per_hour": 0.03,
+    "hardware_source_url": "https://huggingface.co/docs/huggingface_hub/guides/jobs",
+    "hardware_source_retrieved": "2026-08-02",
+    "gpu_requested": false
+  },
+  "runtime_seconds": 3.6823529871180654,
+  "verdict": "BLOCKED",
+  "reason": "The cited renderer requires CUDA and its camera script is not the paper's black-box stochastic-smoothing implementation. GPU use is prohibited, and substituting a CPU renderer would not test the exact claim."
+}

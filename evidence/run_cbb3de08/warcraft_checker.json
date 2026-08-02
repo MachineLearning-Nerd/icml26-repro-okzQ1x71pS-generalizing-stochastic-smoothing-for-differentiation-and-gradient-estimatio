@@ -1,0 +1,20 @@
+[local file] bytes 0–219488 of 219488
+{
+  "checks": {
+    "exact_disclosed_training_target_recorded": true,
+    "exact_optimizer_schedule_recorded": true,
+    "cited_primary_model_fixed": true,
+    "paper_variance_reduction_cell": true,
+    "official_archive_identity": true,
+    "official_cardinality": true,
+    "six_array_hashes_present": true,
+    "independent_path_oracle_confirms_quantization_compatible_labels": true,
+    "negative_control_fails_as_intended": true,
+    "measured_not_formula_derived": true,
+    "finite_losses_and_projection": true,
+    "full_test_predictions_are_paths": true,
+    "cpu_allocation_recorded": true,
+    "honest_blocked_verdict": true
+  },
+  "passed": true
+}

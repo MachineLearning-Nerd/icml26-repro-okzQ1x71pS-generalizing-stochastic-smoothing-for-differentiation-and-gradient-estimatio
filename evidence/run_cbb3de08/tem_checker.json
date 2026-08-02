@@ -1,0 +1,18 @@
+[local file] bytes 0–219488 of 219488
+{
+  "checks": {
+    "exact_claim_logic_recorded": true,
+    "exact_image_and_ground_truth_recorded": true,
+    "exact_search_domains_recorded": true,
+    "exact_disclosed_optimizer_recorded": true,
+    "primary_archive_identities_verified": true,
+    "archives_are_safe_and_auditable": true,
+    "cpu_capability_recorded_without_proxy_claim": true,
+    "negative_control_fails_as_intended": true,
+    "four_distinct_routes_recorded": true,
+    "no_invalid_falsification": true,
+    "cpu_allocation_recorded": true,
+    "honest_blocked_verdict": true
+  },
+  "passed": true
+}

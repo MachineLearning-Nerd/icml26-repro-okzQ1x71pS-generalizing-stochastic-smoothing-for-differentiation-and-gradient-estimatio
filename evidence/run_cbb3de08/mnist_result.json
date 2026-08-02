@@ -1,0 +1,107 @@
+[local file] bytes 0–219488 of 219488
+{
+  "route": "exact-protocol throughput calibration, not full training",
+  "paper_protocol": {
+    "set_size": 5,
+    "digits_per_image": 4,
+    "training_steps": 100000,
+    "seeds": 12,
+    "batch_size": 100,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "architecture": [
+      "Conv2d(1,32,5,padding=2)",
+      "ReLU",
+      "MaxPool2d(2)",
+      "Conv2d(32,64,5,padding=2)",
+      "ReLU",
+      "MaxPool2d(2)",
+      "Linear(12544,64)",
+      "ReLU",
+      "Linear(64,1)"
+    ],
+    "distribution": "Laplace",
+    "samples": 256,
+    "sampling": "randomized Latin hypercube",
+    "covariate": "LOO",
+    "gamma": 0.3333333333333333,
+    "loss": "row cross-entropy against the exact hard permutation"
+  },
+  "calibration": {
+    "warmup_steps": 5,
+    "measured_steps": 100,
+    "measured_seconds": 118.01123810606077,
+    "seconds_per_step": 1.1801123810606078,
+    "projected_single_seed_hours": 32.78089947390577,
+    "projected_twelve_seed_serial_hours": 393.3707936868692,
+    "initial_validation_exact_match": 0.007,
+    "final_validation_exact_match": 0.326,
+    "test_exact_match_after_calibration": 0.307,
+    "loss_first_ten_mean": 1.3317758560180664,
+    "loss_last_ten_mean": 0.9033824503421783,
+    "all_losses_finite": true
+  },
+  "data_audit": {
+    "torchvision_train_images": 60000,
+    "train_split_images": 55000,
+    "validation_split_images": 5000,
+    "test_images": 10000,
+    "raw_files": {
+      "t10k-images-idx3-ubyte": {
+        "bytes": 7840016,
+        "sha256": "0fa7898d509279e482958e8ce81c8e77db3f2f8254e26661ceb7762c4d494ce7"
+      },
+      "t10k-images-idx3-ubyte.gz": {
+        "bytes": 1648877,
+        "sha256": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6"
+      },
+      "t10k-labels-idx1-ubyte": {
+        "bytes": 10008,
+        "sha256": "ff7bcfd416de33731a308c3f266cc351222c34898ecbeaf847f06e48f7ec33f2"
+      },
+      "t10k-labels-idx1-ubyte.gz": {
+        "bytes": 4542,
+        "sha256": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6"
+      },
+      "train-images-idx3-ubyte": {
+        "bytes": 47040016,
+        "sha256": "ba891046e6505d7aadcbbe25680a0738ad16aec93bde7f9b65e87a2fc25776db"
+      },
+      "train-images-idx3-ubyte.gz": {
+        "bytes": 9912422,
+        "sha256": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609"
+      },
+      "train-labels-idx1-ubyte": {
+        "bytes": 60008,
+        "sha256": "65a50cbbf4e906d70832878ad85ccda5333a97f0f4c3dd2ef09a8a9eef7101c5"
+      },
+      "train-labels-idx1-ubyte.gz": {
+        "bytes": 28881,
+        "sha256": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c"
+      }
+    }
+  },
+  "environment": {
+    "estimated_required_cores": 32,
+    "selected_flavor": "hf/cpu-upgrade",
+    "selected_flavor_declared_vcpus": 8,
+    "visible_logical_cpus": 64,
+    "affinity_logical_cpus": 64,
+    "cgroup_quota_vcpus": 8.0,
+    "worker_limit": 8,
+    "declared_cost_usd_per_hour": 0.03,
+    "hardware_source_url": "https://huggingface.co/docs/huggingface_hub/guides/jobs",
+    "hardware_source_retrieved": "2026-08-02",
+    "gpu_requested": false,
+    "torch_threads": 8
+  },
+  "seeds": {
+    "model": 24102025,
+    "training_data": 31415,
+    "training_noise": 27182,
+    "validation": 41421,
+    "test": 51521
+  },
+  "verdict": "BLOCKED",
+  "reason": "The disclosed 100,000-step, 12-seed protocol was calibrated but not run in this route."
+}

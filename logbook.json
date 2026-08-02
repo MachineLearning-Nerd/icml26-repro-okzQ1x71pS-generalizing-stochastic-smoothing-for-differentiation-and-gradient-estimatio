@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "title": "Repro - Generalizing Stochastic Smoothing for Differentiation and Gradient Estimation",
+  "emoji": "🎯",
+  "space_id": "DineshAI/okzQ1x71pS",
+  "paper": "arXiv:2410.08125",
+  "tags": ["icml2026-repro", "paper-okzQ1x71pS"],
+  "updated_at": "2026-08-02T00:00:00+00:00",
+  "root": {
+    "slug": "index",
+    "title": "Generalized stochastic smoothing reproduction",
+    "file": "pages/index.md",
+    "children": [
+      {"slug": "current", "title": "Current verification", "file": "pages/current/page.md", "children": []},
+      {"slug": "current-claims-1-3", "title": "Current Claims 1–3", "file": "pages/current/claims-1-3.md", "children": []},
+      {"slug": "current-claims-4-5", "title": "Current Claims 4–5", "file": "pages/current/claims-4-5.md", "children": []},
+      {"slug": "current-claim-6", "title": "Current Claim 6", "file": "pages/current/claim-6.md", "children": []},
+      {"slug": "current-visibility", "title": "Evaluator visibility matrix", "file": "pages/current/visibility.md", "children": []},
+      {"slug": "current-release", "title": "Release forecast", "file": "pages/current/release.md", "children": []},
+      {"slug": "overview", "title": "Historical overview", "file": "pages/overview/page.md", "children": []},
+      {"slug": "claims", "title": "Historical claims", "file": "pages/claims/page.md", "children": []},
+      {"slug": "evidence", "title": "Historical evidence", "file": "pages/evidence/page.md", "children": []},
+      {"slug": "verification-run", "title": "Historical rejected baseline — verification run", "file": "pages/verification-run/page.md", "children": []},
+      {"slug": "conclusion", "title": "Historical conclusion", "file": "pages/conclusion/page.md", "children": []}
+    ]
+  },
+  "revision": "candidate-before-publication"
+}

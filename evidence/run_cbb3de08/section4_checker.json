@@ -1,0 +1,119 @@
+[local file] bytes 0–219488 of 219488
+{
+  "checks": {
+    "row_count_447": true,
+    "all_mean_errors_finite": true,
+    "six_distributions": true,
+    "four_operator_sizes": true,
+    "summary_row_count_matches": true,
+    "official_dataset_md5_matches": true,
+    "official_8x8_and_12x12_maps_used": true,
+    "map_derivations_recorded": true,
+    "held_out_path_perturbations_non_vacuous": true,
+    "twelve_path_scale_calibrations": true,
+    "all_paths_valid": true,
+    "path_oracle_uncertainty_passes": true,
+    "path_oracle_power_matches_calibrated_design": true,
+    "wrong_score_control_passes": true,
+    "paper_ranking_passes": true
+  },
+  "sorting_cases": [
+    {
+      "size": "n=3",
+      "distribution": "Gaussian",
+      "target_strategy": "RQMC-cartesian",
+      "target_error": 0.0324962257400982,
+      "minimum_error": 0.0324962257400982,
+      "passed": true
+    },
+    {
+      "size": "n=3",
+      "distribution": "Logistic",
+      "target_strategy": "RQMC-cartesian",
+      "target_error": 0.01597415896581181,
+      "minimum_error": 0.01597415896581181,
+      "passed": true
+    },
+    {
+      "size": "n=3",
+      "distribution": "Gumbel",
+      "target_strategy": "RQMC-cartesian",
+      "target_error": 0.0378043647220381,
+      "minimum_error": 0.0378043647220381,
+      "passed": true
+    },
+    {
+      "size": "n=3",
+      "distribution": "Cauchy",
+      "target_strategy": "RQMC-cartesian",
+      "target_error": 0.022869829325347868,
+      "minimum_error": 0.022869829325347868,
+      "passed": true
+    },
+    {
+      "size": "n=3",
+      "distribution": "Laplace",
+      "target_strategy": "RQMC-cartesian",
+      "target_error": 0.028986913147536198,
+      "minimum_error": 0.028941844799594767,
+      "passed": true
+    },
+    {
+      "size": "n=3",
+      "distribution": "Triangular",
+      "target_strategy": "QMC-latin",
+      "target_error": 0.15148197092660992,
+      "minimum_error": 0.15148197092660992,
+      "passed": true
+    },
+    {
+      "size": "n=5",
+      "distribution": "Gaussian",
+      "target_strategy": "RQMC-cartesian",
+      "target_error": 0.10150918841623602,
+      "minimum_error": 0.10150918841623602,
+      "passed": true
+    },
+    {
+      "size": "n=5",
+      "distribution": "Logistic",
+      "target_strategy": "RQMC-cartesian",
+      "target_error": 0.0567563077447842,
+      "minimum_error": 0.0567563077447842,
+      "passed": true
+    },
+    {
+      "size": "n=5",
+      "distribution": "Gumbel",
+      "target_strategy": "RQMC-cartesian",
+      "target_error": 0.10604360142574334,
+      "minimum_error": 0.10604360142574334,
+      "passed": true
+    },
+    {
+      "size": "n=5",
+      "distribution": "Cauchy",
+      "target_strategy": "RQMC-cartesian",
+      "target_error": 0.07447264421504468,
+      "minimum_error": 0.07447264421504468,
+      "passed": true
+    },
+    {
+      "size": "n=5",
+      "distribution": "Laplace",
+      "target_strategy": "RQMC-cartesian",
+      "target_error": 0.09542132871453794,
+      "minimum_error": 0.0953225407381884,
+      "passed": true
+    },
+    {
+      "size": "n=5",
+      "distribution": "Triangular",
+      "target_strategy": "QMC-latin",
+      "target_error": 0.32524880308720217,
+      "minimum_error": 0.32524880308720217,
+      "passed": true
+    }
+  ],
+  "passed": true
+}
