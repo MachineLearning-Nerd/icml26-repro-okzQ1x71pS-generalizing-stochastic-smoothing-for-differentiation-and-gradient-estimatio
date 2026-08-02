@@ -1,0 +1,24 @@
+{
+  "paper": "arXiv:2410.08125",
+  "source_anchor": "Section 4.1; ar5iv #S4.SS1; source tables tab:sorting-variance and tab:shortest-path-variance",
+  "source_sha256": "053740ba5182819585699124d6672d9772e91b5d080cb3b047d74f7dd54dc8fd",
+  "claim_4": "The paper benchmarks gradient-estimator error for six distributions and up to 24 combinations of sampling strategy, covariate, and antithetic pairing on hard sorting and 8-neighborhood shortest-path operators.",
+  "claim_5": "When Cartesian sampling is feasible, Cartesian RQMC with LOO and no antithetic pairing is within 1% of the lowest reported error; triangular noise is the paper's explicit exception, for which Latin QMC is the target.",
+  "domain": {
+    "distributions": ["Gaussian", "Logistic", "Gumbel", "Cauchy", "Laplace", "Triangular"],
+    "sorting_sizes": [3, 5],
+    "shortest_path_sizes": ["8x8", "12x12"],
+    "sampling_strategies": ["MC", "QMC-latin", "RQMC-latin", "RQMC-cartesian when feasible"],
+    "covariates": ["none", "f(x)", "LOO"],
+    "sample_counts": {"sorting_n3_cartesian": 1000, "all_other_cells": 1024}
+  },
+  "acceptance": {
+    "expected_cell_count": 447,
+    "all_metrics_finite": true,
+    "sorting_oracle_bistochastic_error_below": 2e-7,
+    "sorting_oracle_fd_step_disagreement_below": 5e-4,
+    "path_oracle_relative_half_disagreement_below": 0.5,
+    "wrong_score_error_ratio_above": 1.25,
+    "claim_5_target_within_fraction_of_cell_minimum": 1.01
+  }
+}

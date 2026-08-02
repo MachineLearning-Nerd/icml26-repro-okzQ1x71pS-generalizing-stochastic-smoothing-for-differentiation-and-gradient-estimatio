@@ -1,0 +1,7 @@
+{
+  "method": "Adaptive piecewise Gauss-Kronrod quadrature compared with closed-form derivatives of the Laplace and triangular convolutions.",
+  "laplace_quadrature_minus_closed_form": 0.0,
+  "triangular_quadrature_minus_closed_form": 0.0,
+  "acceptance_threshold": 1e-8,
+  "passed": true
+}

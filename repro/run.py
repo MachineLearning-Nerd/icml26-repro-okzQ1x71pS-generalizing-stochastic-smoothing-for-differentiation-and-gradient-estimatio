@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import csv
+import io
 import json
 import os
 import platform
@@ -8,6 +10,7 @@ import time
 from pathlib import Path
 
 from .numerics import baseline_variance_proxy, lemma3_check, theorem7_check, theorem8_check
+from .section4 import run_section4
 
 
 def git_sha():
@@ -22,14 +25,18 @@ def main():
     claim2 = theorem7_check()
     claim3 = theorem8_check()
     variance_proxy = baseline_variance_proxy()
+    section4 = run_section4()
+    section4_rows = section4.pop("rows")
 
     checks = {
         "claim_1": max(claim1["laplace_error"], claim1["triangular_error"]) < 1e-8
         and claim1["wrong_score_error"] > 0.04,
         "claim_2": max(claim2.values()) < 1e-7,
         "claim_3": max(claim3.values()) < 1e-7,
-        "claim_4_baseline_scope": variance_proxy["combination_count"] == 108
+        "claim_4_historical_proxy": variance_proxy["combination_count"] == 108
         and variance_proxy["all_finite"],
+        "claim_4_faithful_benchmark": section4["summary"]["claim4_verified"],
+        "claim_5_ranking": section4["summary"]["claim5_verified"],
     }
     checks = {name: bool(passed) for name, passed in checks.items()}
     elapsed = time.perf_counter() - started
@@ -40,7 +47,7 @@ def main():
         "environment": {
             "python": platform.python_version(),
             "platform": platform.platform(),
-            "estimated_useful_cores": 2,
+            "estimated_useful_cores": 32,
             "selected_flavor": "hf/cpu-upgrade",
             "actual_logical_cpus": os.cpu_count(),
             "gpu_requested": False,
@@ -51,15 +58,13 @@ def main():
             "2": {"verdict": "VERIFIED", "metrics": claim2},
             "3": {"verdict": "VERIFIED", "metrics": claim3},
             "4": {
-                "verdict": "BLOCKED",
-                "baseline_evidence_label": "Historical rejected baseline",
-                "reason": "The 1D proxy is reduced-scope and cannot verify the paper's sorting and shortest-path benchmark.",
-                "metrics": variance_proxy,
+                "verdict": "VERIFIED" if section4["summary"]["claim4_verified"] else "BLOCKED",
+                "metrics": section4["summary"],
+                "historical_rejected_baseline": variance_proxy,
             },
             "5": {
-                "verdict": "BLOCKED",
-                "baseline_evidence_label": "Historical rejected baseline",
-                "reason": "A 1D proxy cannot establish the paper's ranking over the actual sorting and shortest-path operators.",
+                "verdict": "VERIFIED" if section4["summary"]["claim5_verified"] else "BLOCKED",
+                "metrics": section4["ranking_contract"],
             },
             "6": {
                 "verdict": "BLOCKED",
@@ -71,6 +76,7 @@ def main():
             "error": claim1["wrong_score_error"],
             "failed_as_intended": bool(claim1["wrong_score_error"] > 0.04),
         },
+        "section4_evidence": section4,
         "checks": checks,
         "all_regressions_passed": all(checks.values()),
     }
@@ -78,9 +84,20 @@ def main():
     output = Path(".openresearch/artifacts/baseline/raw_output.json")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2) + "\n")
+    csv_buffer = io.StringIO()
+    writer = csv.DictWriter(csv_buffer, fieldnames=list(section4_rows[0]))
+    writer.writeheader()
+    writer.writerows(section4_rows)
+    raw_csv = csv_buffer.getvalue()
+    section4_output = Path(".openresearch/artifacts/claims_4_5/raw_results.csv")
+    section4_output.parent.mkdir(parents=True, exist_ok=True)
+    section4_output.write_text(raw_csv)
     print("=== EVAL.md ===")
     print(json.dumps(result, indent=2))
     print("=== END EVAL.md ===")
+    print("=== RAW_SECTION4_CSV ===")
+    print(raw_csv, end="")
+    print("=== END_RAW_SECTION4_CSV ===")
     if not result["all_regressions_passed"]:
         raise SystemExit(1)
 

@@ -1,0 +1,16 @@
+{
+  "paper": "arXiv:2410.08125",
+  "source_anchor": "Section 2, Lemma 3, ar5iv #Thmtheorem3",
+  "source_sha256": "053740ba5182819585699124d6672d9772e91b5d080cb3b047d74f7dd54dc8fd",
+  "claim": "For an absolutely continuous perturbation density, subject to the paper's finiteness and almost-everywhere score assumptions, the smoothed function is differentiable everywhere and its gradient equals the score expectation.",
+  "numerical_instance": {
+    "function": "f(x)=abs(x)",
+    "x": 0.37,
+    "densities": ["unit-scale Laplace", "unit-scale symmetric triangular"]
+  },
+  "acceptance": {
+    "maximum_identity_error": 1e-8,
+    "minimum_wrong_gaussian_score_error": 0.04
+  },
+  "verdict": "VERIFIED"
+}

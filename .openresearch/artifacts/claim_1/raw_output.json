@@ -1,0 +1,17 @@
+{
+  "run_id": "abd54655-bcdb-47e8-99aa-9faeb6692588",
+  "git_sha": "448579491ffe35e7b113204da313cdcbc7405da0",
+  "fixed_command": "uv sync --frozen --no-dev && .venv/bin/python -m repro.run",
+  "compute": {
+    "selected_flavor": "hf/cpu-upgrade",
+    "estimated_useful_cores": 2,
+    "actual_logical_cpus": 64,
+    "gpu_requested": false,
+    "verifier_runtime_seconds": 0.28361172400036594
+  },
+  "seed": "deterministic quadrature; no pseudorandom seed",
+  "laplace_error": 0.0,
+  "triangular_error": 0.0,
+  "wrong_gaussian_score_error": 0.05369396702682416,
+  "verdict": "VERIFIED"
+}

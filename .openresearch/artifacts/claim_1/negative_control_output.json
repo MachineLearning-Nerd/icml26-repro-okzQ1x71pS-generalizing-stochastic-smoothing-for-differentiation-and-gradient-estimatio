@@ -1,0 +1,6 @@
+{
+  "control": "Substitute the Gaussian score epsilon for the Laplace score sign(epsilon).",
+  "observed_error": 0.05369396702682416,
+  "minimum_failure_error": 0.04,
+  "failed_as_intended": true
+}
